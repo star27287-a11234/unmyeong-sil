@@ -3,6 +3,8 @@
 import { useState, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
+import AdBanner from '@/components/AdBanner'
+import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { mbtiQuestions } from '@/data/mbti-questions'
 import { mbtiResults } from '@/data/mbti-results'
 import { calcMbtiType } from '@/lib/test-calc'
@@ -275,6 +277,9 @@ export default function MbtiTestPage() {
             <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
           </div>
 
+          {/* 요약 아래 광고 */}
+          <AdBanner adSlot="4567890123" adFormat="auto" className="mb-2" />
+
           {step === 'detail' || unlocked ? (
             <div>
               <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
@@ -284,7 +289,10 @@ export default function MbtiTestPage() {
             <ResultGate onAdWatch={handleAdWatch} blurContent={<DetailContent />} />
           )}
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          {/* 다음 테스트 추천 */}
+          <NextTestSuggestion currentPath="/test/mbti" />
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleReset}
               className="px-6 py-3 rounded-xl text-sm font-medium"

@@ -4,6 +4,8 @@ import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
+import AdBanner from '@/components/AdBanner'
+import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { loveQuestions } from '@/data/love-questions'
 import { loveResults } from '@/data/love-results'
 import { calcLoveType } from '@/lib/test-calc'
@@ -168,6 +170,9 @@ export default function LoveTestPage() {
             </p>
           </div>
 
+          {/* 요약 아래 광고 */}
+          <AdBanner adSlot="2345678901" adFormat="auto" className="mb-2" />
+
           {/* 상세 결과 */}
           {step === 'detail' || unlocked ? (
             <div>
@@ -181,8 +186,11 @@ export default function LoveTestPage() {
             />
           )}
 
+          {/* 다음 테스트 추천 */}
+          <NextTestSuggestion currentPath="/test/love" />
+
           {/* 다시 하기 / 다른 테스트 */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleReset}
               className="px-6 py-3 rounded-xl text-sm font-medium transition-all"

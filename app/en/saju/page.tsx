@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
+import AdBanner from '@/components/AdBanner'
+import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { calcSaju, elementToHanja, elementToColor, elementToEmoji } from '@/lib/saju-calc'
 import { sajuResults } from '@/data/en/saju-results'
 
@@ -373,6 +375,8 @@ export default function EnglishSajuPage() {
               ))}
             </div>
           </div>
+
+          <AdBanner adSlot="1234509876" adFormat="auto" className="mb-2" />
 
           {step === 'detail' || unlocked ? (
             <div>

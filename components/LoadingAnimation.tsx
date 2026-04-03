@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import AdBanner from '@/components/AdBanner'
 
 interface Star {
   id: number
@@ -120,6 +121,11 @@ export default function LoadingAnimation() {
               backgroundSize: '200% 100%',
             }}
           />
+        </div>
+
+        {/* 로딩 중 광고 */}
+        <div className="w-full max-w-sm mt-6">
+          <AdBanner adSlot="1234567890" adFormat="rectangle" />
         </div>
       </div>
 

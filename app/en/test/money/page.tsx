@@ -4,6 +4,8 @@ import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
+import AdBanner from '@/components/AdBanner'
+import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { moneyQuestions } from '@/data/en/money-questions'
 import { moneyResults } from '@/data/en/money-results'
 import { calcMoneyType } from '@/lib/test-calc'
@@ -146,6 +148,8 @@ export default function EnglishMoneyTestPage() {
             <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
           </div>
 
+          <AdBanner adSlot="0123456789" adFormat="auto" className="mb-2" />
+
           {step === 'detail' || unlocked ? (
             <div>
               <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>Full Analysis</h2>
@@ -162,7 +166,9 @@ export default function EnglishMoneyTestPage() {
             />
           )}
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <NextTestSuggestion currentPath="/en/test/money" lang="en" />
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={handleReset} className="px-6 py-3 rounded-xl text-sm font-medium"
               style={{ background: 'transparent', border: '1px solid #e0c97f30', color: '#8090a8' }}>
               Retake Test

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
+import AdBanner from '@/components/AdBanner'
+import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { calcSaju, elementToHanja, elementToColor, elementToEmoji } from '@/lib/saju-calc'
 import { sajuResults } from '@/data/saju-results'
 
@@ -428,6 +430,9 @@ export default function SajuPage() {
             </div>
           </div>
 
+          {/* 오행 카드 아래 광고 */}
+          <AdBanner adSlot="6789012345" adFormat="auto" className="mb-2" />
+
           {/* 상세 결과 (잠금/해제) */}
           {step === 'detail' || unlocked ? (
             <div>
@@ -443,8 +448,11 @@ export default function SajuPage() {
             />
           )}
 
+          {/* 다음 테스트 추천 */}
+          <NextTestSuggestion currentPath="/saju" />
+
           {/* 다시 하기 */}
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <button
               onClick={() => {
                 sessionStorage.removeItem('saju-result')

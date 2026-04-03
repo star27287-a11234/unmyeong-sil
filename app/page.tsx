@@ -46,15 +46,6 @@ const services = [
     color: '#e0c97f',
     badge: '',
   },
-  {
-    href: '/pro',
-    icon: '⭐',
-    title: 'PRO 종합',
-    subtitle: '광고 없이 전체 분석',
-    description: '사주+심리테스트 전체 결과를 광고 없이 무제한으로 이용합니다.',
-    color: '#e0c97f',
-    badge: 'PRO',
-  },
 ]
 
 export default function HomePage() {
@@ -125,7 +116,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold mb-3" style={{ color: '#e8e8f0' }}>
               무엇을 알아보고 싶으신가요?
             </h2>
-            <p style={{ color: '#8080a0' }}>6가지 서비스로 당신의 모든 것을 분석합니다</p>
+            <p style={{ color: '#8080a0' }}>5가지 서비스로 당신의 모든 것을 분석합니다</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -199,17 +190,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 푸터 */}
-      <footer className="py-8 px-4 text-center" style={{ borderTop: '1px solid #e0c97f10' }}>
-        <p className="text-sm mb-2" style={{ color: '#606080' }}>
-          © 2025 운명의 실. 사주 분석은 오락·참고 목적으로 제공됩니다.
-        </p>
-        <div className="flex justify-center gap-4">
-          <span className="text-xs cursor-pointer" style={{ color: '#707090' }}>이용약관</span>
-          <span style={{ color: '#404060' }}>|</span>
-          <span className="text-xs cursor-pointer" style={{ color: '#707090' }}>개인정보처리방침</span>
-        </div>
-      </footer>
     </div>
   )
 }

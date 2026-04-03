@@ -9,7 +9,6 @@ export default function Navbar() {
   const links = [
     { href: '/saju', label: '사주분석' },
     { href: '/test', label: '심리테스트' },
-    { href: '/pro', label: 'PRO ⭐' },
   ]
 
   return (

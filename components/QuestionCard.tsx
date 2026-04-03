@@ -11,9 +11,12 @@ interface Props {
   total: number
   onAnswer: (index: number) => void
   onBack: () => void
+  prevLabel?: string
+  questionLabel?: string
 }
 
-export default function QuestionCard({ question, options, current, total, onAnswer, onBack }: Props) {
+export default function QuestionCard({ question, options, current, total, onAnswer, onBack, prevLabel = '이전 질문으로', questionLabel }: Props) {
+  const qLabel = questionLabel ?? `질문 ${current} / ${total}`
   const progress = (current / total) * 100
 
   return (
@@ -22,7 +25,7 @@ export default function QuestionCard({ question, options, current, total, onAnsw
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm" style={{ color: '#9090b0' }}>
-            질문 {current} / {total}
+            {qLabel}
           </span>
           <span className="text-sm font-medium" style={{ color: '#e0c97f' }}>
             {Math.round(progress)}%
@@ -123,7 +126,7 @@ export default function QuestionCard({ question, options, current, total, onAnsw
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
               <path d="M10.5 3L5.5 8L10.5 13" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
             </svg>
-            이전 질문으로
+            {prevLabel}
           </button>
         </div>
       )}

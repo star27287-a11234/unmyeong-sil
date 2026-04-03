@@ -5,11 +5,22 @@ import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
+  const isEnglish = pathname.startsWith('/en')
 
-  const links = [
-    { href: '/saju', label: '사주분석' },
-    { href: '/test', label: '심리테스트' },
-  ]
+  const links = isEnglish
+    ? [
+        { href: '/en/saju', label: 'Fortune Reading' },
+        { href: '/en/test', label: 'Psychology Tests' },
+      ]
+    : [
+        { href: '/saju', label: '사주분석' },
+        { href: '/test', label: '심리테스트' },
+      ]
+
+  // 언어 전환 링크
+  const langSwitchHref = isEnglish
+    ? pathname.replace(/^\/en/, '') || '/'
+    : `/en${pathname}`
 
   return (
     <nav
@@ -22,15 +33,15 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* 로고 */}
         <Link
-          href="/"
-          className="text-xl font-bold text-glow-gold"
+          href={isEnglish ? '/en' : '/'}
+          className="text-xl font-bold"
           style={{ color: '#e0c97f' }}
         >
-          ✨ 운명의 실
+          ✨ {isEnglish ? 'Thread of Fate' : '운명의 실'}
         </Link>
 
-        {/* 네비게이션 링크 */}
         <div className="flex items-center gap-1">
+          {/* 네비게이션 링크 */}
           {links.map((link) => {
             const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
             return (
@@ -48,6 +59,19 @@ export default function Navbar() {
               </Link>
             )
           })}
+
+          {/* 언어 전환 버튼 */}
+          <Link
+            href={langSwitchHref}
+            className="ml-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 border"
+            style={{
+              color: '#e0c97f',
+              borderColor: '#e0c97f40',
+              background: '#e0c97f10',
+            }}
+          >
+            {isEnglish ? '한국어' : 'EN'}
+          </Link>
         </div>
       </div>
     </nav>

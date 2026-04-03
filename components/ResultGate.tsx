@@ -5,9 +5,20 @@ import { ReactNode } from 'react'
 interface Props {
   onAdWatch: () => void
   blurContent: ReactNode
+  title?: string
+  subtitle?: string
+  watchAdLabel?: string
+  note?: string
 }
 
-export default function ResultGate({ onAdWatch, blurContent }: Props) {
+export default function ResultGate({
+  onAdWatch,
+  blurContent,
+  title = '상세 분석 보기',
+  subtitle = '전체 결과를 확인하려면 아래 버튼을 클릭하세요',
+  watchAdLabel = '📺 광고 시청하고 무료로 보기',
+  note = '광고 1회 시청 시 무료로 상세 분석을 볼 수 있습니다',
+}: Props) {
   return (
     <div className="relative">
       {/* 블러 처리된 콘텐츠 */}
@@ -38,17 +49,16 @@ export default function ResultGate({ onAdWatch, blurContent }: Props) {
             className="text-xl font-bold mb-2"
             style={{ color: '#e0c97f' }}
           >
-            상세 분석 보기
+            {title}
           </h3>
           <p
             className="text-sm mb-6"
             style={{ color: '#9090b0' }}
           >
-            전체 결과를 확인하려면 아래 중 하나를 선택하세요
+            {subtitle}
           </p>
 
           <div className="flex flex-col gap-3">
-            {/* 광고 시청 버튼 */}
             <button
               onClick={onAdWatch}
               className="w-full py-3 px-6 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
@@ -58,15 +68,15 @@ export default function ResultGate({ onAdWatch, blurContent }: Props) {
                 boxShadow: '0 4px 15px #e0c97f40',
               }}
             >
-              📺 광고 시청하고 무료로 보기
+              {watchAdLabel}
             </button>
           </div>
 
           <p
             className="text-xs mt-4"
-            style={{ color: '#6060808' }}
+            style={{ color: '#606080' }}
           >
-            광고 1회 시청 시 무료로 상세 분석을 볼 수 있습니다
+            {note}
           </p>
         </div>
       </div>

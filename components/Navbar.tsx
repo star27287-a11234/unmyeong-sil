@@ -11,10 +11,12 @@ export default function Navbar() {
     ? [
         { href: '/en/saju', label: 'Fortune Reading' },
         { href: '/en/test', label: 'Psychology Tests' },
+        { href: '/en/blog', label: 'Column' },
       ]
     : [
         { href: '/saju', label: '사주분석' },
         { href: '/test', label: '심리테스트' },
+        { href: '/blog', label: '칼럼' },
       ]
 
   // 언어 전환 링크

@@ -1,0 +1,87 @@
+name: Daily Fortune Column Generator
+
+on:
+  schedule:
+    # 매일 오전 9시 (KST = UTC+9, 즉 UTC 00:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: '칼럼 주제 (비워두면 랜덤)'
+        required: false
+        default: ''
+      lang:
+        description: '언어 (ko 또는 en)'
+        required: false
+        default: 'both'
+
+jobs:
+  generate-ko:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.lang != 'en' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Korean post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          TOPIC="${{ github.event.inputs.topic }}"
+          if [ -z "$TOPIC" ]; then
+            node scripts/generate-post.mjs --lang ko
+          else
+            node scripts/generate-post.mjs --lang ko --topic "$TOPIC"
+          fi
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/posts/
+          git diff --staged --quiet || git commit -m "chore: auto-generate daily Korean fortune column [$(date +%Y-%m-%d)]"
+          git push
+
+  generate-en:
+    runs-on: ubuntu-latest
+    needs: generate-ko
+    if: ${{ always() && github.event.inputs.lang != 'ko' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate English post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          TOPIC="${{ github.event.inputs.topic }}"
+          if [ -z "$TOPIC" ]; then
+            node scripts/generate-post.mjs --lang en
+          else
+            node scripts/generate-post.mjs --lang en --topic "$TOPIC"
+          fi
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull
+          git add content/en-posts/
+          git diff --staged --quiet || git commit -m "chore: auto-generate daily English fortune column [$(date +%Y-%m-%d)]"
+          git push

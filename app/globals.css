@@ -120,6 +120,51 @@ body {
   background: linear-gradient(135deg, #e0c97f, #c4a84f);
 }
 
+/* 블로그 본문 스타일 */
+.prose-custom h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e0c97f;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-custom h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e8e8f0;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.prose-custom p {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+  color: #b0b8c8;
+}
+.prose-custom strong {
+  color: #e8e8f0;
+  font-weight: 600;
+}
+.prose-custom ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.prose-custom li {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: #b0b8c8;
+  margin-bottom: 0.25rem;
+}
+.prose-custom hr {
+  border-color: #2a2a4a;
+  margin: 1.5rem 0;
+}
+.prose-custom a {
+  color: #e0c97f;
+  text-decoration: underline;
+}
+
 /* 진행 바 */
 .progress-bar {
   background: linear-gradient(90deg, #e0c97f, #9c59d1);

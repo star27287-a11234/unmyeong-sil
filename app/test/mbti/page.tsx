@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
 import { mbtiQuestions } from '@/data/mbti-questions'
@@ -17,7 +16,6 @@ interface Answer {
 }
 
 export default function MbtiTestPage() {
-  const router = useRouter()
   const [step, setStep] = useState<Step>('quiz')
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
@@ -61,8 +59,6 @@ export default function MbtiTestPage() {
     setUnlocked(true)
     setStep('detail')
   }, [])
-
-  const handleProClick = useCallback(() => router.push('/pro'), [router])
 
   const result = mbtiResults[resultType]
 
@@ -285,7 +281,7 @@ export default function MbtiTestPage() {
               <DetailContent />
             </div>
           ) : (
-            <ResultGate onAdWatch={handleAdWatch} onProClick={handleProClick} blurContent={<DetailContent />} />
+            <ResultGate onAdWatch={handleAdWatch} blurContent={<DetailContent />} />
           )}
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

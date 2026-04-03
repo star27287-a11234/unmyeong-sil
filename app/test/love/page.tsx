@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import QuestionCard from '@/components/QuestionCard'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
@@ -18,7 +17,6 @@ interface Answer {
 }
 
 export default function LoveTestPage() {
-  const router = useRouter()
   const [step, setStep] = useState<Step>('quiz')
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
@@ -61,10 +59,6 @@ export default function LoveTestPage() {
     setUnlocked(true)
     setStep('detail')
   }, [])
-
-  const handleProClick = useCallback(() => {
-    router.push('/pro')
-  }, [router])
 
   const result = loveResults.find(r => r.id === resultType)
 
@@ -183,7 +177,6 @@ export default function LoveTestPage() {
           ) : (
             <ResultGate
               onAdWatch={handleAdWatch}
-              onProClick={handleProClick}
               blurContent={<DetailContent />}
             />
           )}

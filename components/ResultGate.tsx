@@ -4,11 +4,10 @@ import { ReactNode } from 'react'
 
 interface Props {
   onAdWatch: () => void
-  onProClick: () => void
   blurContent: ReactNode
 }
 
-export default function ResultGate({ onAdWatch, onProClick, blurContent }: Props) {
+export default function ResultGate({ onAdWatch, blurContent }: Props) {
   return (
     <div className="relative">
       {/* 블러 처리된 콘텐츠 */}
@@ -52,19 +51,6 @@ export default function ResultGate({ onAdWatch, onProClick, blurContent }: Props
             {/* 광고 시청 버튼 */}
             <button
               onClick={onAdWatch}
-              className="w-full py-3 px-6 rounded-xl font-medium text-sm transition-all duration-200 hover:scale-105 active:scale-95"
-              style={{
-                background: 'transparent',
-                border: '2px solid #e0c97f',
-                color: '#e0c97f',
-              }}
-            >
-              📺 광고 시청하고 무료로 보기
-            </button>
-
-            {/* PRO 결제 버튼 */}
-            <button
-              onClick={onProClick}
               className="w-full py-3 px-6 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
               style={{
                 background: 'linear-gradient(135deg, #e0c97f, #c4a84f)',
@@ -72,7 +58,7 @@ export default function ResultGate({ onAdWatch, onProClick, blurContent }: Props
                 boxShadow: '0 4px 15px #e0c97f40',
               }}
             >
-              ⭐ PRO 결제 — 광고 없이 전체 보기
+              📺 광고 시청하고 무료로 보기
             </button>
           </div>
 

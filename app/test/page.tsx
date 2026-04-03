@@ -107,32 +107,6 @@ export default function TestPage() {
           ))}
         </div>
 
-        {/* PRO 배너 */}
-        <div
-          className="mt-8 rounded-2xl p-6 text-center"
-          style={{
-            background: 'linear-gradient(135deg, #16213e, #0f3460)',
-            border: '1px solid #e0c97f40',
-          }}
-        >
-          <div className="text-3xl mb-3">⭐</div>
-          <h3 className="text-xl font-bold mb-2" style={{ color: '#e0c97f' }}>
-            PRO 멤버십으로 더 많은 혜택을
-          </h3>
-          <p className="text-sm mb-4" style={{ color: '#8090a8' }}>
-            광고 없이 모든 테스트 상세 결과를 무제한으로 이용하세요
-          </p>
-          <Link
-            href="/pro"
-            className="inline-block px-8 py-3 rounded-xl font-bold transition-all hover:scale-105"
-            style={{
-              background: 'linear-gradient(135deg, #e0c97f, #c4a84f)',
-              color: '#1a1a2e',
-            }}
-          >
-            PRO 멤버십 보기
-          </Link>
-        </div>
       </div>
     </div>
   )

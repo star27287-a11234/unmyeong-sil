@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import QuestionCard from '@/components/QuestionCard'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
@@ -18,7 +17,6 @@ interface Answer {
 }
 
 export default function MoneyTestPage() {
-  const router = useRouter()
   const [step, setStep] = useState<Step>('quiz')
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
@@ -60,8 +58,6 @@ export default function MoneyTestPage() {
     setUnlocked(true)
     setStep('detail')
   }, [])
-
-  const handleProClick = useCallback(() => router.push('/pro'), [router])
 
   const result = moneyResults.find(r => r.id === resultType)
 
@@ -172,7 +168,7 @@ export default function MoneyTestPage() {
               <DetailContent />
             </div>
           ) : (
-            <ResultGate onAdWatch={handleAdWatch} onProClick={handleProClick} blurContent={<DetailContent />} />
+            <ResultGate onAdWatch={handleAdWatch} blurContent={<DetailContent />} />
           )}
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

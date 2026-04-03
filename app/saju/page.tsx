@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import LoadingAnimation from '@/components/LoadingAnimation'
 import ResultGate from '@/components/ResultGate'
 import { calcSaju, elementToHanja, elementToColor, elementToEmoji } from '@/lib/saju-calc'
@@ -25,7 +24,6 @@ interface SajuCalcResult {
 }
 
 export default function SajuPage() {
-  const router = useRouter()
   const [step, setStep] = useState<Step>('input')
   const [unlocked, setUnlocked] = useState(false)
   const [input, setInput] = useState<SajuInput>({
@@ -71,10 +69,6 @@ export default function SajuPage() {
     setStep('detail')
   }, [])
 
-  const handleProClick = useCallback(() => {
-    router.push('/pro')
-  }, [router])
-
   const sajuData = calcResult ? (sajuResults[calcResult.resultKey] || sajuResults['토_토']) : null
 
   const years = Array.from({ length: 67 }, (_, i) => 2006 - i)
@@ -114,8 +108,10 @@ export default function SajuPage() {
               <input
                 type="text"
                 value={input.name}
-                onChange={(e) => setInput(prev => ({ ...prev, name: e.target.value }))}
+                onChange={(e) => setInput(prev => ({ ...prev, name: e.target.value.slice(0, 20) }))}
                 placeholder="이름을 입력하세요"
+                maxLength={20}
+                autoComplete="off"
                 className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all"
                 style={{
                   background: '#1a1a2e',
@@ -443,7 +439,6 @@ export default function SajuPage() {
           ) : (
             <ResultGate
               onAdWatch={handleAdWatch}
-              onProClick={handleProClick}
               blurContent={<DetailContent />}
             />
           )}

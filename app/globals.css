@@ -1,26 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: #e0c97f;
+  --color-gold-light: #f0dfa0;
+  --color-gold-dark: #c4a84f;
+  --color-mystic-dark: #1a1a2e;
+  --color-mystic-mid: #16213e;
+  --color-mystic-light: #0f3460;
+  --color-mystic-accent: #9c59d1;
+  --color-neon-green: #00ff88;
+  --font-sans: 'Noto Sans KR', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #1a1a2e;
+  --foreground: #e8e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #16213e;
+}
+::-webkit-scrollbar-thumb {
+  background: #e0c97f40;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e0c97f80;
+}
+
+/* 별 반짝임 애니메이션 */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 5px #e0c97f40; }
+  50% { box-shadow: 0 0 20px #e0c97f80, 0 0 40px #e0c97f30; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-twinkle { animation: twinkle 2s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-shimmer { animation: shimmer 3s linear infinite; }
+.animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+
+/* 글로우 텍스트 */
+.text-glow-gold {
+  text-shadow: 0 0 10px #e0c97f80, 0 0 20px #e0c97f40;
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 10px #9c59d180, 0 0 20px #9c59d140;
+}
+
+/* 카드 스타일 */
+.card-mystic {
+  background: linear-gradient(135deg, #16213e, #0f3460);
+  border: 1px solid #e0c97f20;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-mystic:hover {
+  border-color: #e0c97f60;
+  box-shadow: 0 8px 32px #e0c97f15;
+  transform: translateY(-2px);
+}
+
+/* 그라디언트 배경 */
+.bg-mystic-gradient {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #e0c97f, #c4a84f);
+}
+
+/* 진행 바 */
+.progress-bar {
+  background: linear-gradient(90deg, #e0c97f, #9c59d1);
+  height: 4px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }

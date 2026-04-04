@@ -12,6 +12,8 @@ export default function Navbar() {
         { href: '/en/saju', label: 'Fortune Reading' },
         { href: '/en/test', label: 'Psychology Tests' },
         { href: '/en/blog', label: 'Column' },
+        { href: '/en/blog/gwansang', label: 'Face' },
+        { href: '/en/blog/songeum', label: 'Palm' },
       ]
     : [
         { href: '/saju', label: '사주분석' },

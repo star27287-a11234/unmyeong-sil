@@ -11,6 +11,8 @@ export default function Navbar() {
     ? [
         { href: '/en/saju', label: 'Fortune Reading' },
         { href: '/en/test', label: 'Psychology Tests' },
+        { href: '/en/fortune', label: 'Daily Fortune' },
+        { href: '/en/lotto', label: 'Lucky Numbers' },
         { href: '/en/blog', label: 'Column' },
         { href: '/en/blog/gwansang', label: 'Face' },
         { href: '/en/blog/songeum', label: 'Palm' },
@@ -18,6 +20,8 @@ export default function Navbar() {
     : [
         { href: '/saju', label: '사주분석' },
         { href: '/test', label: '심리테스트' },
+        { href: '/fortune', label: '오늘의운세' },
+        { href: '/lotto', label: '로또번호' },
         { href: '/blog', label: '칼럼' },
         { href: '/blog/gwansang', label: '관상' },
         { href: '/blog/songeum', label: '손금' },

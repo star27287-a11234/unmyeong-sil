@@ -45,7 +45,7 @@ export default function Navbar() {
 
       {/* 2행: 메뉴 + 언어전환 */}
       <div
-        className="max-w-5xl mx-auto px-2 pb-1 flex items-center gap-0.5 overflow-x-auto"
+        className="max-w-5xl mx-auto px-2 pb-1 flex items-center justify-end gap-0.5 overflow-x-auto"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {links.map((link) => {

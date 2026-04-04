@@ -301,7 +301,7 @@ export default function LottoPageEn() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#ff6b6b' }}>Draw #{pbRound} (est.)</div>
+                    <div className="text-sm font-black" style={{ color: '#ff6b6b' }}>Draw #{pbRound}</div>
                     <div className="text-xs" style={{ color: '#505068' }}>{wedDate}</div>
                   </div>
                 </div>
@@ -327,7 +327,7 @@ export default function LottoPageEn() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#54a0ff' }}>Draw #{emRound} (est.)</div>
+                    <div className="text-sm font-black" style={{ color: '#54a0ff' }}>Draw #{emRound}</div>
                     <div className="text-xs" style={{ color: '#505068' }}>{tueDate}</div>
                   </div>
                 </div>
@@ -353,7 +353,7 @@ export default function LottoPageEn() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#a29bfe' }}>Draw #{mmRound} (est.)</div>
+                    <div className="text-sm font-black" style={{ color: '#a29bfe' }}>Draw #{mmRound}</div>
                     <div className="text-xs" style={{ color: '#505068' }}>{tueDate}</div>
                   </div>
                 </div>
@@ -410,8 +410,7 @@ export default function LottoPageEn() {
         </div>
 
         <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>
-          ※ These numbers are for entertainment only and do not guarantee any lottery winnings.<br />
-          Foreign lottery draw numbers are estimated and may differ from actual values.
+          ※ These numbers are for entertainment only and do not guarantee any lottery winnings.
         </p>
       </div>
     </div>

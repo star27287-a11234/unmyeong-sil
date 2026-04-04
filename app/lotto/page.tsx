@@ -318,7 +318,7 @@ export default function LottoPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#ff6b6b' }}>제 {pbRound}회 (추정)</div>
+                    <div className="text-sm font-black" style={{ color: '#ff6b6b' }}>제 {pbRound}회</div>
                     <div className="text-xs" style={{ color: '#505068' }}>추첨일 {wedDate}</div>
                   </div>
                 </div>
@@ -344,7 +344,7 @@ export default function LottoPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#54a0ff' }}>제 {emRound}회 (추정)</div>
+                    <div className="text-sm font-black" style={{ color: '#54a0ff' }}>제 {emRound}회</div>
                     <div className="text-xs" style={{ color: '#505068' }}>추첨일 {tueDate}</div>
                   </div>
                 </div>
@@ -370,7 +370,7 @@ export default function LottoPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#a29bfe' }}>제 {mmRound}회 (추정)</div>
+                    <div className="text-sm font-black" style={{ color: '#a29bfe' }}>제 {mmRound}회</div>
                     <div className="text-xs" style={{ color: '#505068' }}>추첨일 {tueDate}</div>
                   </div>
                 </div>
@@ -427,8 +427,7 @@ export default function LottoPage() {
         </div>
 
         <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>
-          ※ 본 번호는 재미·위안 목적의 콘텐츠로, 실제 당첨을 보장하지 않습니다.<br />
-          해외 복권 회차는 추정값이며 실제와 다를 수 있습니다.
+          ※ 본 번호는 재미·위안 목적의 콘텐츠로, 실제 당첨을 보장하지 않습니다.
         </p>
       </div>
     </div>

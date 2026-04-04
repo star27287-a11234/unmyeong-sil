@@ -17,6 +17,8 @@ export default function Navbar() {
         { href: '/saju', label: '사주분석' },
         { href: '/test', label: '심리테스트' },
         { href: '/blog', label: '칼럼' },
+        { href: '/blog/gwansang', label: '관상' },
+        { href: '/blog/songeum', label: '손금' },
       ]
 
   // 언어 전환 링크

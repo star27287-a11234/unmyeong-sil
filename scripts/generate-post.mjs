@@ -35,6 +35,10 @@ const KO_TOPICS = [
   'MBTI와 직업 적성의 상관관계',
   '여름 운세: 화(火)의 기운 활용법',
   '스트레스 유형과 심리 유형의 관계',
+  '관상으로 보는 나의 재물운 — 코와 광대뼈의 비밀',
+  '손금 생명선 완전 해석 — 길이보다 중요한 것은?',
+  '관상학으로 보는 직업운 — 이마와 눈썹이 말하는 적성',
+  '감정선으로 읽는 연애 스타일 — 내 손금 속 사랑의 패턴',
 ]
 
 const EN_TOPICS = [
@@ -48,10 +52,14 @@ const EN_TOPICS = [
   'MBTI Career Paths: Which Type Thrives Where',
   'Summer Fortune: Harnessing Fire Energy',
   'Stress Patterns Across 16 MBTI Types',
+  'Face Reading: What Your Nose Says About Your Wealth Fortune',
+  'Palm Reading Guide: The Life Line and What It Really Means',
+  'Physiognomy and Career: What Your Forehead Reveals About Success',
+  'Heart Line in Palmistry: Decoding Your Love and Emotion Style',
 ]
 
-const KO_CATEGORIES = ['사주운세', '심리분석', 'MBTI', '연애심리', '재물운', '직업']
-const EN_CATEGORIES = ['Fortune', 'Psychology', 'MBTI', 'Love', 'Wealth', 'Career']
+const KO_CATEGORIES = ['사주운세', '심리분석', 'MBTI', '연애심리', '재물운', '직업', '관상', '손금']
+const EN_CATEGORIES = ['Fortune', 'Psychology', 'MBTI', 'Love', 'Wealth', 'Career', 'Physiognomy', 'Palmistry']
 
 function getTodaySlug() {
   return new Date().toISOString().slice(0, 10)

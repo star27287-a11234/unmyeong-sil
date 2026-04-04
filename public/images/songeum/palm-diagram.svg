@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 620" font-family="'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1a0d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a1218;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="palmGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2e1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#162818;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="560" height="620" fill="url(#bgGrad2)" rx="16"/>
+
+  <!-- 제목 -->
+  <text x="280" y="38" text-anchor="middle" font-size="18" font-weight="bold" fill="#80e0a0" filter="url(#glow2)">손금학 — 손바닥 선의 의미</text>
+  <line x1="80" y1="50" x2="480" y2="50" stroke="#80e0a030" stroke-width="1"/>
+
+  <!-- 손바닥 윤곽 -->
+  <!-- 손바닥 메인 -->
+  <path d="M175,450 Q155,420 150,380 Q145,340 148,300 Q151,260 158,240 Q165,220 172,230 Q178,240 180,260
+           L182,200 Q182,178 190,172 Q198,166 206,172 Q214,178 215,200 L216,175
+           Q216,153 224,147 Q232,141 240,147 Q248,153 248,175 L249,185
+           Q250,163 258,157 Q266,151 274,157 Q282,163 282,185 L282,210
+           Q285,195 294,192 Q303,189 309,196 Q315,203 314,220 L312,280
+           Q330,275 340,285 Q350,295 348,310 Q345,330 325,340
+           L322,380 Q318,420 305,450 Z"
+        fill="url(#palmGrad)" stroke="#50a060" stroke-width="2"/>
+
+  <!-- 엄지 -->
+  <path d="M150,300 Q130,280 128,260 Q126,238 138,228 Q150,218 162,228 Q170,236 168,255 L165,290 Z"
+        fill="url(#palmGrad)" stroke="#50a060" stroke-width="1.5"/>
+
+  <!-- 손가락들 -->
+  <!-- 검지 -->
+  <path d="M182,200 L184,120 Q184,100 192,95 Q200,90 208,95 Q216,100 216,120 L215,200"
+        fill="url(#palmGrad)" stroke="#50a060" stroke-width="1.5"/>
+  <!-- 중지 -->
+  <path d="M216,175 L218,95 Q218,73 226,68 Q234,63 242,68 Q250,73 250,95 L249,175"
+        fill="url(#palmGrad)" stroke="#50a060" stroke-width="1.5"/>
+  <!-- 약지 -->
+  <path d="M249,185 L252,108 Q252,86 260,81 Q268,76 276,81 Q284,86 284,108 L282,185"
+        fill="url(#palmGrad)" stroke="#50a060" stroke-width="1.5"/>
+  <!-- 새끼손가락 -->
+  <path d="M282,210 L285,148 Q285,128 292,124 Q299,120 306,124 Q313,128 314,148 L312,210"
+        fill="url(#palmGrad)" stroke="#50a060" stroke-width="1.5"/>
+
+  <!-- 손가락 관절 선 -->
+  <line x1="183" y1="145" x2="215" y2="145" stroke="#30503040" stroke-width="1"/>
+  <line x1="183" y1="170" x2="215" y2="170" stroke="#30503040" stroke-width="1"/>
+  <line x1="217" y1="120" x2="249" y2="120" stroke="#30503040" stroke-width="1"/>
+  <line x1="217" y1="148" x2="249" y2="148" stroke="#30503040" stroke-width="1"/>
+  <line x1="250" y1="130" x2="283" y2="130" stroke="#30503040" stroke-width="1"/>
+  <line x1="251" y1="158" x2="283" y2="158" stroke="#30503040" stroke-width="1"/>
+  <line x1="284" y1="155" x2="313" y2="155" stroke="#30503040" stroke-width="1"/>
+  <line x1="285" y1="178" x2="313" y2="178" stroke="#30503040" stroke-width="1"/>
+
+  <!-- ============ 손금 선들 ============ -->
+
+  <!-- 생명선 (Life Line) - 빨간색 계열, 엄지 아래 아치형 -->
+  <path d="M200,230 Q185,280 178,330 Q172,380 176,430"
+        stroke="#e05050" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+
+  <!-- 두뇌선 (Head Line) - 파란색, 중간 가로선 -->
+  <path d="M168,258 Q200,260 240,265 Q275,270 315,275"
+        stroke="#5090e0" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+
+  <!-- 감정선 (Heart Line) - 분홍/마젠타, 위쪽 가로선 -->
+  <path d="M190,232 Q220,222 258,220 Q290,218 320,228"
+        stroke="#e060a0" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+
+  <!-- 운명선 (Fate Line) - 금색, 세로 중앙선 -->
+  <path d="M238,440 Q242,380 245,320 Q248,265 248,220"
+        stroke="#e0c050" stroke-width="2" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+
+  <!-- 태양선 (Sun Line) - 주황/금, 약지 아래 세로선 -->
+  <path d="M272,390 Q274,350 275,315 Q276,285 278,260"
+        stroke="#e09030" stroke-width="1.8" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+
+  <!-- 결혼선 (Marriage Line) - 연보라, 새끼손가락 아래 짧은 가로선 -->
+  <path d="M297,215 Q305,212 318,213"
+        stroke="#b080e0" stroke-width="2" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+  <path d="M297,225 Q308,222 320,223"
+        stroke="#b080e050" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- ============ 어노테이션 ============ -->
+
+  <!-- 감정선 → 라벨 (왼쪽) -->
+  <line x1="190" y1="230" x2="95" y2="200" stroke="#e060a060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="190" cy="230" r="3.5" fill="#e060a0"/>
+  <rect x="0" y="180" width="93" height="44" rx="8" fill="#0d1a15" stroke="#e060a040" stroke-width="1"/>
+  <text x="46" y="197" text-anchor="middle" font-size="12" font-weight="bold" fill="#e060a0">감정선</text>
+  <text x="46" y="213" text-anchor="middle" font-size="10" fill="#709080">연애운 · 감성</text>
+
+  <!-- 두뇌선 → 라벨 (왼쪽) -->
+  <line x1="168" y1="258" x2="95" y2="260" stroke="#5090e060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="168" cy="258" r="3.5" fill="#5090e0"/>
+  <rect x="0" y="240" width="93" height="44" rx="8" fill="#0d1a15" stroke="#5090e040" stroke-width="1"/>
+  <text x="46" y="257" text-anchor="middle" font-size="12" font-weight="bold" fill="#5090e0">두뇌선</text>
+  <text x="46" y="273" text-anchor="middle" font-size="10" fill="#709080">지능 · 사고력</text>
+
+  <!-- 생명선 → 라벨 (왼쪽) -->
+  <line x1="177" y1="340" x2="95" y2="325" stroke="#e0505060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="177" cy="340" r="3.5" fill="#e05050"/>
+  <rect x="0" y="305" width="93" height="44" rx="8" fill="#0d1a15" stroke="#e0505040" stroke-width="1"/>
+  <text x="46" y="322" text-anchor="middle" font-size="12" font-weight="bold" fill="#e05050">생명선</text>
+  <text x="46" y="338" text-anchor="middle" font-size="10" fill="#709080">건강 · 활력</text>
+
+  <!-- 운명선 → 라벨 (오른쪽) -->
+  <line x1="246" y1="360" x2="380" y2="340" stroke="#e0c05060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="246" cy="360" r="3.5" fill="#e0c050"/>
+  <rect x="382" y="320" width="110" height="44" rx="8" fill="#0d1a15" stroke="#e0c05040" stroke-width="1"/>
+  <text x="437" y="337" text-anchor="middle" font-size="12" font-weight="bold" fill="#e0c050">운명선</text>
+  <text x="437" y="353" text-anchor="middle" font-size="10" fill="#709080">사업운 · 성공</text>
+
+  <!-- 태양선 → 라벨 (오른쪽) -->
+  <line x1="276" y1="310" x2="380" y2="295" stroke="#e0903060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="276" cy="310" r="3.5" fill="#e09030"/>
+  <rect x="382" y="275" width="110" height="44" rx="8" fill="#0d1a15" stroke="#e0903040" stroke-width="1"/>
+  <text x="437" y="292" text-anchor="middle" font-size="12" font-weight="bold" fill="#e09030">태양선</text>
+  <text x="437" y="308" text-anchor="middle" font-size="10" fill="#709080">명예 · 재물운</text>
+
+  <!-- 결혼선 → 라벨 (오른쪽) -->
+  <line x1="310" y1="218" x2="380" y2="230" stroke="#b080e060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="310" cy="218" r="3.5" fill="#b080e0"/>
+  <rect x="382" y="212" width="110" height="44" rx="8" fill="#0d1a15" stroke="#b080e040" stroke-width="1"/>
+  <text x="437" y="229" text-anchor="middle" font-size="12" font-weight="bold" fill="#b080e0">결혼선</text>
+  <text x="437" y="245" text-anchor="middle" font-size="10" fill="#709080">인연 · 결혼운</text>
+
+  <!-- 손가락 부위 라벨 -->
+  <text x="197" y="88" text-anchor="middle" font-size="10" fill="#80a080">목성구</text>
+  <text x="232" y="63" text-anchor="middle" font-size="10" fill="#80a080">토성구</text>
+  <text x="265" y="75" text-anchor="middle" font-size="10" fill="#80a080">태양구</text>
+  <text x="296" y="120" text-anchor="middle" font-size="10" fill="#80a080">수성구</text>
+
+  <!-- 하단 범례 -->
+  <line x1="40" y1="510" x2="520" y2="510" stroke="#80e0a020" stroke-width="1"/>
+
+  <text x="60" y="535" font-size="11" fill="#80a060">범례</text>
+  <line x1="85" y1="530" x2="105" y2="530" stroke="#e05050" stroke-width="2.5"/>
+  <text x="108" y="534" font-size="10" fill="#809080">생명선</text>
+  <line x1="160" y1="530" x2="180" y2="530" stroke="#5090e0" stroke-width="2.5"/>
+  <text x="183" y="534" font-size="10" fill="#809080">두뇌선</text>
+  <line x1="238" y1="530" x2="258" y2="530" stroke="#e060a0" stroke-width="2.5"/>
+  <text x="261" y="534" font-size="10" fill="#809080">감정선</text>
+  <line x1="318" y1="530" x2="338" y2="530" stroke="#e0c050" stroke-width="2"/>
+  <text x="341" y="534" font-size="10" fill="#809080">운명선</text>
+  <line x1="396" y1="530" x2="416" y2="530" stroke="#e09030" stroke-width="1.8"/>
+  <text x="419" y="534" font-size="10" fill="#809080">태양선</text>
+  <line x1="468" y1="530" x2="488" y2="530" stroke="#b080e0" stroke-width="2"/>
+  <text x="491" y="534" font-size="10" fill="#809080">결혼선</text>
+
+  <text x="280" y="562" text-anchor="middle" font-size="11" fill="#506050">※ 손금은 태어날 때 정해지지 않으며 삶의 변화에 따라 달라집니다</text>
+  <text x="280" y="582" text-anchor="middle" font-size="10" fill="#405040">손금학(手相學)은 동양 관상학의 한 분야입니다</text>
+
+</svg>

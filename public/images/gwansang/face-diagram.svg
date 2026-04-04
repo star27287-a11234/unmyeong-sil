@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 620" font-family="'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d2b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a1a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="faceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1e40;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16163a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="560" height="620" fill="url(#bgGrad)" rx="16"/>
+
+  <!-- 제목 -->
+  <text x="280" y="38" text-anchor="middle" font-size="18" font-weight="bold" fill="#e0c97f" filter="url(#glow)">관상학 — 얼굴 부위별 운세</text>
+  <line x1="80" y1="50" x2="480" y2="50" stroke="#9c59d130" stroke-width="1"/>
+
+  <!-- 얼굴 윤곽 (타원) -->
+  <ellipse cx="280" cy="320" rx="120" ry="155" fill="url(#faceGrad)" stroke="#9c59d1" stroke-width="1.5"/>
+
+  <!-- 이마 강조 영역 -->
+  <ellipse cx="280" cy="200" rx="90" ry="35" fill="#9c59d108" stroke="#9c59d140" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- 눈썹 (왼쪽) -->
+  <path d="M225,255 Q245,245 265,248" stroke="#c8a8e0" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 눈썹 (오른쪽) -->
+  <path d="M295,248 Q315,245 335,255" stroke="#c8a8e0" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- 눈 (왼쪽) -->
+  <ellipse cx="245" cy="270" rx="22" ry="10" fill="#1a1a3e" stroke="#8090c0" stroke-width="1.5"/>
+  <circle cx="245" cy="270" r="6" fill="#2a2a5e"/>
+  <circle cx="245" cy="270" r="3" fill="#0a0a2a"/>
+  <circle cx="248" cy="268" r="1.5" fill="#ffffff60"/>
+  <!-- 눈 (오른쪽) -->
+  <ellipse cx="315" cy="270" rx="22" ry="10" fill="#1a1a3e" stroke="#8090c0" stroke-width="1.5"/>
+  <circle cx="315" cy="270" r="6" fill="#2a2a5e"/>
+  <circle cx="315" cy="270" r="3" fill="#0a0a2a"/>
+  <circle cx="318" cy="268" r="1.5" fill="#ffffff60"/>
+
+  <!-- 코 -->
+  <path d="M280,280 L268,320 Q280,328 292,320 L280,280" fill="#1e1e40" stroke="#7080a0" stroke-width="1.2"/>
+  <ellipse cx="270" cy="320" rx="8" ry="5" fill="#252545" stroke="#6070a0" stroke-width="1"/>
+  <ellipse cx="290" cy="320" rx="8" ry="5" fill="#252545" stroke="#6070a0" stroke-width="1"/>
+
+  <!-- 인중 -->
+  <path d="M274,328 L272,345" stroke="#5060a0" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M286,328 L288,345" stroke="#5060a0" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- 입 -->
+  <path d="M255,355 Q280,345 305,355" stroke="#b06080" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M258,355 Q280,372 302,355" stroke="#b06080" stroke-width="1.5" fill="#3a1528" stroke-linecap="round"/>
+
+  <!-- 귀 (왼쪽) -->
+  <path d="M160,278 Q148,295 150,315 Q152,335 162,340 L170,330 Q162,318 162,305 Q162,290 170,280 Z" fill="#1e1e40" stroke="#7080b0" stroke-width="1.5"/>
+  <!-- 귀 (오른쪽) -->
+  <path d="M400,278 Q412,295 410,315 Q408,335 398,340 L390,330 Q398,318 398,305 Q398,290 390,280 Z" fill="#1e1e40" stroke="#7080b0" stroke-width="1.5"/>
+
+  <!-- 광대뼈 표시 -->
+  <ellipse cx="220" cy="300" rx="18" ry="10" fill="none" stroke="#e0804030" stroke-width="1" stroke-dasharray="3,3"/>
+  <ellipse cx="340" cy="300" rx="18" ry="10" fill="none" stroke="#e0804030" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- 턱 강조 -->
+  <ellipse cx="280" cy="455" rx="50" ry="12" fill="#ffffff08" stroke="#4a7a8a30" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- ============ 어노테이션 라인 ============ -->
+
+  <!-- 이마 → 라벨 (오른쪽) -->
+  <line x1="350" y1="198" x2="420" y2="175" stroke="#e0c97f60" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="350" cy="198" r="3" fill="#e0c97f"/>
+  <rect x="422" y="155" width="110" height="44" rx="8" fill="#1a1a35" stroke="#e0c97f40" stroke-width="1"/>
+  <text x="477" y="172" text-anchor="middle" font-size="12" font-weight="bold" fill="#e0c97f">이마</text>
+  <text x="477" y="188" text-anchor="middle" font-size="10" fill="#8090a8">초년운 · 지성</text>
+
+  <!-- 눈썹 → 라벨 (오른쪽) -->
+  <line x1="338" y1="250" x2="420" y2="235" stroke="#c8a8e060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="338" cy="250" r="3" fill="#c8a8e0"/>
+  <rect x="422" y="218" width="110" height="44" rx="8" fill="#1a1a35" stroke="#c8a8e040" stroke-width="1"/>
+  <text x="477" y="235" text-anchor="middle" font-size="12" font-weight="bold" fill="#c8a8e0">눈썹</text>
+  <text x="477" y="251" text-anchor="middle" font-size="10" fill="#8090a8">성격 · 형제운</text>
+
+  <!-- 눈 → 라벨 (오른쪽) -->
+  <line x1="338" y1="272" x2="420" y2="282" stroke="#60b8e060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="338" cy="272" r="3" fill="#60b8e0"/>
+  <rect x="422" y="265" width="110" height="44" rx="8" fill="#1a1a35" stroke="#60b8e040" stroke-width="1"/>
+  <text x="477" y="282" text-anchor="middle" font-size="12" font-weight="bold" fill="#60b8e0">눈</text>
+  <text x="477" y="298" text-anchor="middle" font-size="10" fill="#8090a8">중년운 · 감성</text>
+
+  <!-- 코 → 라벨 (오른쪽) -->
+  <line x1="292" y1="315" x2="420" y2="330" stroke="#e0804060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="292" cy="315" r="3" fill="#e08040"/>
+  <rect x="422" y="312" width="110" height="44" rx="8" fill="#1a1a35" stroke="#e0804040" stroke-width="1"/>
+  <text x="477" y="329" text-anchor="middle" font-size="12" font-weight="bold" fill="#e08040">코</text>
+  <text x="477" y="345" text-anchor="middle" font-size="10" fill="#8090a8">재물운 · 건강</text>
+
+  <!-- 귀 → 라벨 (왼쪽) -->
+  <line x1="160" y1="305" x2="100" y2="270" stroke="#80e0a060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="160" cy="305" r="3" fill="#80e0a0"/>
+  <rect x="0" y="252" width="98" height="44" rx="8" fill="#1a1a35" stroke="#80e0a040" stroke-width="1"/>
+  <text x="49" y="269" text-anchor="middle" font-size="12" font-weight="bold" fill="#80e0a0">귀</text>
+  <text x="49" y="285" text-anchor="middle" font-size="10" fill="#8090a8">초년운 · 장수</text>
+
+  <!-- 광대뼈 → 라벨 (왼쪽) -->
+  <line x1="205" y1="300" x2="100" y2="315" stroke="#e0c06060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="205" cy="300" r="3" fill="#e0c060"/>
+  <rect x="0" y="298" width="98" height="44" rx="8" fill="#1a1a35" stroke="#e0c06040" stroke-width="1"/>
+  <text x="49" y="315" text-anchor="middle" font-size="12" font-weight="bold" fill="#e0c060">광대뼈</text>
+  <text x="49" y="331" text-anchor="middle" font-size="10" fill="#8090a8">권력 · 리더십</text>
+
+  <!-- 입 → 라벨 (왼쪽) -->
+  <line x1="258" y1="358" x2="100" y2="368" stroke="#e06080 60" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="258" y1="358" x2="100" y2="368" stroke="#e0608060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="258" cy="358" r="3" fill="#e06080"/>
+  <rect x="0" y="350" width="98" height="44" rx="8" fill="#1a1a35" stroke="#e0608040" stroke-width="1"/>
+  <text x="49" y="367" text-anchor="middle" font-size="12" font-weight="bold" fill="#e06080">입</text>
+  <text x="49" y="383" text-anchor="middle" font-size="10" fill="#8090a8">말년운 · 식복</text>
+
+  <!-- 턱 → 라벨 (왼쪽) -->
+  <line x1="248" y1="455" x2="100" y2="440" stroke="#a080e060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="248" cy="455" r="3" fill="#a080e0"/>
+  <rect x="0" y="422" width="98" height="44" rx="8" fill="#1a1a35" stroke="#a080e040" stroke-width="1"/>
+  <text x="49" y="439" text-anchor="middle" font-size="12" font-weight="bold" fill="#a080e0">턱</text>
+  <text x="49" y="455" text-anchor="middle" font-size="10" fill="#8090a8">의지력 · 만년운</text>
+
+  <!-- 인중 → 라벨 (오른쪽) -->
+  <line x1="280" y1="340" x2="420" y2="380" stroke="#60c0c060" stroke-width="1" stroke-dasharray="3,2"/>
+  <circle cx="280" cy="340" r="3" fill="#60c0c0"/>
+  <rect x="422" y="362" width="110" height="44" rx="8" fill="#1a1a35" stroke="#60c0c040" stroke-width="1"/>
+  <text x="477" y="379" text-anchor="middle" font-size="12" font-weight="bold" fill="#60c0c0">인중</text>
+  <text x="477" y="395" text-anchor="middle" font-size="10" fill="#8090a8">생명력 · 자녀운</text>
+
+  <!-- 하단 설명 -->
+  <line x1="40" y1="540" x2="520" y2="540" stroke="#9c59d120" stroke-width="1"/>
+  <text x="280" y="562" text-anchor="middle" font-size="11" fill="#606080">※ 얼굴 각 부위는 오행(五行)과 연결되어 운명의 흐름을 나타냅니다</text>
+  <text x="280" y="582" text-anchor="middle" font-size="10" fill="#404060">관상학은 동양 철학의 전통적 인상학(人相學)에 기반합니다</text>
+
+</svg>

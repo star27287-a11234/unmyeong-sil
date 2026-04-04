@@ -4,7 +4,7 @@ import { getAllPosts } from '@/lib/posts'
 
 export const metadata: Metadata = {
   title: '운세 칼럼 | 운명의 실',
-  description: '사주, 연애 심리, MBTI 등 운세와 심리에 관한 다양한 칼럼을 읽어보세요.',
+  description: '사주, 관상, 손금, 연애 심리, MBTI 등 운세와 심리에 관한 다양한 칼럼을 읽어보세요.',
 }
 
 const categoryColors: Record<string, string> = {
@@ -14,7 +14,30 @@ const categoryColors: Record<string, string> = {
   '연애심리': '#e05c7f',
   '재물운': '#e0c97f',
   '직업': '#4a9eff',
+  '관상': '#c8a8e0',
+  '손금': '#80e0a0',
 }
+
+const SPECIAL_SECTIONS = [
+  {
+    href: '/blog/gwansang',
+    title: '관상학 · 觀相學',
+    desc: '얼굴 부위별 운세 · 이마·눈·코·입·턱',
+    color: '#c8a8e0',
+    bg: 'linear-gradient(135deg, #16213e, #0f1f3d)',
+    border: '#9c59d130',
+    icon: '👁',
+  },
+  {
+    href: '/blog/songeum',
+    title: '손금학 · 手相學',
+    desc: '생명선·감정선·두뇌선·운명선 해설',
+    color: '#80e0a0',
+    bg: 'linear-gradient(135deg, #0f2018, #0a1a12)',
+    border: '#50a06030',
+    icon: '✋',
+  },
+]
 
 export default function BlogPage() {
   const posts = getAllPosts('ko')
@@ -22,14 +45,39 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h1 className="text-4xl font-black mb-3" style={{ color: '#e0c97f' }}>
             운세 칼럼
           </h1>
           <p style={{ color: '#8080a0' }}>
-            사주·심리·MBTI에 관한 깊이 있는 이야기
+            사주·관상·손금·심리·MBTI에 관한 깊이 있는 이야기
           </p>
         </div>
+
+        {/* 관상 / 손금 특별 섹션 카드 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          {SPECIAL_SECTIONS.map(s => (
+            <Link
+              key={s.href}
+              href={s.href}
+              className="block rounded-2xl p-6 transition-all duration-200 hover:scale-[1.02]"
+              style={{ background: s.bg, border: `1px solid ${s.border}` }}
+            >
+              <div className="text-3xl mb-3">{s.icon}</div>
+              <h2 className="text-lg font-bold mb-1" style={{ color: s.color }}>{s.title}</h2>
+              <p className="text-xs" style={{ color: '#8090a8' }}>{s.desc}</p>
+              <div
+                className="mt-3 text-xs inline-block px-3 py-1 rounded-full font-medium"
+                style={{ background: `${s.color}15`, color: s.color }}
+              >
+                자세히 보기 →
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* 전체 칼럼 목록 */}
+        <h2 className="text-xl font-bold mb-5" style={{ color: '#e0c97f' }}>전체 칼럼</h2>
 
         {posts.length === 0 ? (
           <p className="text-center" style={{ color: '#6b7280' }}>

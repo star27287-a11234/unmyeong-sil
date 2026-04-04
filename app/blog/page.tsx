@@ -60,14 +60,14 @@ export default function BlogPage() {
             <Link
               key={s.href}
               href={s.href}
-              className="block rounded-2xl p-6 transition-all duration-200 hover:scale-[1.02]"
+              className="block rounded-2xl p-7 transition-all duration-200 hover:scale-[1.02]"
               style={{ background: s.bg, border: `1px solid ${s.border}` }}
             >
-              <div className="text-3xl mb-3">{s.icon}</div>
-              <h2 className="text-lg font-bold mb-1" style={{ color: s.color }}>{s.title}</h2>
-              <p className="text-xs" style={{ color: '#8090a8' }}>{s.desc}</p>
+              <div className="text-4xl mb-3">{s.icon}</div>
+              <h2 className="text-xl font-bold mb-2" style={{ color: s.color }}>{s.title}</h2>
+              <p className="text-sm" style={{ color: '#8090a8' }}>{s.desc}</p>
               <div
-                className="mt-3 text-xs inline-block px-3 py-1 rounded-full font-medium"
+                className="mt-4 text-sm inline-block px-4 py-1.5 rounded-full font-medium"
                 style={{ background: `${s.color}15`, color: s.color }}
               >
                 자세히 보기 →
@@ -77,10 +77,10 @@ export default function BlogPage() {
         </div>
 
         {/* 전체 칼럼 목록 */}
-        <h2 className="text-xl font-bold mb-5" style={{ color: '#e0c97f' }}>전체 칼럼</h2>
+        <h2 className="text-2xl font-bold mb-5" style={{ color: '#e0c97f' }}>전체 칼럼</h2>
 
         {posts.length === 0 ? (
-          <p className="text-center" style={{ color: '#6b7280' }}>
+          <p className="text-center text-base" style={{ color: '#6b7280' }}>
             아직 게시된 칼럼이 없습니다.
           </p>
         ) : (
@@ -99,24 +99,24 @@ export default function BlogPage() {
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <span
-                      className="text-xs px-2 py-1 rounded-full font-medium"
+                      className="text-sm px-3 py-1 rounded-full font-medium"
                       style={{ background: `${color}20`, color }}
                     >
                       {post.category}
                     </span>
-                    <span className="text-xs" style={{ color: '#6b7280' }}>
+                    <span className="text-sm" style={{ color: '#6b7280' }}>
                       {post.date}
                     </span>
                   </div>
-                  <h2 className="text-lg font-bold mb-2" style={{ color: '#e8e8f0' }}>
+                  <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>
                     {post.title}
                   </h2>
-                  <p className="text-sm leading-relaxed" style={{ color: '#8090a8' }}>
+                  <p className="text-base leading-relaxed" style={{ color: '#8090a8' }}>
                     {post.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {post.tags.map(tag => (
-                      <span key={tag} className="text-xs" style={{ color: '#606080' }}>
+                      <span key={tag} className="text-sm" style={{ color: '#606080' }}>
                         #{tag}
                       </span>
                     ))}

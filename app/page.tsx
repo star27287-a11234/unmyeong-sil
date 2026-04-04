@@ -119,12 +119,12 @@ export default function HomePage() {
             <p style={{ color: '#8080a0' }}>5가지 서비스로 당신의 모든 것을 분석합니다</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((service) => (
               <Link
                 key={service.href}
                 href={service.href}
-                className="group relative rounded-2xl p-6 block transition-all duration-300 hover:scale-[1.03]"
+                className="group relative rounded-2xl p-7 block transition-all duration-300 hover:scale-[1.03]"
                 style={{
                   background: 'linear-gradient(135deg, #16213e, #0f3460)',
                   border: '1px solid #e0c97f20',
@@ -142,19 +142,19 @@ export default function HomePage() {
                   </div>
                 )}
 
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold mb-1" style={{ color: '#e8e8f0' }}>
+                <div className="text-5xl mb-4">{service.icon}</div>
+                <h3 className="text-2xl font-bold mb-1" style={{ color: '#e8e8f0' }}>
                   {service.title}
                 </h3>
-                <p className="text-sm mb-3 font-medium" style={{ color: service.color }}>
+                <p className="text-base mb-3 font-medium" style={{ color: service.color }}>
                   {service.subtitle}
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: '#8090a8' }}>
+                <p className="text-base leading-relaxed" style={{ color: '#8090a8' }}>
                   {service.description}
                 </p>
-                <div className="mt-4 flex items-center gap-1 text-sm font-medium" style={{ color: '#e0c97f' }}>
+                <div className="mt-5 flex items-center gap-1 text-base font-medium" style={{ color: '#e0c97f' }}>
                   <span>시작하기</span>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                   </svg>
                 </div>

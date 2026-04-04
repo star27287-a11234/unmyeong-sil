@@ -60,13 +60,13 @@ export default function BlogPage() {
             <Link
               key={s.href}
               href={s.href}
-              className="block rounded-2xl p-6 transition-all duration-200 hover:scale-[1.02]"
+              className="block rounded-2xl p-7 transition-all duration-200 hover:scale-[1.02]"
               style={{ background: s.bg, border: `1px solid ${s.border}` }}
             >
-              <div className="text-3xl mb-3">{s.icon}</div>
-              <h2 className="text-lg font-bold mb-1" style={{ color: s.color }}>{s.title}</h2>
-              <p className="text-xs" style={{ color: '#8090a8' }}>{s.desc}</p>
-              <div className="mt-3 text-xs inline-block px-3 py-1 rounded-full font-medium"
+              <div className="text-4xl mb-3">{s.icon}</div>
+              <h2 className="text-xl font-bold mb-2" style={{ color: s.color }}>{s.title}</h2>
+              <p className="text-sm" style={{ color: '#8090a8' }}>{s.desc}</p>
+              <div className="mt-4 text-sm inline-block px-4 py-1.5 rounded-full font-medium"
                 style={{ background: `${s.color}15`, color: s.color }}>
                 Explore →
               </div>
@@ -74,10 +74,10 @@ export default function BlogPage() {
           ))}
         </div>
 
-        <h2 className="text-xl font-bold mb-5" style={{ color: '#e0c97f' }}>All Columns</h2>
+        <h2 className="text-2xl font-bold mb-5" style={{ color: '#e0c97f' }}>All Columns</h2>
 
         {posts.length === 0 ? (
-          <p className="text-center" style={{ color: '#6b7280' }}>
+          <p className="text-center text-base" style={{ color: '#6b7280' }}>
             No columns published yet.
           </p>
         ) : (
@@ -95,17 +95,17 @@ export default function BlogPage() {
                   }}
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs px-2 py-1 rounded-full font-medium"
+                    <span className="text-sm px-3 py-1 rounded-full font-medium"
                       style={{ background: `${color}20`, color }}>
                       {post.category}
                     </span>
-                    <span className="text-xs" style={{ color: '#6b7280' }}>{post.date}</span>
+                    <span className="text-sm" style={{ color: '#6b7280' }}>{post.date}</span>
                   </div>
-                  <h2 className="text-lg font-bold mb-2" style={{ color: '#e8e8f0' }}>{post.title}</h2>
-                  <p className="text-sm leading-relaxed" style={{ color: '#8090a8' }}>{post.description}</p>
+                  <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>{post.title}</h2>
+                  <p className="text-base leading-relaxed" style={{ color: '#8090a8' }}>{post.description}</p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {post.tags.map(tag => (
-                      <span key={tag} className="text-xs" style={{ color: '#606080' }}>#{tag}</span>
+                      <span key={tag} className="text-sm" style={{ color: '#606080' }}>#{tag}</span>
                     ))}
                   </div>
                 </Link>

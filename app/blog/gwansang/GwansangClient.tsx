@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import type { Post } from '@/lib/posts'
 
 interface Props {
@@ -168,30 +168,6 @@ const FACE_PARTS = [
 
 export default function GwansangClient({ posts }: Props) {
   const [active, setActive] = useState<string | null>(null)
-  const [editMode, setEditMode] = useState(false)
-  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>({})
-  const draggingId = useRef<string | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  const getPos = (item: (typeof FACE_PARTS)[0]) => positions[item.id] ?? { x: item.x, y: item.y }
-
-  const handlePointerDown = (e: React.PointerEvent, id: string) => {
-    if (!editMode) return
-    e.preventDefault()
-    e.stopPropagation()
-    draggingId.current = id
-    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
-  }
-
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (!draggingId.current || !containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = Math.round(((e.clientX - rect.left) / rect.width) * 1000) / 10
-    const y = Math.round(((e.clientY - rect.top) / rect.height) * 1000) / 10
-    setPositions(prev => ({ ...prev, [draggingId.current!]: { x, y } }))
-  }
-
-  const handlePointerUp = () => { draggingId.current = null }
 
   const scrollTo = (id: string) => {
     setActive(id)
@@ -216,107 +192,54 @@ export default function GwansangClient({ posts }: Props) {
           <p style={{ color: '#8080a0' }}>얼굴이 담고 있는 운명의 이야기</p>
         </div>
 
-        {/* 위치조정 버튼 */}
-        <div className="flex justify-end mb-2">
-          <button
-            onClick={() => setEditMode(v => !v)}
-            style={{
-              background: editMode ? '#e0c97f' : '#3a3a5a',
-              border: 'none',
-              color: editMode ? '#1a1a2e' : '#e0c97f',
-              padding: '8px 16px', borderRadius: '8px', fontSize: '13px',
-              cursor: 'pointer', fontWeight: 'bold',
-            }}
-          >{editMode ? '✓ 편집 완료' : '📍 버튼 위치 조정'}</button>
-        </div>
-
         {/* 이미지 + 오버레이 버튼 */}
         <div
           className="rounded-2xl overflow-hidden mb-3"
-          style={{ border: `2px solid ${editMode ? '#e0c97f60' : '#9c59d130'}`, background: '#0e0e24' }}
+          style={{ border: '1px solid #9c59d130', background: '#0e0e24' }}
         >
           <div className="px-4 pt-4 pb-2">
             <h2 className="text-base font-bold" style={{ color: '#c8a8e0' }}>
               얼굴 부위별 관상 해설도
             </h2>
           </div>
-          {editMode && (
-            <div className="mx-4 mb-2 rounded-xl px-3 py-2" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-xs font-bold" style={{ color: '#e0c97f' }}>드래그로 버튼 이동 · 현재 좌표</span>
-                <button
-                  onClick={() => {
-                    const output = FACE_PARTS.map(p => {
-                      const pos = getPos(p)
-                      return `    x: ${pos.x}, y: ${pos.y},  // ${p.part}`
-                    }).join('\n')
-                    navigator.clipboard.writeText(output)
-                  }}
-                  style={{ background: '#e0c97f20', border: '1px solid #e0c97f50', color: '#e0c97f', padding: '2px 8px', borderRadius: '5px', fontSize: '10px', cursor: 'pointer' }}
-                >📋 복사</button>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {FACE_PARTS.map(p => {
-                  const pos = getPos(p)
-                  return (
-                    <span key={p.id} style={{ background: `${p.color}20`, border: `1px solid ${p.color}40`, padding: '2px 7px', borderRadius: '5px', fontSize: '10px', color: '#c0c0d0', fontFamily: 'monospace' }}>
-                      {p.num}.{p.part} ({pos.x}, {pos.y})
-                    </span>
-                  )
-                })}
-              </div>
-            </div>
-          )}
-          <div
-            ref={containerRef}
-            className="relative mx-4 mb-4"
-            style={{ userSelect: 'none' }}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-          >
+          <div className="relative mx-4 mb-4">
             <img
               src="/images/gwansang/face-reference.png"
               alt="관상학 얼굴 부위별 운세"
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', pointerEvents: 'none' }}
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }}
             />
-            {FACE_PARTS.map(part => {
-              const pos = getPos(part)
-              return (
-                <button
-                  key={part.id}
-                  onClick={() => { if (!editMode) scrollTo(part.id) }}
-                  onPointerDown={e => handlePointerDown(e, part.id)}
-                  title={`${part.num}. ${part.part} — ${part.keywords.join(', ')}`}
-                  style={{
-                    position: 'absolute',
-                    left: `${pos.x}%`,
-                    top: `${pos.y}%`,
-                    transform: 'translate(-50%, -50%)',
-                    width: '26px', height: '26px', borderRadius: '50%',
-                    background: part.color,
-                    border: editMode ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.85)',
-                    cursor: editMode ? 'grab' : 'pointer',
-                    fontSize: '11px', fontWeight: '800', color: '#1a1a1a',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: editMode ? '0 0 0 3px rgba(255,255,255,0.3), 0 2px 6px rgba(0,0,0,0.5)' : '0 2px 6px rgba(0,0,0,0.5)',
-                    transition: editMode ? 'none' : 'transform 0.15s ease, box-shadow 0.15s ease',
-                    zIndex: 10,
-                  }}
-                  onMouseEnter={e => {
-                    if (editMode) return
-                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.3)'
-                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
-                  }}
-                  onMouseLeave={e => {
-                    if (editMode) return
-                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
-                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)'
-                  }}
-                >
-                  {part.num}
-                </button>
-              )
-            })}
+            {FACE_PARTS.map(part => (
+              <button
+                key={part.id}
+                onClick={() => scrollTo(part.id)}
+                title={`${part.num}. ${part.part} — ${part.keywords.join(', ')}`}
+                style={{
+                  position: 'absolute',
+                  left: `${part.x}%`,
+                  top: `${part.y}%`,
+                  transform: 'translate(-50%, -50%)',
+                  width: '26px', height: '26px', borderRadius: '50%',
+                  background: part.color,
+                  border: '2px solid rgba(255,255,255,0.85)',
+                  cursor: 'pointer',
+                  fontSize: '11px', fontWeight: '800', color: '#1a1a1a',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.5)',
+                  transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                  zIndex: 10,
+                }}
+                onMouseEnter={e => {
+                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.3)'
+                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
+                }}
+                onMouseLeave={e => {
+                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
+                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)'
+                }}
+              >
+                {part.num}
+              </button>
+            ))}
           </div>
         </div>
 

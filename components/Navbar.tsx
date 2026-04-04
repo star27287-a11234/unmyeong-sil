@@ -32,51 +32,51 @@ export default function Navbar() {
       style={{ background: '#16213e', borderBottom: '1px solid #e0c97f20' }}
       className="sticky top-0 z-50 w-full"
     >
-      {/* 상단: 로고 + 언어 전환 */}
-      <div className="max-w-5xl mx-auto px-4 pt-3 pb-1 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
+        {/* 로고 */}
         <Link
           href={isEnglish ? '/en' : '/'}
-          className="text-xl font-bold"
+          className="text-xl font-bold flex-shrink-0"
           style={{ color: '#e0c97f' }}
         >
           ✨ {isEnglish ? 'Thread of Fate' : '운명의 실'}
         </Link>
 
-        <Link
-          href={langSwitchHref}
-          className="px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 border"
-          style={{
-            color: '#e0c97f',
-            borderColor: '#e0c97f40',
-            background: '#e0c97f10',
-          }}
+        {/* 우측: 링크 + 언어전환 (가로스크롤) */}
+        <div
+          className="flex items-center gap-1 overflow-x-auto flex-shrink-0"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {isEnglish ? '한국어' : 'EN'}
-        </Link>
-      </div>
+          {links.map((link) => {
+            const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap"
+                style={{
+                  color: isActive ? '#e0c97f' : '#b0b0c0',
+                  background: isActive ? '#e0c97f15' : 'transparent',
+                  borderBottom: isActive ? '2px solid #e0c97f' : '2px solid transparent',
+                }}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
 
-      {/* 하단: 네비게이션 링크 (가로 스크롤) */}
-      <div
-        className="max-w-5xl mx-auto px-2 pb-1 flex items-center gap-0.5 overflow-x-auto"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {links.map((link) => {
-          const isActive = pathname === link.href || pathname.startsWith(link.href + '/')
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0"
-              style={{
-                color: isActive ? '#e0c97f' : '#b0b0c0',
-                background: isActive ? '#e0c97f15' : 'transparent',
-                borderBottom: isActive ? '2px solid #e0c97f' : '2px solid transparent',
-              }}
-            >
-              {link.label}
-            </Link>
-          )
-        })}
+          <Link
+            href={langSwitchHref}
+            className="ml-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 border whitespace-nowrap"
+            style={{
+              color: '#e0c97f',
+              borderColor: '#e0c97f40',
+              background: '#e0c97f10',
+            }}
+          >
+            {isEnglish ? '한국어' : 'EN'}
+          </Link>
+        </div>
       </div>
     </nav>
   )

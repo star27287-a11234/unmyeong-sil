@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { Post } from '@/lib/posts'
 
 interface Props {
@@ -17,7 +17,7 @@ const PALM_ITEMS = [
     hanja: '生命線',
     type: '선(線)',
     color: '#e05050',
-    x: 64, y: 56,
+    x: 58.4, y: 58.4,
     summary: '건강, 수명, 질병, 가족, 신변상황',
     desc: '엄지손가락을 감싸는 호형의 선. 수명의 길이보다는 삶의 활력·건강 상태·생명력을 나타냅니다. 가족 환경과 신변의 변화도 읽을 수 있습니다.',
     types: [
@@ -34,7 +34,7 @@ const PALM_ITEMS = [
     hanja: '頭腦線',
     type: '선(線)',
     color: '#5090e0',
-    x: 63, y: 44,
+    x: 64.1, y: 38.3,
     summary: '지능성향, 적성유무, 사고방식',
     desc: '검지와 엄지 사이에서 시작해 손바닥을 가로지르는 선. 사고 방식, 지적 능력, 직업 적성을 나타냅니다.',
     types: [
@@ -51,7 +51,7 @@ const PALM_ITEMS = [
     hanja: '感情線',
     type: '선(線)',
     color: '#e060a0',
-    x: 5, y: 50,
+    x: 2.3, y: 55.8,
     summary: '성격, 애정운, 연애운',
     desc: '새끼손가락 아래에서 시작해 검지 방향으로 이어지는 선. 감정 표현 방식, 연애 스타일, 성격의 따뜻함을 나타냅니다.',
     types: [
@@ -68,7 +68,7 @@ const PALM_ITEMS = [
     hanja: '運命線',
     type: '선(線)',
     color: '#e0c050',
-    x: 64, y: 64,
+    x: 54.7, y: 65.4,
     summary: '직업운, 직업유무, 사회적 성취',
     desc: '손목 아래에서 중지 방향으로 올라가는 세로선. 삶의 방향성, 직업적 성취, 사회적 역할을 나타냅니다. 없어도 나쁜 것이 아닙니다.',
     types: [
@@ -85,7 +85,7 @@ const PALM_ITEMS = [
     hanja: '結婚線',
     type: '선(線)',
     color: '#b080e0',
-    x: 5, y: 38,
+    x: 3, y: 31.7,
     summary: '혼인관련 운세, 인연의 강도',
     desc: '새끼손가락 아래 가로 방향의 짧은 선. 인연의 강도와 결혼 시기, 파트너와의 관계를 나타냅니다.',
     types: [
@@ -102,7 +102,7 @@ const PALM_ITEMS = [
     hanja: '子息線',
     type: '선(線)',
     color: '#a0d080',
-    x: 5, y: 32,
+    x: 2.5, y: 45,
     summary: '자녀 인연, 상향은 아들 하향은 딸',
     desc: '결혼선에서 위아래로 뻗는 짧은 선들. 자녀와의 인연과 자녀의 수를 나타냅니다.',
     types: [
@@ -119,7 +119,7 @@ const PALM_ITEMS = [
     hanja: '事業線',
     type: '선(線)',
     color: '#e09050',
-    x: 5, y: 70,
+    x: 2.8, y: 73.8,
     summary: '사업목구, 리더십, 인내유무',
     desc: '손바닥 아래쪽에서 태양구 방향으로 이어지는 선. 사업가적 기질과 리더십, 추진력을 나타냅니다.',
     types: [
@@ -136,7 +136,7 @@ const PALM_ITEMS = [
     hanja: '木星丘',
     type: '구(丘)',
     color: '#80d0a0',
-    x: 65, y: 20,
+    x: 59.9, y: 18,
     summary: '사회적 권력, 명예, 관직 종사 운세',
     desc: '검지 아래 볼록한 부위. 사회적 지위·명예·권력욕을 나타냅니다. 발달할수록 리더십이 강하고 공직·정치 방면에 적합합니다.',
     types: [
@@ -152,7 +152,7 @@ const PALM_ITEMS = [
     hanja: '土星丘',
     type: '구(丘)',
     color: '#c0c080',
-    x: 57, y: 10,
+    x: 37.6, y: 11.3,
     summary: '직업운, 성향, 종교성, 인내력',
     desc: '중지 아래 볼록한 부위. 직업에 대한 성실함, 종교적 성향, 인내력을 나타냅니다. 발달할수록 깊고 철학적인 성격입니다.',
     types: [
@@ -167,7 +167,7 @@ const PALM_ITEMS = [
     hanja: '太陽丘',
     type: '구(丘)',
     color: '#e0c050',
-    x: 5, y: 7,
+    x: 8.6, y: 3,
     summary: '재물복, 사회적 인기운, 예술성',
     desc: '약지 아래 볼록한 부위. 재물복, 사회적 인기, 예술적 감각을 나타냅니다. 발달할수록 사람들에게 인정받고 재물이 따릅니다.',
     types: [
@@ -182,7 +182,7 @@ const PALM_ITEMS = [
     hanja: '水星丘',
     type: '구(丘)',
     color: '#60c0e0',
-    x: 5, y: 22,
+    x: 2.8, y: 18.4,
     summary: '사업성향, 건강, 재물욕, 언변',
     desc: '새끼손가락 아래 볼록한 부위. 사업 능력, 언변, 재물욕, 건강 상태를 나타냅니다. 발달할수록 장사 수완이 좋습니다.',
     types: [
@@ -197,7 +197,7 @@ const PALM_ITEMS = [
     hanja: '金星丘',
     type: '구(丘)',
     color: '#e0a0c0',
-    x: 64, y: 78,
+    x: 60.3, y: 76.7,
     summary: '건강, 스태미나, 정력적 활동, 애정',
     desc: '생명선 안쪽 엄지 아래 두툼한 부위. 성적 매력, 건강한 체력, 애정의 깊이를 나타냅니다. 발달할수록 생명력이 넘칩니다.',
     types: [
@@ -212,7 +212,7 @@ const PALM_ITEMS = [
     hanja: '月丘',
     type: '구(丘)',
     color: '#a080d0',
-    x: 5, y: 87,
+    x: 6.6, y: 87.6,
     summary: '상상력, 창의력, 예술성, 직관',
     desc: '손바닥 아래 엄지 반대쪽 부위. 상상력, 창의력, 예술적 감각, 직관력을 나타냅니다. 발달할수록 예술가·작가·음악가 기질이 강합니다.',
     types: [
@@ -227,7 +227,7 @@ const PALM_ITEMS = [
     hanja: '第一火星丘',
     type: '구(丘)',
     color: '#e08060',
-    x: 58, y: 37,
+    x: 75.7, y: 49.2,
     summary: '적극성, 용기, 투쟁심',
     desc: '검지와 엄지 사이의 볼록한 부위. 적극성, 용기, 경쟁심을 나타냅니다. 발달할수록 도전적이고 직접적인 성격입니다.',
     types: [
@@ -242,7 +242,7 @@ const PALM_ITEMS = [
     hanja: '第二火星丘',
     type: '구(丘)',
     color: '#c06040',
-    x: 20, y: 60,
+    x: 20.4, y: 68.2,
     summary: '인내력, 저항력, 자기통제',
     desc: '새끼손가락 아래와 월구 사이의 부위. 인내력, 자기통제, 저항력을 나타냅니다. 발달할수록 끈기가 강합니다.',
     types: [
@@ -257,7 +257,7 @@ const PALM_ITEMS = [
     hanja: '火星平原',
     type: '구(丘)',
     color: '#909090',
-    x: 45, y: 68,
+    x: 43.8, y: 73.8,
     summary: '정신력 균형, 인내와 용기의 조화',
     desc: '손바닥 중앙의 평평한 부분. 화성평원이 넓고 평탄할수록 정신적 균형이 잡혀 있고 안정적인 성격입니다.',
     types: [
@@ -272,6 +272,30 @@ const ZONES = PALM_ITEMS.filter(i => i.type === '구(丘)')
 
 export default function SongeumClient({ posts }: Props) {
   const [active, setActive] = useState<string | null>(null)
+  const [editMode, setEditMode] = useState(false)
+  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>({})
+  const draggingId = useRef<string | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const getPos = (item: (typeof PALM_ITEMS)[0]) => positions[item.id] ?? { x: item.x, y: item.y }
+
+  const handlePointerDown = (e: React.PointerEvent, id: string) => {
+    if (!editMode) return
+    e.preventDefault()
+    e.stopPropagation()
+    draggingId.current = id
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!draggingId.current || !containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 1000) / 10
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 1000) / 10
+    setPositions(prev => ({ ...prev, [draggingId.current!]: { x, y } }))
+  }
+
+  const handlePointerUp = () => { draggingId.current = null }
 
   const scrollTo = (id: string) => {
     setActive(id)
@@ -296,61 +320,107 @@ export default function SongeumClient({ posts }: Props) {
           <p style={{ color: '#809080' }}>손바닥이 새겨 놓은 운명의 지도</p>
         </div>
 
+        {/* 위치조정 버튼 */}
+        <div className="flex justify-end mb-2">
+          <button
+            onClick={() => setEditMode(v => !v)}
+            style={{
+              background: editMode ? '#80e0a0' : '#1a3a2a',
+              border: 'none',
+              color: editMode ? '#0a1a10' : '#80e0a0',
+              padding: '8px 16px', borderRadius: '8px', fontSize: '13px',
+              cursor: 'pointer', fontWeight: 'bold',
+            }}
+          >{editMode ? '✓ 편집 완료' : '📍 버튼 위치 조정'}</button>
+        </div>
+
         {/* 이미지 + 오버레이 버튼 */}
         <div
           className="rounded-2xl overflow-hidden mb-3"
-          style={{ border: '1px solid #50a06030', background: '#0a1a12' }}
+          style={{ border: `2px solid ${editMode ? '#80e0a060' : '#50a06030'}`, background: '#0a1a12' }}
         >
-          <div className="px-4 pt-4 pb-2 text-center">
+          <div className="px-4 pt-4 pb-2">
             <h2 className="text-base font-bold" style={{ color: '#80e0a0' }}>
               손바닥 부위 및 선 전체 해설도
             </h2>
           </div>
-          <div className="relative mx-4 mb-4">
+          {editMode && (
+            <div className="mx-4 mb-2 rounded-xl px-3 py-2" style={{ background: '#80e0a00a', border: '1px solid #80e0a025' }}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-bold" style={{ color: '#80e0a0' }}>드래그로 버튼 이동 · 현재 좌표</span>
+                <button
+                  onClick={() => {
+                    const output = PALM_ITEMS.map(p => {
+                      const pos = getPos(p)
+                      return `    x: ${pos.x}, y: ${pos.y},  // ${p.name}`
+                    }).join('\n')
+                    navigator.clipboard.writeText(output)
+                  }}
+                  style={{ background: '#80e0a020', border: '1px solid #80e0a050', color: '#80e0a0', padding: '2px 8px', borderRadius: '5px', fontSize: '10px', cursor: 'pointer' }}
+                >📋 복사</button>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {PALM_ITEMS.map(p => {
+                  const pos = getPos(p)
+                  return (
+                    <span key={p.id} style={{ background: `${p.color}20`, border: `1px solid ${p.color}40`, padding: '2px 7px', borderRadius: '5px', fontSize: '10px', color: '#c0c0d0', fontFamily: 'monospace' }}>
+                      {p.num}.{p.name} ({pos.x}, {pos.y})
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+          <div
+            ref={containerRef}
+            className="relative mx-4 mb-4"
+            style={{ userSelect: 'none' }}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+          >
             <img
               src="/images/songeum/palm-reference.jpg"
               alt="손금 손바닥 선 명칭 전체"
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }}
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', pointerEvents: 'none' }}
             />
-            {/* 오버레이 번호 버튼 */}
-            {PALM_ITEMS.map(item => (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                title={`${item.num}. ${item.name} — ${item.summary}`}
-                style={{
-                  position: 'absolute',
-                  left: `${item.x}%`,
-                  top: `${item.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  width: '22px',
-                  height: '22px',
-                  borderRadius: '50%',
-                  background: item.color,
-                  border: '2px solid rgba(255,255,255,0.8)',
-                  cursor: 'pointer',
-                  fontSize: '9px',
-                  fontWeight: '800',
-                  color: '#1a1a1a',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 2px 5px rgba(0,0,0,0.6)',
-                  transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-                  zIndex: 10,
-                }}
-                onMouseEnter={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.35)'
-                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
-                }}
-                onMouseLeave={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
-                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 5px rgba(0,0,0,0.6)'
-                }}
-              >
-                {item.num}
-              </button>
-            ))}
+            {PALM_ITEMS.map(item => {
+              const pos = getPos(item)
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => { if (!editMode) scrollTo(item.id) }}
+                  onPointerDown={e => handlePointerDown(e, item.id)}
+                  title={`${item.num}. ${item.name} — ${item.summary}`}
+                  style={{
+                    position: 'absolute',
+                    left: `${pos.x}%`,
+                    top: `${pos.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    width: '22px', height: '22px', borderRadius: '50%',
+                    background: item.color,
+                    border: editMode ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.8)',
+                    cursor: editMode ? 'grab' : 'pointer',
+                    fontSize: '9px', fontWeight: '800', color: '#1a1a1a',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: editMode ? '0 0 0 3px rgba(255,255,255,0.3), 0 2px 5px rgba(0,0,0,0.6)' : '0 2px 5px rgba(0,0,0,0.6)',
+                    transition: editMode ? 'none' : 'transform 0.15s ease, box-shadow 0.15s ease',
+                    zIndex: 10,
+                  }}
+                  onMouseEnter={e => {
+                    if (editMode) return
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.35)'
+                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
+                  }}
+                  onMouseLeave={e => {
+                    if (editMode) return
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
+                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 5px rgba(0,0,0,0.6)'
+                  }}
+                >
+                  {item.num}
+                </button>
+              )
+            })}
           </div>
         </div>
 

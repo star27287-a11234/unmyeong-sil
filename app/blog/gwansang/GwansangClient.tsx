@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { Post } from '@/lib/posts'
 
 interface Props {
@@ -16,7 +16,7 @@ const FACE_PARTS = [
     hanja: '額',
     zone: '상정(上停) · 초년운',
     color: '#e0c97f',
-    x: 10, y: 8,
+    x: 10.7, y: 14.2,
     keywords: ['총명함', '부모운', '초기성공'],
     desc: '이마는 초년운(0~30세)을 관장하는 핵심 부위입니다. 넓고 반듯한 이마는 총명함과 부모의 덕을 나타내며, 학업·직업의 초기 성공을 의미합니다.',
     detail: [
@@ -33,7 +33,7 @@ const FACE_PARTS = [
     hanja: '眉上',
     zone: '상정(上停) · 성공운',
     color: '#c8d8ff',
-    x: 30, y: 25,
+    x: 21.2, y: 32.4,
     keywords: ['성공운'],
     desc: '눈썹 바로 위 이마 하단 영역은 사회적 성공운과 직결됩니다. 이 부위가 평평하고 풍만할수록 사회적 성공과 명예가 따릅니다.',
     detail: [
@@ -49,7 +49,7 @@ const FACE_PARTS = [
     hanja: '眉',
     zone: '상정(上停) · 형제·친구운',
     color: '#c8a8e0',
-    x: 10, y: 37,
+    x: 10.6, y: 41.7,
     keywords: ['지혜', '복덕', '성격운'],
     desc: '눈썹은 형제·친구운과 성격·기질을 나타냅니다. 눈썹이 짙고 선명하면 의지력이 강하고, 옅으면 섬세한 성격입니다.',
     detail: [
@@ -67,7 +67,7 @@ const FACE_PARTS = [
     hanja: '耳',
     zone: '상정(上停) · 장수·복덕',
     color: '#80e0a0',
-    x: 10, y: 51,
+    x: 10.2, y: 59.4,
     keywords: ['지혜', '복덕', '성격'],
     desc: '귀는 타고난 복과 장수, 그리고 초년의 환경을 상징합니다. 귀가 얼굴보다 높이 위치할수록 지혜롭고, 귓불이 두툼할수록 복덕이 많습니다.',
     detail: [
@@ -84,7 +84,7 @@ const FACE_PARTS = [
     hanja: '眼',
     zone: '중정(中停) · 중년운',
     color: '#60b8e0',
-    x: 65, y: 30,
+    x: 72.8, y: 29.8,
     keywords: ['지혜', '정신력', '대인운'],
     desc: '눈은 관상에서 가장 중요한 부위입니다. 눈빛이 맑고 총기 있으면 지혜롭고 대인운이 강합니다. 현재의 정신 상태와 중년운을 나타냅니다.',
     detail: [
@@ -102,7 +102,7 @@ const FACE_PARTS = [
     hanja: '鼻',
     zone: '중정(中停) · 재물궁',
     color: '#e08040',
-    x: 65, y: 44,
+    x: 72.6, y: 42.9,
     keywords: ['재물운(재물궁)', '자존감'],
     desc: '코는 재물궁(財物宮)이라 불리며 재물운과 자존감을 나타냅니다. 코끝이 둥글고 두툼하면 재물이 모이고, 콧망울이 발달하면 재물욕이 강합니다.',
     detail: [
@@ -119,7 +119,7 @@ const FACE_PARTS = [
     hanja: '人中',
     zone: '하정(下停) · 생명력',
     color: '#60c0c0',
-    x: 65, y: 56,
+    x: 73, y: 56.1,
     keywords: ['건강', '수명', '자손운'],
     desc: '코와 입 사이의 인중은 건강·수명·자손운을 나타냅니다. 인중이 길고 선명할수록 수명이 길고 자손이 번성합니다.',
     detail: [
@@ -136,7 +136,7 @@ const FACE_PARTS = [
     hanja: '口',
     zone: '하정(下停) · 말년운',
     color: '#e06080',
-    x: 65, y: 65,
+    x: 72.4, y: 66.5,
     keywords: ['말재주', '신뢰', '대인관계', '화술', '인기'],
     desc: '입은 말년운과 식복을 상징하며, 신뢰와 대인관계를 나타냅니다. 입꼬리가 올라가면 화술이 뛰어나고 인기가 많습니다.',
     detail: [
@@ -154,7 +154,7 @@ const FACE_PARTS = [
     hanja: '頤',
     zone: '하정(下停) · 말년운',
     color: '#a080e0',
-    x: 65, y: 77,
+    x: 72.6, y: 78.9,
     keywords: ['말년운', '결단력', '끈기'],
     desc: '턱은 말년운과 의지력을 나타냅니다. 턱이 둥글고 풍만할수록 말년이 풍요롭고 자녀복이 있으며, 사각턱은 강한 결단력을 의미합니다.',
     detail: [
@@ -168,6 +168,30 @@ const FACE_PARTS = [
 
 export default function GwansangClient({ posts }: Props) {
   const [active, setActive] = useState<string | null>(null)
+  const [editMode, setEditMode] = useState(false)
+  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>({})
+  const draggingId = useRef<string | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const getPos = (item: (typeof FACE_PARTS)[0]) => positions[item.id] ?? { x: item.x, y: item.y }
+
+  const handlePointerDown = (e: React.PointerEvent, id: string) => {
+    if (!editMode) return
+    e.preventDefault()
+    e.stopPropagation()
+    draggingId.current = id
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!draggingId.current || !containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 1000) / 10
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 1000) / 10
+    setPositions(prev => ({ ...prev, [draggingId.current!]: { x, y } }))
+  }
+
+  const handlePointerUp = () => { draggingId.current = null }
 
   const scrollTo = (id: string) => {
     setActive(id)
@@ -192,61 +216,107 @@ export default function GwansangClient({ posts }: Props) {
           <p style={{ color: '#8080a0' }}>얼굴이 담고 있는 운명의 이야기</p>
         </div>
 
+        {/* 위치조정 버튼 */}
+        <div className="flex justify-end mb-2">
+          <button
+            onClick={() => setEditMode(v => !v)}
+            style={{
+              background: editMode ? '#e0c97f' : '#3a3a5a',
+              border: 'none',
+              color: editMode ? '#1a1a2e' : '#e0c97f',
+              padding: '8px 16px', borderRadius: '8px', fontSize: '13px',
+              cursor: 'pointer', fontWeight: 'bold',
+            }}
+          >{editMode ? '✓ 편집 완료' : '📍 버튼 위치 조정'}</button>
+        </div>
+
         {/* 이미지 + 오버레이 버튼 */}
         <div
           className="rounded-2xl overflow-hidden mb-3"
-          style={{ border: '1px solid #9c59d130', background: '#0e0e24' }}
+          style={{ border: `2px solid ${editMode ? '#e0c97f60' : '#9c59d130'}`, background: '#0e0e24' }}
         >
-          <div className="px-4 pt-4 pb-2 text-center">
+          <div className="px-4 pt-4 pb-2">
             <h2 className="text-base font-bold" style={{ color: '#c8a8e0' }}>
               얼굴 부위별 관상 해설도
             </h2>
           </div>
-          <div className="relative mx-4 mb-4">
+          {editMode && (
+            <div className="mx-4 mb-2 rounded-xl px-3 py-2" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-bold" style={{ color: '#e0c97f' }}>드래그로 버튼 이동 · 현재 좌표</span>
+                <button
+                  onClick={() => {
+                    const output = FACE_PARTS.map(p => {
+                      const pos = getPos(p)
+                      return `    x: ${pos.x}, y: ${pos.y},  // ${p.part}`
+                    }).join('\n')
+                    navigator.clipboard.writeText(output)
+                  }}
+                  style={{ background: '#e0c97f20', border: '1px solid #e0c97f50', color: '#e0c97f', padding: '2px 8px', borderRadius: '5px', fontSize: '10px', cursor: 'pointer' }}
+                >📋 복사</button>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {FACE_PARTS.map(p => {
+                  const pos = getPos(p)
+                  return (
+                    <span key={p.id} style={{ background: `${p.color}20`, border: `1px solid ${p.color}40`, padding: '2px 7px', borderRadius: '5px', fontSize: '10px', color: '#c0c0d0', fontFamily: 'monospace' }}>
+                      {p.num}.{p.part} ({pos.x}, {pos.y})
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+          <div
+            ref={containerRef}
+            className="relative mx-4 mb-4"
+            style={{ userSelect: 'none' }}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+          >
             <img
               src="/images/gwansang/face-reference.png"
               alt="관상학 얼굴 부위별 운세"
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }}
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', pointerEvents: 'none' }}
             />
-            {/* 오버레이 번호 버튼 */}
-            {FACE_PARTS.map(part => (
-              <button
-                key={part.id}
-                onClick={() => scrollTo(part.id)}
-                title={`${part.num}. ${part.part} — ${part.keywords.join(', ')}`}
-                style={{
-                  position: 'absolute',
-                  left: `${part.x}%`,
-                  top: `${part.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  width: '26px',
-                  height: '26px',
-                  borderRadius: '50%',
-                  background: part.color,
-                  border: '2px solid rgba(255,255,255,0.85)',
-                  cursor: 'pointer',
-                  fontSize: '11px',
-                  fontWeight: '800',
-                  color: '#1a1a1a',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.5)',
-                  transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-                  zIndex: 10,
-                }}
-                onMouseEnter={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.3)'
-                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
-                }}
-                onMouseLeave={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
-                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)'
-                }}
-              >
-                {part.num}
-              </button>
-            ))}
+            {FACE_PARTS.map(part => {
+              const pos = getPos(part)
+              return (
+                <button
+                  key={part.id}
+                  onClick={() => { if (!editMode) scrollTo(part.id) }}
+                  onPointerDown={e => handlePointerDown(e, part.id)}
+                  title={`${part.num}. ${part.part} — ${part.keywords.join(', ')}`}
+                  style={{
+                    position: 'absolute',
+                    left: `${pos.x}%`,
+                    top: `${pos.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    width: '26px', height: '26px', borderRadius: '50%',
+                    background: part.color,
+                    border: editMode ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.85)',
+                    cursor: editMode ? 'grab' : 'pointer',
+                    fontSize: '11px', fontWeight: '800', color: '#1a1a1a',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: editMode ? '0 0 0 3px rgba(255,255,255,0.3), 0 2px 6px rgba(0,0,0,0.5)' : '0 2px 6px rgba(0,0,0,0.5)',
+                    transition: editMode ? 'none' : 'transform 0.15s ease, box-shadow 0.15s ease',
+                    zIndex: 10,
+                  }}
+                  onMouseEnter={e => {
+                    if (editMode) return
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.3)'
+                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
+                  }}
+                  onMouseLeave={e => {
+                    if (editMode) return
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
+                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)'
+                  }}
+                >
+                  {part.num}
+                </button>
+              )
+            })}
           </div>
         </div>
 

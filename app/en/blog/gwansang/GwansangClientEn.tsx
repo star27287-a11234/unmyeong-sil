@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { Post } from '@/lib/posts'
 
 interface Props {
@@ -16,7 +16,7 @@ const FACE_PARTS = [
     chinese: '額',
     zone: 'Upper Region · Early Fortune',
     color: '#e0c97f',
-    x: 10, y: 8,
+    x: 10.7, y: 14.2,
     keywords: ['Intelligence', 'Parental Luck', 'Early Success'],
     desc: 'The forehead governs your early fortune (ages 0–30). A wide, smooth forehead indicates intelligence and parental support, suggesting success in education and career during early life.',
     detail: [
@@ -33,7 +33,7 @@ const FACE_PARTS = [
     chinese: '眉上',
     zone: 'Upper Region · Success',
     color: '#c8d8ff',
-    x: 30, y: 25,
+    x: 21.2, y: 32.4,
     keywords: ['Success Fortune'],
     desc: 'The area just above the eyebrows relates directly to social success and achievement. A flat, full area here indicates greater social recognition and honor.',
     detail: [
@@ -49,7 +49,7 @@ const FACE_PARTS = [
     chinese: '眉',
     zone: 'Upper Region · Siblings & Character',
     color: '#c8a8e0',
-    x: 10, y: 37,
+    x: 10.6, y: 41.7,
     keywords: ['Wisdom', 'Virtue', 'Character'],
     desc: 'The eyebrows reveal sibling luck, friendship, and character. Thick, well-defined brows indicate strong willpower; light brows suggest a more sensitive nature.',
     detail: [
@@ -67,7 +67,7 @@ const FACE_PARTS = [
     chinese: '耳',
     zone: 'Upper Region · Longevity & Virtue',
     color: '#80e0a0',
-    x: 10, y: 51,
+    x: 10.2, y: 59.4,
     keywords: ['Wisdom', 'Virtue', 'Character'],
     desc: 'The ears symbolize innate fortune, longevity, and early life environment. Ears positioned higher than average indicate wisdom; thick earlobes suggest abundant blessings.',
     detail: [
@@ -84,7 +84,7 @@ const FACE_PARTS = [
     chinese: '眼',
     zone: 'Middle Region · Mid-life Fortune',
     color: '#60b8e0',
-    x: 65, y: 30,
+    x: 72.8, y: 29.8,
     keywords: ['Wisdom', 'Mental Strength', 'Social Luck'],
     desc: 'The eyes are the most important feature in physiognomy. Clear, bright eyes indicate wisdom and strong social luck. They reflect current mental state and mid-life fortune.',
     detail: [
@@ -102,7 +102,7 @@ const FACE_PARTS = [
     chinese: '鼻',
     zone: 'Middle Region · Wealth Palace',
     color: '#e08040',
-    x: 65, y: 44,
+    x: 72.6, y: 42.9,
     keywords: ['Wealth Fortune', 'Self-esteem'],
     desc: 'The nose is called the "Palace of Wealth." A rounded, full nose tip indicates strong wealth accumulation. Well-developed nostrils suggest strong desire for prosperity.',
     detail: [
@@ -119,7 +119,7 @@ const FACE_PARTS = [
     chinese: '人中',
     zone: 'Lower Region · Vitality',
     color: '#60c0c0',
-    x: 65, y: 56,
+    x: 73, y: 56.1,
     keywords: ['Health', 'Longevity', 'Descendants'],
     desc: 'The philtrum (groove between nose and lips) represents health, longevity, and descendants. A long, well-defined philtrum indicates long life and flourishing offspring.',
     detail: [
@@ -136,7 +136,7 @@ const FACE_PARTS = [
     chinese: '口',
     zone: 'Lower Region · Late-life Fortune',
     color: '#e06080',
-    x: 65, y: 65,
+    x: 72.4, y: 66.5,
     keywords: ['Eloquence', 'Trustworthiness', 'Relationships', 'Charisma'],
     desc: 'The mouth governs late-life fortune and social blessings. Upturned corners indicate excellent communication skills and widespread popularity.',
     detail: [
@@ -154,7 +154,7 @@ const FACE_PARTS = [
     chinese: '頤',
     zone: 'Lower Region · Late-life Fortune',
     color: '#a080e0',
-    x: 65, y: 77,
+    x: 72.6, y: 78.9,
     keywords: ['Late-life Fortune', 'Decisiveness', 'Perseverance'],
     desc: 'The chin represents late-life fortune and willpower. A round, full chin indicates a prosperous old age with good children\'s luck. A square jaw suggests strong decisiveness.',
     detail: [
@@ -168,6 +168,30 @@ const FACE_PARTS = [
 
 export default function GwansangClientEn({ posts }: Props) {
   const [active, setActive] = useState<string | null>(null)
+  const [editMode, setEditMode] = useState(false)
+  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>({})
+  const draggingId = useRef<string | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const getPos = (item: (typeof FACE_PARTS)[0]) => positions[item.id] ?? { x: item.x, y: item.y }
+
+  const handlePointerDown = (e: React.PointerEvent, id: string) => {
+    if (!editMode) return
+    e.preventDefault()
+    e.stopPropagation()
+    draggingId.current = id
+    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!draggingId.current || !containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 1000) / 10
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 1000) / 10
+    setPositions(prev => ({ ...prev, [draggingId.current!]: { x, y } }))
+  }
+
+  const handlePointerUp = () => { draggingId.current = null }
 
   const scrollTo = (id: string) => {
     setActive(id)
@@ -192,60 +216,107 @@ export default function GwansangClientEn({ posts }: Props) {
           <p style={{ color: '#8080a0' }}>The story of destiny written in your face</p>
         </div>
 
+        {/* Adjust button */}
+        <div className="flex justify-end mb-2">
+          <button
+            onClick={() => setEditMode(v => !v)}
+            style={{
+              background: editMode ? '#e0c97f' : '#3a3a5a',
+              border: 'none',
+              color: editMode ? '#1a1a2e' : '#e0c97f',
+              padding: '8px 16px', borderRadius: '8px', fontSize: '13px',
+              cursor: 'pointer', fontWeight: 'bold',
+            }}
+          >{editMode ? '✓ Done' : '📍 Adjust Positions'}</button>
+        </div>
+
         {/* Image + Overlay Buttons */}
         <div
           className="rounded-2xl overflow-hidden mb-3"
-          style={{ border: '1px solid #9c59d130', background: '#0e0e24' }}
+          style={{ border: `2px solid ${editMode ? '#e0c97f60' : '#9c59d130'}`, background: '#0e0e24' }}
         >
-          <div className="px-4 pt-4 pb-2 text-center">
+          <div className="px-4 pt-4 pb-2">
             <h2 className="text-base font-bold" style={{ color: '#c8a8e0' }}>
               Facial Feature Fortune Guide
             </h2>
           </div>
-          <div className="relative mx-4 mb-4">
+          {editMode && (
+            <div className="mx-4 mb-2 rounded-xl px-3 py-2" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-bold" style={{ color: '#e0c97f' }}>Drag buttons to reposition · Current coords</span>
+                <button
+                  onClick={() => {
+                    const output = FACE_PARTS.map(p => {
+                      const pos = getPos(p)
+                      return `    x: ${pos.x}, y: ${pos.y},  // ${p.part}`
+                    }).join('\n')
+                    navigator.clipboard.writeText(output)
+                  }}
+                  style={{ background: '#e0c97f20', border: '1px solid #e0c97f50', color: '#e0c97f', padding: '2px 8px', borderRadius: '5px', fontSize: '10px', cursor: 'pointer' }}
+                >📋 Copy</button>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {FACE_PARTS.map(p => {
+                  const pos = getPos(p)
+                  return (
+                    <span key={p.id} style={{ background: `${p.color}20`, border: `1px solid ${p.color}40`, padding: '2px 7px', borderRadius: '5px', fontSize: '10px', color: '#c0c0d0', fontFamily: 'monospace' }}>
+                      {p.num}.{p.part} ({pos.x}, {pos.y})
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+          <div
+            ref={containerRef}
+            className="relative mx-4 mb-4"
+            style={{ userSelect: 'none' }}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+          >
             <img
               src="/images/gwansang/face-reference.png"
               alt="Physiognomy facial feature fortune guide"
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px' }}
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '10px', pointerEvents: 'none' }}
             />
-            {FACE_PARTS.map(part => (
-              <button
-                key={part.id}
-                onClick={() => scrollTo(part.id)}
-                title={`${part.num}. ${part.part} — ${part.keywords.join(', ')}`}
-                style={{
-                  position: 'absolute',
-                  left: `${part.x}%`,
-                  top: `${part.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  width: '26px',
-                  height: '26px',
-                  borderRadius: '50%',
-                  background: part.color,
-                  border: '2px solid rgba(255,255,255,0.85)',
-                  cursor: 'pointer',
-                  fontSize: '11px',
-                  fontWeight: '800',
-                  color: '#1a1a1a',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.5)',
-                  transition: 'transform 0.15s ease, box-shadow 0.15s ease',
-                  zIndex: 10,
-                }}
-                onMouseEnter={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.3)'
-                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
-                }}
-                onMouseLeave={e => {
-                  ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
-                  ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)'
-                }}
-              >
-                {part.num}
-              </button>
-            ))}
+            {FACE_PARTS.map(part => {
+              const pos = getPos(part)
+              return (
+                <button
+                  key={part.id}
+                  onClick={() => { if (!editMode) scrollTo(part.id) }}
+                  onPointerDown={e => handlePointerDown(e, part.id)}
+                  title={`${part.num}. ${part.part} — ${part.keywords.join(', ')}`}
+                  style={{
+                    position: 'absolute',
+                    left: `${pos.x}%`,
+                    top: `${pos.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    width: '26px', height: '26px', borderRadius: '50%',
+                    background: part.color,
+                    border: editMode ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0.85)',
+                    cursor: editMode ? 'grab' : 'pointer',
+                    fontSize: '11px', fontWeight: '800', color: '#1a1a1a',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: editMode ? '0 0 0 3px rgba(255,255,255,0.3), 0 2px 6px rgba(0,0,0,0.5)' : '0 2px 6px rgba(0,0,0,0.5)',
+                    transition: editMode ? 'none' : 'transform 0.15s ease, box-shadow 0.15s ease',
+                    zIndex: 10,
+                  }}
+                  onMouseEnter={e => {
+                    if (editMode) return
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1.3)'
+                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.7)'
+                  }}
+                  onMouseLeave={e => {
+                    if (editMode) return
+                    ;(e.currentTarget as HTMLButtonElement).style.transform = 'translate(-50%, -50%) scale(1)'
+                    ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 2px 6px rgba(0,0,0,0.5)'
+                  }}
+                >
+                  {part.num}
+                </button>
+              )
+            })}
           </div>
         </div>
 

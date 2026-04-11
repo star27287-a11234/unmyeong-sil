@@ -22,88 +22,75 @@ export default function QuestionCard({ question, options, current, total, onAnsw
   return (
     <div className="w-full max-w-2xl mx-auto px-4">
       {/* 진행 상황 */}
-      <div className="mb-6">
+      <div className="mb-8">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm" style={{ color: '#9090b0' }}>
+          <span className="text-xs font-medium tracking-wide" style={{ color: '#505075' }}>
             {qLabel}
           </span>
-          <span className="text-sm font-medium" style={{ color: '#e0c97f' }}>
+          <span className="text-xs font-bold" style={{ color: '#c94444' }}>
             {Math.round(progress)}%
           </span>
         </div>
-        {/* 진행 바 */}
-        <div
-          className="w-full h-1.5 rounded-full overflow-hidden"
-          style={{ background: '#e0c97f20' }}
-        >
+        <div className="w-full h-0.5 rounded-full overflow-hidden" style={{ background: '#1e1e38' }}>
           <div
-            className="h-full rounded-full transition-all duration-500"
-            style={{
-              width: `${progress}%`,
-              background: 'linear-gradient(90deg, #e0c97f, #9c59d1)',
-            }}
+            className="h-full transition-all duration-500"
+            style={{ width: `${progress}%`, background: '#c94444' }}
           />
         </div>
       </div>
 
-      {/* 질문 카드 */}
+      {/* 질문 */}
       <div
-        className="rounded-2xl p-6 mb-6"
+        className="rounded-xl p-6 mb-5"
         style={{
-          background: 'linear-gradient(135deg, #16213e, #0f3460)',
-          border: '1px solid #e0c97f20',
+          background: '#111120',
+          border: '1px solid #1e1e38',
         }}
       >
-        <div
-          className="text-xs font-semibold mb-3 uppercase tracking-wider"
-          style={{ color: '#9c59d1' }}
-        >
-          Question {current}
+        <div className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#505075' }}>
+          Q{current}
         </div>
-        <p
-          className="text-lg font-medium leading-relaxed"
-          style={{ color: '#e8e8f0' }}
-        >
+        <p className="text-lg font-medium leading-relaxed" style={{ color: '#f0eef8' }}>
           {question}
         </p>
       </div>
 
       {/* 선택지 */}
-      <div className="flex flex-col gap-3 mb-6">
+      <div className="flex flex-col gap-2.5 mb-6">
         {options.map((option, index) => (
           <button
             key={index}
             onClick={() => onAnswer(index)}
-            className="w-full text-left p-4 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95"
+            className="w-full text-left p-4 rounded-xl transition-all duration-150 active:scale-[0.99]"
             style={{
-              background: '#16213e',
-              border: '1px solid #e0c97f20',
-              color: '#c0c0d0',
+              background: '#111120',
+              border: '1px solid #1e1e38',
+              color: '#9090b8',
             }}
             onMouseEnter={(e) => {
-              const target = e.currentTarget
-              target.style.borderColor = '#e0c97f60'
-              target.style.background = '#1a2a4e'
-              target.style.color = '#e8e8f0'
+              const t = e.currentTarget
+              t.style.borderColor = '#c9444440'
+              t.style.background = '#1a0f1f'
+              t.style.color = '#f0eef8'
             }}
             onMouseLeave={(e) => {
-              const target = e.currentTarget
-              target.style.borderColor = '#e0c97f20'
-              target.style.background = '#16213e'
-              target.style.color = '#c0c0d0'
+              const t = e.currentTarget
+              t.style.borderColor = '#1e1e38'
+              t.style.background = '#111120'
+              t.style.color = '#9090b8'
             }}
           >
             <div className="flex items-start gap-3">
               <span
-                className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold"
+                className="flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold mt-0.5"
                 style={{
-                  background: '#e0c97f20',
-                  color: '#e0c97f',
+                  background: '#1e1e38',
+                  color: '#505075',
                 }}
               >
                 {String.fromCharCode(65 + index)}
               </span>
-              <span className="pt-0.5 text-sm leading-relaxed">{option.text}</span>
+              <span className="text-sm leading-relaxed">{option.text}</span>
             </div>
           </button>
         ))}
@@ -111,24 +98,15 @@ export default function QuestionCard({ question, options, current, total, onAnsw
 
       {/* 뒤로가기 */}
       {current > 1 && (
-        <div className="flex justify-start">
-          <button
-            onClick={onBack}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all duration-200"
-            style={{ color: '#7070a0' }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#e0c97f'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#7070a0'
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M10.5 3L5.5 8L10.5 13" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-            </svg>
-            {prevLabel}
-          </button>
-        </div>
+        <button
+          onClick={onBack}
+          className="flex items-center gap-1.5 text-xs transition-colors duration-150"
+          style={{ color: '#505075' }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#9090b8' }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = '#505075' }}
+        >
+          ← {prevLabel}
+        </button>
       )}
     </div>
   )

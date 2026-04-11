@@ -7,17 +7,15 @@ const services = [
     title: '사주팔자',
     subtitle: '생년월일시로 보는 운명',
     description: '오행의 기운으로 당신의 성격, 재능, 2025년 운세를 분석합니다.',
-    color: '#9c59d1',
-    badge: '',
+    accent: '#c94444',
   },
   {
     href: '/test/love',
     icon: '💘',
     title: '연애유형',
     subtitle: '나는 어떤 연애를 할까?',
-    description: '10가지 질문으로 당신의 연애 스타일과 최고의 파트너를 찾아드립니다.',
-    color: '#e05c7f',
-    badge: '',
+    description: '25가지 질문으로 당신의 연애 스타일과 최고의 파트너를 찾아드립니다.',
+    accent: '#e05272',
   },
   {
     href: '/test/career',
@@ -25,17 +23,15 @@ const services = [
     title: '직업적성',
     subtitle: '나에게 맞는 일은?',
     description: '타고난 재능과 성향으로 최적의 직업 유형을 분석합니다.',
-    color: '#4a9eff',
-    badge: '',
+    accent: '#4a90e2',
   },
   {
     href: '/test/mbti',
     icon: '🧩',
     title: 'MBTI',
     subtitle: '16가지 성격 유형 분석',
-    description: '12가지 질문으로 정확한 MBTI 유형과 심층 분석을 제공합니다.',
-    color: '#00cc77',
-    badge: '',
+    description: '25가지 질문으로 정확한 MBTI 유형과 심층 분석을 제공합니다.',
+    accent: '#2db8a0',
   },
   {
     href: '/test/money',
@@ -43,120 +39,108 @@ const services = [
     title: '재물운',
     subtitle: '나의 돈 버는 스타일은?',
     description: '재물운과 금전 관리 성향으로 나만의 부의 전략을 찾습니다.',
-    color: '#e0c97f',
-    badge: '',
+    accent: '#d4951e',
   },
 ]
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* 히어로 섹션 */}
-      <section
-        className="relative overflow-hidden py-20 px-4"
-        style={{
-          background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-        }}
-      >
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="text-5xl sm:text-6xl mb-4 animate-float">✨</div>
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-black mb-4"
-            style={{
-              color: '#e0c97f',
-              textShadow: '0 0 30px #e0c97f40, 0 0 60px #e0c97f20',
-              lineHeight: 1.2,
-            }}
+
+      {/* 히어로 */}
+      <section className="px-4 pt-20 pb-16" style={{ borderBottom: '1px solid #1e1e38' }}>
+        <div className="max-w-3xl mx-auto">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
+            style={{ background: 'rgba(201,68,68,0.12)', color: '#c94444', border: '1px solid rgba(201,68,68,0.25)' }}
           >
-            당신의 운명을 읽다
+            <span className="w-1.5 h-1.5 rounded-full bg-current" />
+            무료 · 즉시 결과 · 저장 없음
+          </div>
+
+          <h1
+            className="text-4xl sm:text-5xl font-black mb-5 leading-tight"
+            style={{ color: '#f0eef8', letterSpacing: '-0.02em' }}
+          >
+            당신의 운명을<br />
+            <span style={{ color: '#c94444' }}>지금 읽어드립니다</span>
           </h1>
-          <p className="text-xl sm:text-2xl font-light mb-2" style={{ color: '#c0c0d0' }}>
-            사주팔자와 심리테스트로
-          </p>
-          <p className="text-lg sm:text-xl mb-10" style={{ color: '#8080a0' }}>
-            진정한 나를 이해하는 여정을 시작하세요
+
+          <p className="text-lg mb-10" style={{ color: '#6060a0', lineHeight: 1.7 }}>
+            사주팔자와 심리테스트로 진정한 나를 이해하는 여정
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-wrap gap-3">
             <Link
               href="/saju"
-              className="px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 inline-block"
+              className="px-7 py-3.5 rounded-full text-sm font-bold transition-opacity hover:opacity-90"
               style={{
-                background: 'linear-gradient(135deg, #e0c97f, #c4a84f)',
-                color: '#1a1a2e',
-                boxShadow: '0 8px 30px #e0c97f40',
+                background: '#c94444',
+                color: '#fff',
               }}
             >
-              🔮 사주 분석 시작
+              사주 분석 시작 →
             </Link>
             <Link
               href="/test"
-              className="px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 inline-block"
+              className="px-7 py-3.5 rounded-full text-sm font-bold transition-colors"
               style={{
                 background: 'transparent',
-                border: '2px solid #e0c97f60',
-                color: '#e0c97f',
+                border: '1px solid #2a2a48',
+                color: '#9090b8',
               }}
             >
-              🧩 심리테스트 하기
+              심리테스트 보기
             </Link>
           </div>
         </div>
       </section>
 
-      <div
-        className="h-px mx-8"
-        style={{ background: 'linear-gradient(90deg, transparent, #e0c97f30, transparent)' }}
-      />
-
-      {/* 서비스 카드 섹션 */}
+      {/* 서비스 */}
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-3" style={{ color: '#e8e8f0' }}>
-              무엇을 알아보고 싶으신가요?
-            </h2>
-            <p style={{ color: '#8080a0' }}>5가지 서비스로 당신의 모든 것을 분석합니다</p>
+
+          <div className="mb-10">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#505075' }}>Services</p>
+            <h2 className="text-2xl font-bold" style={{ color: '#f0eef8' }}>무엇을 알아보고 싶으신가요?</h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {services.map((service) => (
               <Link
                 key={service.href}
                 href={service.href}
-                className="group relative rounded-2xl p-7 block transition-all duration-300 hover:scale-[1.03]"
+                className="group block rounded-xl p-6 transition-all duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #16213e, #0f3460)',
-                  border: '1px solid #e0c97f20',
+                  background: '#111120',
+                  border: '1px solid #1e1e38',
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget
+                  el.style.borderColor = service.accent + '50'
+                  el.style.background = '#16162a'
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget
+                  el.style.borderColor = '#1e1e38'
+                  el.style.background = '#111120'
                 }}
               >
-                {service.badge && (
-                  <div
-                    className="absolute top-4 right-4 px-2 py-0.5 rounded-full text-xs font-bold"
-                    style={{
-                      background: 'linear-gradient(135deg, #e0c97f, #c4a84f)',
-                      color: '#1a1a2e',
-                    }}
-                  >
-                    {service.badge}
-                  </div>
-                )}
-
-                <div className="text-5xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold mb-1" style={{ color: '#e8e8f0' }}>
+                <div className="text-3xl mb-4">{service.icon}</div>
+                <div
+                  className="text-xs font-semibold tracking-wide uppercase mb-1"
+                  style={{ color: service.accent }}
+                >
+                  {service.subtitle}
+                </div>
+                <h3 className="text-lg font-bold mb-2" style={{ color: '#f0eef8' }}>
                   {service.title}
                 </h3>
-                <p className="text-base mb-3 font-medium" style={{ color: service.color }}>
-                  {service.subtitle}
-                </p>
-                <p className="text-base leading-relaxed" style={{ color: '#8090a8' }}>
+                <p className="text-sm leading-relaxed" style={{ color: '#505075' }}>
                   {service.description}
                 </p>
-                <div className="mt-5 flex items-center gap-1 text-base font-medium" style={{ color: '#e0c97f' }}>
-                  <span>시작하기</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
+                <div className="mt-5 text-xs font-medium" style={{ color: service.accent }}>
+                  시작하기 →
                 </div>
               </Link>
             ))}
@@ -164,26 +148,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 소개 섹션 */}
-      <section className="py-16 px-4" style={{ borderTop: '1px solid #e0c97f10' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-6" style={{ color: '#e0c97f' }}>
-            왜 운명의 실인가요?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* 소개 */}
+      <section className="py-14 px-4" style={{ borderTop: '1px solid #1e1e38' }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px" style={{ background: '#1e1e38' }}>
             {[
-              { icon: '🎯', title: '정확한 분석', desc: '사주 원리와 심리학을 결합한 심층 분석으로 당신의 진짜 모습을 발견하세요.' },
-              { icon: '📖', title: '풍부한 콘텐츠', desc: '단순한 결과가 아닌, 실제 도움이 되는 상세하고 풍부한 내용을 제공합니다.' },
-              { icon: '🔒', title: '개인정보 보호', desc: '입력된 정보는 분석에만 활용되며 저장되거나 외부에 공유되지 않습니다.' },
+              { label: '01', title: '정확한 분석', desc: '사주 원리와 심리학을 결합한 심층 분석으로 당신의 진짜 모습을 발견하세요.' },
+              { label: '02', title: '풍부한 콘텐츠', desc: '단순한 결과가 아닌, 실제 도움이 되는 상세하고 풍부한 내용을 제공합니다.' },
+              { label: '03', title: '개인정보 보호', desc: '입력된 정보는 분석에만 활용되며 저장되거나 외부에 공유되지 않습니다.' },
             ].map((item) => (
               <div
                 key={item.title}
-                className="p-6 rounded-2xl"
-                style={{ background: '#16213e', border: '1px solid #e0c97f15' }}
+                className="p-7"
+                style={{ background: '#0b0b16' }}
               >
-                <div className="text-3xl mb-3">{item.icon}</div>
-                <h3 className="font-bold mb-2" style={{ color: '#e8e8f0' }}>{item.title}</h3>
-                <p className="text-sm" style={{ color: '#8090a8' }}>{item.desc}</p>
+                <div className="text-xs font-bold mb-4" style={{ color: '#c94444' }}>{item.label}</div>
+                <h3 className="font-bold mb-2 text-base" style={{ color: '#f0eef8' }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#505075' }}>{item.desc}</p>
               </div>
             ))}
           </div>

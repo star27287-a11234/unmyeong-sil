@@ -89,7 +89,17 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-base font-semibold mb-3" style={{ color: '#e8e8f0' }}>7. 개인정보 보호책임자</h2>
-          <p>개인정보 관련 문의사항은 서비스 내 문의 채널을 통해 연락해 주시기 바랍니다.</p>
+          <p>개인정보 관련 문의사항은 아래 이메일로 연락해 주시기 바랍니다.</p>
+          <p className="mt-2">
+            이메일:{' '}
+            <a
+              href="mailto:star27287@gmail.com"
+              className="underline"
+              style={{ color: '#e0c97f' }}
+            >
+              star27287@gmail.com
+            </a>
+          </p>
         </section>
       </div>
     </div>

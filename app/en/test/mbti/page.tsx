@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
@@ -215,7 +215,7 @@ export default function EnglishMbtiTestPage() {
             <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
           </div>
 
-          <AdBanner adSlot="9012345678" adFormat="auto" className="mb-2" />
+          <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           {step === 'detail' || unlocked ? (
             <div>

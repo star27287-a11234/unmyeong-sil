@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
@@ -376,7 +376,7 @@ export default function EnglishSajuPage() {
             </div>
           </div>
 
-          <AdBanner adSlot="1234509876" adFormat="auto" className="mb-2" />
+          <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           {step === 'detail' || unlocked ? (
             <div>

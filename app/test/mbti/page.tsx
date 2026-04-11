@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
@@ -278,7 +278,7 @@ export default function MbtiTestPage() {
           </div>
 
           {/* 요약 아래 광고 */}
-          <AdBanner adSlot="4567890123" adFormat="auto" className="mb-2" />
+          <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           {step === 'detail' || unlocked ? (
             <div>

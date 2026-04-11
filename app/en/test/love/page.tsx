@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
@@ -141,7 +141,7 @@ export default function EnglishLoveTestPage() {
             <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
           </div>
 
-          <AdBanner adSlot="7890123456" adFormat="auto" className="mb-2" />
+          <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           {step === 'detail' || unlocked ? (
             <div>

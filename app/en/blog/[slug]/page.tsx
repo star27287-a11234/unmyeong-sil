@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Top Banner Ad */}
-        <AdBanner adSlot="6677889900" adFormat="horizontal" className="mb-6" />
+        <AdBanner adSlot="6836248572" adFormat="horizontal" className="mb-6" />
 
         {/* Content */}
         <article
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
         />
 
         {/* Bottom Banner Ad */}
-        <AdBanner adSlot="0099887766" adFormat="auto" className="mt-8" />
+        <AdBanner adSlot="6121932704" adFormat="auto" className="mt-8" />
 
         {/* Tags */}
         {post.tags.length > 0 && (

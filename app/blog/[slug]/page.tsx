@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* 본문 상단 광고 */}
-        <AdBanner adSlot="1122334455" adFormat="horizontal" className="mb-6" />
+        <AdBanner adSlot="6836248572" adFormat="horizontal" className="mb-6" />
 
         {/* 본문 */}
         <article
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
         />
 
         {/* 본문 하단 광고 */}
-        <AdBanner adSlot="5544332211" adFormat="auto" className="mt-8" />
+        <AdBanner adSlot="6121932704" adFormat="auto" className="mt-8" />
 
         {/* 태그 */}
         {post.tags.length > 0 && (

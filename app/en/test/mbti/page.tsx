@@ -46,7 +46,6 @@ export default function EnglishMbtiTestPage() {
     setCurrentQ(0)
     setAnswers([])
     setResultType('')
-    setUnlocked(false)
   }
 
   const dimensionColors: Record<string, string> = {

@@ -13,11 +13,9 @@ const notoSansKR = Noto_Sans_KR({
 })
 
 export const metadata: Metadata = {
-  verification: {
-    google: 'gOOfvvKF_wL-tCtJiQayCJvEKZeJEnTrpfQu-9TAWUM',
-  },
   other: {
     'google-adsense-account': 'ca-pub-1867480436223927',
+    'google-site-verification': 'gOOfvvKF_wL-tCtJiQayCJvEKZeJEnTrpfQu-9TAWUM',
   },
   title: "운명의 실 | 사주·심리테스트",
   description: "사주팔자 분석, 연애유형, 직업적성, MBTI, 재물운까지 — 당신의 운명을 읽어드립니다.",

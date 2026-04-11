@@ -164,39 +164,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 생활 도구 섹션 */}
-      <section className="py-12 px-4" style={{ borderTop: '1px solid #e0c97f10' }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-2" style={{ color: '#e8e8f0' }}>🛠️ 생활 도구</h2>
-            <p style={{ color: '#8080a0' }}>일상에서 자주 쓰는 계산기 모음</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {[
-              { href: '/tools/dday', icon: '📅', title: 'D-day 계산기', color: '#e05c7f' },
-              { href: '/tools/date', icon: '🗓️', title: '날짜 계산기', color: '#4a9eff' },
-              { href: '/tools/lotto-gen', icon: '🎱', title: '로또 번호 생성', color: '#e0c97f' },
-              { href: '/tools/random', icon: '🎲', title: '랜덤 뽑기', color: '#00cc77' },
-            ].map((tool) => (
-              <Link
-                key={tool.href}
-                href={tool.href}
-                className="rounded-2xl p-5 text-center block transition-all duration-300 hover:scale-[1.04]"
-                style={{ background: '#16213e', border: `1px solid ${tool.color}25` }}
-              >
-                <div className="text-4xl mb-2">{tool.icon}</div>
-                <div className="text-sm font-bold" style={{ color: tool.color }}>{tool.title}</div>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-5">
-            <Link href="/tools" className="text-sm font-medium" style={{ color: '#e0c97f80' }}>
-              전체 도구 보기 →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* 소개 섹션 */}
       <section className="py-16 px-4" style={{ borderTop: '1px solid #e0c97f10' }}>
         <div className="max-w-4xl mx-auto text-center">

@@ -22,8 +22,9 @@ export default function Navbar() {
         { href: '/test', label: '심리테스트' },
         { href: '/fortune', label: '오늘의운세' },
         { href: '/lotto', label: '로또번호' },
-        { href: '/tools', label: '생활도구' },
         { href: '/blog', label: '칼럼' },
+        { href: '/blog/gwansang', label: '관상' },
+        { href: '/blog/songeum', label: '손금' },
       ]
 
   const langSwitchHref = isEnglish

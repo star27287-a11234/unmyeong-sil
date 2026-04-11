@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://unmyeong-sil.vercel.app/sitemap.xml

@@ -141,17 +141,28 @@ export default function FortunePage() {
         {/* 헤더 */}
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🔮</div>
-          <h1 className="text-4xl font-black mb-2" style={{ color: '#f0eef8' }}>오늘의 운세</h1>
-          <p className="text-lg font-medium" style={{ color: '#9090b8' }}>
+          <p className="text-xs tracking-widest uppercase mb-2" style={{ color: '#4a4570' }}>Daily Fortune</p>
+          <h1 className="text-4xl font-black mb-2 text-gradient">오늘의 운세</h1>
+          <p className="text-lg font-medium" style={{ color: '#a89dc7' }}>
             {dateStr} ({dayName}요일)
           </p>
-          <p className="text-sm mt-1" style={{ color: '#505075' }}>매일 자정 업데이트 · 12띠별 운세</p>
+          <p className="text-sm mt-1" style={{ color: '#4a4570' }}>매일 자정 업데이트 · 12띠별 운세</p>
+        </div>
+
+        {/* 십이지 소개 */}
+        <div className="glass-card p-6 mb-6">
+          <h2 className="text-base font-bold mb-3" style={{ color: '#a78bfa' }}>🐾 십이지(十二支)란?</h2>
+          <p className="text-sm leading-7" style={{ color: '#a89dc7' }}>
+            십이지(十二支)는 동양 천문학에서 하늘의 기운을 12가지 동물 — 쥐·소·호랑이·토끼·용·뱀·말·양·원숭이·닭·개·돼지 —
+            에 대응시킨 체계입니다. 출생 연도에 따라 정해진 띠동물은 그 사람의 기질, 운명의 흐름과 깊이 연결된다고 봅니다.
+            오늘의 운세는 각 띠의 기운이 오늘의 천지 에너지와 어떻게 만나는지를 풀이합니다.
+          </p>
         </div>
 
         {/* 안내 */}
-        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#0b0b16', border: '1px solid #1e1e38' }}>
-          <p style={{ color: '#9090b8' }}>
-            🐾 본인의 <span style={{ color: '#c94444' }}>띠(출생연도)</span>를 선택하여 오늘의 운세를 확인하세요.
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: 'rgba(10,7,30,0.75)', border: '1px solid rgba(120,80,220,0.2)' }}>
+          <p style={{ color: '#a89dc7' }}>
+            🐾 본인의 <span style={{ color: '#a78bfa' }}>띠(출생연도)</span>를 선택하여 오늘의 운세를 확인하세요.
             재미와 위안을 위한 콘텐츠입니다.
           </p>
         </div>
@@ -243,9 +254,46 @@ export default function FortunePage() {
           })}
         </div>
 
-        <p className="text-center text-xs mt-8" style={{ color: '#505075' }}>
+        <p className="text-center text-xs mt-8" style={{ color: '#4a4570' }}>
           ※ 본 운세는 재미·위안 목적의 콘텐츠로, 실제 미래를 예측하지 않습니다.
         </p>
+
+        {/* 운세 활용 가이드 */}
+        <div className="glass-card p-7 mt-8">
+          <h2 className="text-base font-bold mb-4" style={{ color: '#a78bfa' }}>✨ 오늘의 운세를 더 잘 활용하는 방법</h2>
+          <div className="space-y-3 text-sm leading-7" style={{ color: '#a89dc7' }}>
+            <p>
+              <strong style={{ color: '#ede9fe' }}>아침에 확인하세요.</strong> 하루를 시작하기 전 운세를 보면 그날의 기운을 의식하며
+              더 집중된 마음으로 임할 수 있습니다. 좋은 운세는 자신감을 높이고, 주의가 필요한 운세는 미리 대비하게 합니다.
+            </p>
+            <p>
+              <strong style={{ color: '#ede9fe' }}>행운의 색상과 방향을 활용하세요.</strong> 오늘의 행운 색상을 옷이나 소품에 포인트로 넣거나,
+              행운의 방향을 향해 중요한 대화나 미팅을 진행해보세요. 작은 실천이 긍정적인 마음가짐을 만듭니다.
+            </p>
+            <p>
+              <strong style={{ color: '#ede9fe' }}>사주팔자와 함께 보세요.</strong> 오늘의 운세는 띠별 일간 기운이며, 사주팔자는
+              타고난 기질과 장기적 흐름을 분석합니다. 두 가지를 함께 활용하면 더 풍부한 자기 이해가 가능합니다.
+            </p>
+          </div>
+        </div>
+
+        {/* 관련 서비스 링크 */}
+        <div className="grid grid-cols-2 gap-3 mt-4">
+          {[
+            { href: '/saju', icon: '🔮', label: '사주팔자 분석', color: '#a78bfa' },
+            { href: '/blog', icon: '📚', label: '운세 칼럼', color: '#67e8f9' },
+          ].map(item => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="glass-card p-4 text-center block transition-all duration-200 hover:border-violet-400"
+            >
+              <div className="text-2xl mb-1">{item.icon}</div>
+              <p className="text-xs font-bold" style={{ color: item.color }}>{item.label}</p>
+            </a>
+          ))}
+        </div>
+
       </div>
     </div>
   )

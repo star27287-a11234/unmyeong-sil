@@ -155,6 +155,46 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="py-16 px-4" style={{ borderTop: '1px solid rgba(120,80,220,0.1)' }}>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="text-xs tracking-widest uppercase mb-2" style={{ color: '#4a4570' }}>FAQ</p>
+            <h2 className="text-2xl font-bold" style={{ color: '#ede9fe' }}>자주 묻는 질문</h2>
+          </div>
+          <div className="space-y-4">
+            {[
+              { q: '사주팔자 분석은 어떻게 이루어지나요?', a: '생년월일시의 천간(天干)과 지지(地支)를 분석하여 오행(水·火·木·金·土)의 기운을 파악합니다. 이를 바탕으로 성격, 재능, 인간관계, 재물운, 건강 등 삶의 다양한 영역을 풀이합니다. 단, 결과는 오락 및 자기 이해의 참고 목적으로만 활용하시기 바랍니다.' },
+              { q: '서비스는 무료인가요?', a: '네, 운명의 실의 모든 서비스는 100% 무료입니다. 사주 분석, MBTI, 연애유형, 직업적성, 재물운 테스트 모두 별도 비용 없이 즉시 이용하실 수 있습니다.' },
+              { q: '입력한 개인정보는 저장되나요?', a: '아니요. 입력하신 이름, 생년월일, 성별 등 모든 정보는 분석에만 사용되며 서버에 저장되지 않습니다. 브라우저를 닫으면 모든 데이터가 완전히 삭제됩니다.' },
+              { q: 'MBTI 결과가 정확한가요?', a: '저희 MBTI 테스트는 공식 MBTI 지표의 원리를 기반으로 설계된 자기보고형 성격 검사입니다. 25개 질문으로 E/I, S/N, T/F, J/P 4가지 차원을 측정합니다. 자기 이해의 참고 자료로 활용하시되, 중요한 결정의 근거로는 사용하지 않기를 권장합니다.' },
+              { q: '오늘의 운세는 언제 업데이트되나요?', a: '오늘의 운세는 매일 자정(00:00)에 자동으로 업데이트됩니다. 12가지 띠 동물별로 오늘의 전체운, 애정운, 금전운, 직업운, 건강운과 행운의 색상·숫자·방향을 제공합니다.' },
+              { q: '심리테스트 결과를 저장할 수 있나요?', a: '결과 페이지를 화면 캡처하거나 스크린샷으로 저장하시는 것을 권장합니다. 브라우저를 닫거나 페이지를 이탈하면 결과가 초기화되며, 언제든지 다시 테스트를 진행하실 수 있습니다.' },
+            ].map((faq, i) => (
+              <div key={i} className="glass-card p-5">
+                <p className="font-semibold mb-2 text-sm" style={{ color: '#a78bfa' }}>Q. {faq.q}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#a89dc7' }}>{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* JSON-LD FAQ 구조화 데이터 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              { '@type': 'Question', name: '사주팔자 분석은 어떻게 이루어지나요?', acceptedAnswer: { '@type': 'Answer', text: '생년월일시의 천간과 지지를 분석하여 오행의 기운을 파악하고 성격, 재능, 운세를 풀이합니다.' } },
+              { '@type': 'Question', name: '서비스는 무료인가요?', acceptedAnswer: { '@type': 'Answer', text: '네, 모든 서비스(사주, MBTI, 연애유형, 직업적성, 재물운)는 100% 무료입니다.' } },
+              { '@type': 'Question', name: '입력한 개인정보는 저장되나요?', acceptedAnswer: { '@type': 'Answer', text: '아니요. 모든 입력 정보는 분석에만 사용되며 서버에 저장되지 않습니다.' } },
+            ]
+          })
+        }}
+      />
     </div>
   )
 }

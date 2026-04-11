@@ -110,20 +110,10 @@ export default function HomePage() {
               <Link
                 key={service.href}
                 href={service.href}
-                className="group block rounded-xl p-6 transition-all duration-200"
+                className="test-card group block rounded-xl p-6 transition-all duration-200"
                 style={{
                   background: '#111120',
                   border: '1px solid #1e1e38',
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget
-                  el.style.borderColor = service.accent + '50'
-                  el.style.background = '#16162a'
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget
-                  el.style.borderColor = '#1e1e38'
-                  el.style.background = '#111120'
                 }}
               >
                 <div className="text-3xl mb-4">{service.icon}</div>

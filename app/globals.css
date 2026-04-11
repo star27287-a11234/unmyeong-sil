@@ -79,6 +79,12 @@ body {
 }
 
 .animate-float { animation: float 4s ease-in-out infinite; }
+
+/* 서버 컴포넌트용 카드 hover */
+.test-card:hover {
+  border-color: #2a2a48 !important;
+  background: #16162a !important;
+}
 .animate-fade-in-up { animation: fade-in-up 0.5s ease-out forwards; }
 .animate-spin-slow { animation: spin-slow 12s linear infinite; }
 .animate-shimmer { animation: shimmer 3s linear infinite; }

@@ -67,16 +67,10 @@ export default function EnglishTestPage() {
             <Link
               key={test.href}
               href={test.href}
-              className="group relative rounded-xl p-6 block transition-all duration-200 active:scale-[0.99]"
+              className="test-card group relative rounded-xl p-6 block transition-all duration-200 active:scale-[0.99]"
               style={{
                 background: '#111120',
                 border: '1px solid #1e1e38',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = '#2a2a48'
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = '#1e1e38'
               }}
             >
               <div className="text-5xl mb-4">{test.icon}</div>

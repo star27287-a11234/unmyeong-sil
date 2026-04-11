@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
@@ -67,7 +67,7 @@ export default function MbtiTestPage() {
     EI: '#9c59d1',
     SN: '#4a9eff',
     TF: '#e05c7f',
-    JP: '#e0c97f',
+    JP: '#d4951e',
   }
 
   const dimensionLabels: Record<string, string> = {
@@ -79,31 +79,31 @@ export default function MbtiTestPage() {
 
   if (step === 'quiz') {
     const question = mbtiQuestions[currentQ]
-    const dimColor = dimensionColors[question.dimension] || '#e0c97f'
+    const dimColor = dimensionColors[question.dimension] || '#d4951e'
 
     return (
       <div className="min-h-screen py-12 px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <div className="text-4xl mb-3">🧩</div>
-            <h1 className="text-3xl font-black mb-1" style={{ color: '#e0c97f' }}>MBTI 테스트</h1>
-            <p className="text-sm" style={{ color: '#8080a0' }}>나의 성격 유형을 알아보세요</p>
+            <h1 className="text-3xl font-black mb-1" style={{ color: '#f0eef8' }}>MBTI 테스트</h1>
+            <p className="text-sm" style={{ color: '#505075' }}>나의 성격 유형을 알아보세요</p>
           </div>
 
           {/* 진행 상황 */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm" style={{ color: '#9090b0' }}>
+              <span className="text-sm" style={{ color: '#505075' }}>
                 질문 {currentQ + 1} / {mbtiQuestions.length}
               </span>
-              <span className="text-sm font-medium" style={{ color: '#e0c97f' }}>
+              <span className="text-sm font-medium" style={{ color: '#9090b8' }}>
                 {Math.round(progress)}%
               </span>
             </div>
-            <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: '#e0c97f20' }}>
+            <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: '#1e1e38' }}>
               <div
                 className="h-full rounded-full transition-all duration-500"
-                style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #e0c97f, #9c59d1)' }}
+                style={{ width: `${progress}%`, background: '#c94444' }}
               />
             </div>
           </div>
@@ -118,10 +118,10 @@ export default function MbtiTestPage() {
 
           {/* 질문 카드 */}
           <div
-            className="rounded-2xl p-6 mb-6"
-            style={{ background: 'linear-gradient(135deg, #16213e, #0f3460)', border: '1px solid #e0c97f20' }}
+            className="rounded-xl p-6 mb-6"
+            style={{ background: '#111120', border: '1px solid #1e1e38' }}
           >
-            <p className="text-lg font-medium leading-relaxed" style={{ color: '#e8e8f0' }}>
+            <p className="text-lg font-medium leading-relaxed" style={{ color: '#f0eef8' }}>
               {question.question}
             </p>
           </div>
@@ -132,21 +132,21 @@ export default function MbtiTestPage() {
               <button
                 key={index}
                 onClick={() => handleAnswer(index as 0 | 1)}
-                className="w-full text-left p-5 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-95"
+                className="w-full text-left p-5 rounded-xl transition-all duration-200 active:scale-[0.99]"
                 style={{
-                  background: '#16213e',
-                  border: '1px solid #e0c97f20',
-                  color: '#c0c0d0',
+                  background: '#111120',
+                  border: '1px solid #1e1e38',
+                  color: '#9090b8',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = dimColor + '80'
-                  e.currentTarget.style.background = '#1a2a4e'
-                  e.currentTarget.style.color = '#e8e8f0'
+                  e.currentTarget.style.borderColor = '#2a2a48'
+                  e.currentTarget.style.background = '#16162a'
+                  e.currentTarget.style.color = '#f0eef8'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#e0c97f20'
-                  e.currentTarget.style.background = '#16213e'
-                  e.currentTarget.style.color = '#c0c0d0'
+                  e.currentTarget.style.borderColor = '#1e1e38'
+                  e.currentTarget.style.background = '#111120'
+                  e.currentTarget.style.color = '#9090b8'
                 }}
               >
                 <div className="flex items-start gap-4">
@@ -176,7 +176,7 @@ export default function MbtiTestPage() {
               <button
                 onClick={handleBack}
                 className="text-sm transition-all"
-                style={{ color: '#7070a0' }}
+                style={{ color: '#505075' }}
               >
                 ← 이전 질문으로
               </button>
@@ -198,37 +198,37 @@ export default function MbtiTestPage() {
   if (step === 'result' && result) {
     const typeColors: Record<string, string> = {
       'E': '#9c59d1', 'I': '#4a9eff',
-      'S': '#e0c97f', 'N': '#00cc77',
+      'S': '#d4951e', 'N': '#2db8a0',
       'T': '#4a9eff', 'F': '#e05c7f',
-      'J': '#e0c97f', 'P': '#9c59d1'
+      'J': '#d4951e', 'P': '#9c59d1'
     }
 
     const Paragraphs = ({ text }: { text: string }) => (
       <div className="space-y-3">
         {text.split('\n\n').map((p, i) => (
-          <p key={i} className="text-sm leading-7" style={{ color: '#b0b8c8' }}>{p}</p>
+          <p key={i} className="text-sm leading-7" style={{ color: '#9090b8' }}>{p}</p>
         ))}
       </div>
     )
 
     const DetailContent = () => (
       <div className="space-y-4 mt-4">
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#e0c97f' }}>🔍 상세 분석</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#d4951e' }}>🔍 상세 분석</h4>
           <Paragraphs text={result.detail} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #00ff8820' }}>
-            <h4 className="font-bold mb-3" style={{ color: '#00ff88' }}>💪 강점</h4>
+          <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #2db8a020' }}>
+            <h4 className="font-bold mb-3" style={{ color: '#2db8a0' }}>💪 강점</h4>
             <Paragraphs text={result.strength} />
           </div>
-          <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #ff707020' }}>
-            <h4 className="font-bold mb-3" style={{ color: '#ff7070' }}>⚠️ 약점</h4>
+          <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #e0525220' }}>
+            <h4 className="font-bold mb-3" style={{ color: '#e05252' }}>⚠️ 약점</h4>
             <Paragraphs text={result.weakness} />
           </div>
         </div>
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #9c59d120' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#9c59d1' }}>💞 궁합</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #2db8a020' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#2db8a0' }}>💞 궁합</h4>
           <Paragraphs text={result.compatibility} />
         </div>
       </div>
@@ -246,33 +246,33 @@ export default function MbtiTestPage() {
                   key={i}
                   className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl font-black"
                   style={{
-                    background: `${typeColors[char] || '#e0c97f'}20`,
-                    border: `2px solid ${typeColors[char] || '#e0c97f'}60`,
-                    color: typeColors[char] || '#e0c97f',
+                    background: `${typeColors[char] || '#c94444'}20`,
+                    border: `2px solid ${typeColors[char] || '#c94444'}60`,
+                    color: typeColors[char] || '#c94444',
                   }}
                 >
                   {char}
                 </div>
               ))}
             </div>
-            <h1 className="text-2xl font-black mb-1" style={{ color: '#e0c97f' }}>
+            <h1 className="text-2xl font-black mb-1" style={{ color: '#f0eef8' }}>
               {result.title}
             </h1>
-            <p className="text-sm" style={{ color: '#8080a0' }}>MBTI 성격 유형 분석 결과</p>
+            <p className="text-sm" style={{ color: '#505075' }}>MBTI 성격 유형 분석 결과</p>
           </div>
 
           <div
-            className="rounded-2xl p-6 mb-6"
-            style={{ background: 'linear-gradient(135deg, #16213e, #0f3460)', border: '1px solid #e0c97f30' }}
+            className="rounded-xl p-6 mb-6"
+            style={{ background: '#111120', border: '1px solid #2a2a48' }}
           >
-            <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
+            <p className="text-sm leading-relaxed" style={{ color: '#9090b8' }}>{result.summary}</p>
           </div>
 
           {/* 요약 아래 광고 */}
           <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           <div>
-            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#f0eef8' }}>상세 분석</h2>
             <DetailContent />
           </div>
 
@@ -282,15 +282,15 @@ export default function MbtiTestPage() {
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleReset}
-              className="px-6 py-3 rounded-xl text-sm font-medium"
-              style={{ background: 'transparent', border: '1px solid #e0c97f30', color: '#8090a8' }}
+              className="px-6 py-3 rounded-full text-sm font-medium"
+              style={{ background: 'transparent', border: '1px solid #2a2a48', color: '#9090b8' }}
             >
               다시 테스트하기
             </button>
             <a
               href="/test"
-              className="px-6 py-3 rounded-xl text-sm font-medium text-center"
-              style={{ background: '#16213e', border: '1px solid #e0c97f30', color: '#e0c97f' }}
+              className="px-6 py-3 rounded-full text-sm font-medium text-center"
+              style={{ background: '#c94444', color: '#fff' }}
             >
               다른 테스트 보기
             </a>

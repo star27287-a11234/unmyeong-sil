@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
@@ -60,8 +60,8 @@ export default function EnglishMoneyTestPage() {
       <div className="min-h-screen py-12">
         <div className="text-center mb-8 px-4">
           <div className="text-4xl mb-3">💰</div>
-          <h1 className="text-3xl font-black mb-1" style={{ color: '#e0c97f' }}>Wealth Fortune Test</h1>
-          <p className="text-sm" style={{ color: '#8080a0' }}>Discover your money personality and wealth style</p>
+          <h1 className="text-3xl font-black mb-1" style={{ color: '#f0eef8' }}>Wealth Fortune Test</h1>
+          <p className="text-sm" style={{ color: '#505075' }}>Discover your money personality and wealth style</p>
         </div>
         <QuestionCard
           question={moneyQuestions[currentQ].question}
@@ -85,34 +85,34 @@ export default function EnglishMoneyTestPage() {
     const Paragraphs = ({ text }: { text: string }) => (
       <div className="space-y-3">
         {text.split('\n\n').map((p, i) => (
-          <p key={i} className="text-sm leading-7" style={{ color: '#b0b8c8' }}>{p}</p>
+          <p key={i} className="text-sm leading-7" style={{ color: '#9090b8' }}>{p}</p>
         ))}
       </div>
     )
 
     const DetailContent = () => (
       <div className="space-y-4 mt-4">
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#e0c97f' }}>💰 Detailed Analysis</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#f0eef8' }}>💰 Detailed Analysis</h4>
           <Paragraphs text={result.detail} />
         </div>
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#00ff88' }}>💡 Wealth Management Tips</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#2db8a0' }}>💡 Wealth Management Tips</h4>
           <ul className="space-y-2">
             {result.moneyTips.map((tip, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm" style={{ color: '#b0b8c8' }}>
-                <span className="flex-shrink-0 mt-0.5" style={{ color: '#00ff88' }}>✓</span>
+              <li key={i} className="flex items-start gap-2 text-sm" style={{ color: '#9090b8' }}>
+                <span className="flex-shrink-0 mt-0.5" style={{ color: '#2db8a0' }}>✓</span>
                 <span>{tip}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#e0c97f' }}>🍀 Lucky Items</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#d4951e' }}>🍀 Lucky Items</h4>
           <div className="flex flex-wrap gap-2">
             {result.luckyItems.map((item) => (
               <span key={item} className="text-xs px-3 py-1.5 rounded-full"
-                style={{ background: '#e0c97f20', color: '#e0c97f', border: '1px solid #e0c97f40' }}>
+                style={{ background: '#d4951e20', color: '#d4951e', border: '1px solid #d4951e40' }}>
                 {item}
               </span>
             ))}
@@ -127,34 +127,34 @@ export default function EnglishMoneyTestPage() {
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">{result.icon}</div>
             <div className="inline-block px-4 py-1 rounded-full text-sm font-bold mb-3"
-              style={{ background: '#e0c97f20', color: '#e0c97f', border: '1px solid #e0c97f40' }}>
+              style={{ background: '#c9444420', color: '#c94444', border: '1px solid #c9444440' }}>
               {result.type}
             </div>
-            <h1 className="text-3xl font-black mb-2" style={{ color: '#e0c97f' }}>{result.title}</h1>
-            <p className="text-sm" style={{ color: '#8080a0' }}>Wealth Fortune Result</p>
+            <h1 className="text-3xl font-black mb-2" style={{ color: '#f0eef8' }}>{result.title}</h1>
+            <p className="text-sm" style={{ color: '#505075' }}>Wealth Fortune Result</p>
           </div>
 
           <div className="rounded-2xl p-6 mb-6"
-            style={{ background: 'linear-gradient(135deg, #16213e, #0f3460)', border: '1px solid #e0c97f40' }}>
-            <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
+            style={{ background: '#111120', border: '1px solid #2a2a48' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#9090b8' }}>{result.summary}</p>
           </div>
 
           <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           <div>
-            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>Full Analysis</h2>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#f0eef8' }}>Full Analysis</h2>
             <DetailContent />
           </div>
 
           <NextTestSuggestion currentPath="/en/test/money" lang="en" />
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <button onClick={handleReset} className="px-6 py-3 rounded-xl text-sm font-medium"
-              style={{ background: 'transparent', border: '1px solid #e0c97f30', color: '#8090a8' }}>
+            <button onClick={handleReset} className="px-6 py-3 text-sm font-medium"
+              style={{ background: 'transparent', border: '1px solid #2a2a48', color: '#505075', borderRadius: '9999px' }}>
               Retake Test
             </button>
-            <a href="/en/test" className="px-6 py-3 rounded-xl text-sm font-medium text-center"
-              style={{ background: '#16213e', border: '1px solid #e0c97f30', color: '#e0c97f' }}>
+            <a href="/en/test" className="px-6 py-3 text-sm font-medium text-center"
+              style={{ background: '#111120', border: '1px solid #2a2a48', color: '#9090b8', borderRadius: '9999px' }}>
               Other Tests
             </a>
           </div>

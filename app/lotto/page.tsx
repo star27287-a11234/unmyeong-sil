@@ -33,11 +33,8 @@ function pickUnique(count: number, max: number, rand: () => number): number[] {
 
 /** 이번 주 토요일에 해당하는 국내 로또 회차 계산 */
 function getKrLottoRound(): number {
-  // 1회차 추첨일: 2002-12-07 (토요일)
   const firstDraw = new Date(2002, 11, 7)
   firstDraw.setHours(0, 0, 0, 0)
-
-  // 이번 주 월요일 기준 → 토요일 = +5일
   const d = new Date()
   const day = d.getDay()
   const diff = d.getDate() - day + (day === 0 ? -6 : 1)
@@ -46,32 +43,26 @@ function getKrLottoRound(): number {
   const sat = new Date(monday)
   sat.setDate(monday.getDate() + 5)
   sat.setHours(0, 0, 0, 0)
-
   const weeks = Math.round((sat.getTime() - firstDraw.getTime()) / (7 * 24 * 60 * 60 * 1000))
   return weeks + 1
 }
 
-/** 파워볼 회차 계산 (1992-04-22 첫 추첨, 수/토 → 2021-08 월 추가) */
+/** 파워볼 회차 계산 */
 function getPowerballRound(): number {
-  const firstDraw = new Date(1992, 3, 22) // 1992-04-22
+  const firstDraw = new Date(1992, 3, 22)
   firstDraw.setHours(0, 0, 0, 0)
-  const splitDate = new Date(2021, 7, 23) // 2021-08-23 월요일 추첨 추가
+  const splitDate = new Date(2021, 7, 23)
   splitDate.setHours(0, 0, 0, 0)
   const now = new Date()
   now.setHours(0, 0, 0, 0)
-
-  // 2x/week 구간
   const phase1Days = Math.max(0, Math.min(splitDate.getTime(), now.getTime()) - firstDraw.getTime()) / 86400000
   const phase1Draws = Math.floor(phase1Days / 7 * 2)
-
-  // 3x/week 구간
   const phase2Days = Math.max(0, now.getTime() - splitDate.getTime()) / 86400000
   const phase2Draws = Math.floor(phase2Days / 7 * 3)
-
   return phase1Draws + phase2Draws + 1
 }
 
-/** 유로밀리언스 회차 계산 (2004-02-13 첫 추첨 금요일, 2011-05-10 화요일 추가) */
+/** 유로밀리언스 회차 계산 */
 function getEuromillionsRound(): number {
   const firstDraw = new Date(2004, 1, 13)
   firstDraw.setHours(0, 0, 0, 0)
@@ -79,17 +70,14 @@ function getEuromillionsRound(): number {
   splitDate.setHours(0, 0, 0, 0)
   const now = new Date()
   now.setHours(0, 0, 0, 0)
-
   const phase1Days = Math.max(0, Math.min(splitDate.getTime(), now.getTime()) - firstDraw.getTime()) / 86400000
   const phase1Draws = Math.floor(phase1Days / 7)
-
   const phase2Days = Math.max(0, now.getTime() - splitDate.getTime()) / 86400000
   const phase2Draws = Math.floor(phase2Days / 7 * 2)
-
   return phase1Draws + phase2Draws + 1
 }
 
-/** 메가밀리언스 회차 계산 (1996-09-06 첫 추첨, 화/금 2x/week) */
+/** 메가밀리언스 회차 계산 */
 function getMegaMillionsRound(): number {
   const firstDraw = new Date(1996, 8, 6)
   firstDraw.setHours(0, 0, 0, 0)
@@ -173,10 +161,9 @@ export default function LottoPage() {
   const emRound = getEuromillionsRound()
   const mmRound = getMegaMillionsRound()
 
-  // 이번 주 추첨 날짜
-  const satDate = getDrawDate(5)   // 토요일 (국내 로또)
-  const wedDate = getDrawDate(2)   // 수요일 (파워볼)
-  const tueDate = getDrawDate(1)   // 화요일 (유로밀리언스, 메가밀리언스)
+  const satDate = getDrawDate(5)
+  const wedDate = getDrawDate(2)
+  const tueDate = getDrawDate(1)
 
   const lottos = useMemo(() => {
     const base = getWeekSeed()
@@ -215,28 +202,28 @@ export default function LottoPage() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999,
           }}>
             <div style={{
-              background: '#1a2040', borderRadius: '20px', padding: '2.5rem',
+              background: '#111120', borderRadius: '20px', padding: '2.5rem',
               maxWidth: '380px', width: '90%', textAlign: 'center',
-              border: '1px solid #e0c97f40', boxShadow: '0 0 40px #e0c97f20',
+              border: '1px solid #2a2a48',
             }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📺</div>
-              <p style={{ color: '#e0c97f', fontWeight: 900, fontSize: '1.125rem', marginBottom: '0.5rem' }}>
+              <p style={{ color: '#f0eef8', fontWeight: 900, fontSize: '1.125rem', marginBottom: '0.5rem' }}>
                 광고 시청 중...
               </p>
-              <p style={{ color: '#9090a8', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+              <p style={{ color: '#9090b8', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
                 <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '1.5rem' }}>{countdown}</span>초 후 번호가 공개됩니다
               </p>
               {/* 진행바 */}
-              <div style={{ background: '#0f1f3d', borderRadius: '9999px', height: '8px', overflow: 'hidden', marginBottom: '1rem' }}>
+              <div style={{ background: '#1e1e38', borderRadius: '9999px', height: '8px', overflow: 'hidden', marginBottom: '1rem' }}>
                 <div style={{
-                  background: 'linear-gradient(90deg, #e0c97f, #c8a850)',
+                  background: '#c94444',
                   height: '100%',
                   width: `${((AD_SECONDS - countdown) / AD_SECONDS) * 100}%`,
                   transition: 'width 1s linear',
                   borderRadius: '9999px',
                 }} />
               </div>
-              <p style={{ color: '#505070', fontSize: '0.75rem' }}>광고를 끝까지 시청해 주세요</p>
+              <p style={{ color: '#505075', fontSize: '0.75rem' }}>광고를 끝까지 시청해 주세요</p>
             </div>
           </div>
         )}
@@ -244,14 +231,14 @@ export default function LottoPage() {
         {/* 헤더 */}
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🍀</div>
-          <h1 className="text-4xl font-black mb-2" style={{ color: '#e0c97f' }}>이번 주 로또 번호</h1>
-          <p className="text-sm mt-1" style={{ color: '#6b7280' }}>매주 월요일 업데이트 · 재미를 위한 행운 번호</p>
+          <h1 className="text-4xl font-black mb-2" style={{ color: '#f0eef8' }}>이번 주 로또 번호</h1>
+          <p className="text-sm mt-1" style={{ color: '#505075' }}>매주 월요일 업데이트 · 재미를 위한 행운 번호</p>
         </div>
 
         {/* 안내 */}
-        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
-          <p style={{ color: '#9090a8' }}>
-            🎯 이 번호는 <span style={{ color: '#e0c97f' }}>이번 주 행운의 번호</span>입니다.
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#0b0b16', border: '1px solid #1e1e38' }}>
+          <p style={{ color: '#9090b8' }}>
+            🎯 이 번호는 <span style={{ color: '#d4951e' }}>이번 주 행운의 번호</span>입니다.
             짧은 광고를 시청하면 번호를 확인할 수 있습니다.
           </p>
         </div>
@@ -268,23 +255,23 @@ export default function LottoPage() {
             <div className="flex flex-col gap-6">
 
               {/* 국내 로또 6/45 */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #e0c97f30' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #2a2a48' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🇰🇷</span>
                     <div>
-                      <h2 className="text-xl font-black" style={{ color: '#e0c97f' }}>국내 로또 6/45</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>1~45 중 6개 + 보너스 1개</p>
+                      <h2 className="text-xl font-black" style={{ color: '#f0eef8' }}>국내 로또 6/45</h2>
+                      <p className="text-xs" style={{ color: '#505075' }}>1~45 중 6개 + 보너스 1개</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#e0c97f' }}>제 {krRound}회</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>추첨일 {satDate}</div>
+                    <div className="text-sm font-black" style={{ color: '#d4951e' }}>제 {krRound}회</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>추첨일 {satDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap mb-3">
                   {lottos.kr.map(n => <LottoBall key={n} n={n} />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   <LottoBall n={lottos.krBonus} bonus />
                 </div>
                 <div className="flex gap-3 text-xs flex-wrap mt-2">
@@ -297,89 +284,89 @@ export default function LottoPage() {
                   ].map(c => (
                     <span key={c.label} className="flex items-center gap-1">
                       <span style={{ width: 10, height: 10, borderRadius: '50%', background: c.color, display: 'inline-block' }} />
-                      <span style={{ color: '#808090' }}>{c.label}</span>
+                      <span style={{ color: '#505075' }}>{c.label}</span>
                     </span>
                   ))}
                   <span className="flex items-center gap-1">
                     <span style={{ width: 10, height: 10, borderRadius: '50%', border: '2px solid #ffd700', display: 'inline-block' }} />
-                    <span style={{ color: '#808090' }}>보너스</span>
+                    <span style={{ color: '#505075' }}>보너스</span>
                   </span>
                 </div>
               </div>
 
               {/* 미국 파워볼 */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #ff6b6b40' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #ff6b6b40' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🇺🇸</span>
                     <div>
                       <h2 className="text-xl font-black" style={{ color: '#ff6b6b' }}>미국 파워볼</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>1~69 중 5개 + 파워볼 1~26</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>1~69 중 5개 + 파워볼 1~26</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-black" style={{ color: '#ff6b6b' }}>제 {pbRound}회</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>추첨일 {wedDate}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>추첨일 {wedDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {lottos.pb.map(n => <ForeignBall key={n} n={n} color="#54a0ff" />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   <ForeignBall n={lottos.pbPower} color="#ff4757" />
                 </div>
-                <p className="text-xs mt-3" style={{ color: '#606080' }}>
+                <p className="text-xs mt-3" style={{ color: '#505075' }}>
                   <span style={{ color: '#54a0ff' }}>●</span> 흰 공 (1~69) &nbsp;
                   <span style={{ color: '#ff4757' }}>●</span> 파워볼 (1~26)
                 </p>
               </div>
 
               {/* 유로밀리언스 */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #54a0ff40' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #54a0ff40' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🇪🇺</span>
                     <div>
                       <h2 className="text-xl font-black" style={{ color: '#54a0ff' }}>유로밀리언스</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>1~50 중 5개 + 스타볼 1~12 중 2개</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>1~50 중 5개 + 스타볼 1~12 중 2개</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-black" style={{ color: '#54a0ff' }}>제 {emRound}회</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>추첨일 {tueDate}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>추첨일 {tueDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {lottos.em.map(n => <ForeignBall key={n} n={n} color="#54a0ff" />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   {lottos.emStars.map(n => <ForeignBall key={n} n={n} color="#ffd700" small />)}
                 </div>
-                <p className="text-xs mt-3" style={{ color: '#606080' }}>
+                <p className="text-xs mt-3" style={{ color: '#505075' }}>
                   <span style={{ color: '#54a0ff' }}>●</span> 메인 공 (1~50) &nbsp;
                   <span style={{ color: '#ffd700' }}>★</span> 스타볼 (1~12)
                 </p>
               </div>
 
               {/* 메가밀리언스 */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #5f27cd40' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #5f27cd40' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">💎</span>
                     <div>
                       <h2 className="text-xl font-black" style={{ color: '#a29bfe' }}>메가밀리언스</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>1~70 중 5개 + 메가볼 1~25</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>1~70 중 5개 + 메가볼 1~25</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-black" style={{ color: '#a29bfe' }}>제 {mmRound}회</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>추첨일 {tueDate}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>추첨일 {tueDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {lottos.mm.map(n => <ForeignBall key={n} n={n} color="#5f27cd" />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   <ForeignBall n={lottos.mmMega} color="#ffd700" />
                 </div>
-                <p className="text-xs mt-3" style={{ color: '#606080' }}>
+                <p className="text-xs mt-3" style={{ color: '#505075' }}>
                   <span style={{ color: '#5f27cd' }}>●</span> 메인 공 (1~70) &nbsp;
                   <span style={{ color: '#ffd700' }}>●</span> 메가볼 (1~25)
                 </p>
@@ -394,29 +381,28 @@ export default function LottoPage() {
               position: 'absolute', inset: 0,
               display: 'flex', flexDirection: 'column',
               alignItems: 'center', justifyContent: 'center',
-              background: 'rgba(10, 15, 35, 0.55)',
-              borderRadius: '16px',
+              background: 'rgba(10, 10, 22, 0.55)',
+              borderRadius: '12px',
             }}>
               <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <div style={{ fontSize: '3.5rem', marginBottom: '0.75rem' }}>🔒</div>
-                <h3 style={{ color: '#e0c97f', fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.5rem' }}>
+                <h3 style={{ color: '#f0eef8', fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.5rem' }}>
                   광고 시청 후 번호 공개
                 </h3>
-                <p style={{ color: '#9090a8', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                <p style={{ color: '#9090b8', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
                   짧은 광고({AD_SECONDS}초)를 시청하면<br />이번 주 행운의 번호를 확인할 수 있어요
                 </p>
                 <button
                   onClick={handleWatchAd}
                   style={{
-                    background: 'linear-gradient(135deg, #e0c97f, #c8a850)',
-                    color: '#16213e',
+                    background: '#c94444',
+                    color: '#fff',
                     fontWeight: 900,
                     padding: '0.875rem 2rem',
                     borderRadius: '9999px',
                     border: 'none',
                     cursor: 'pointer',
                     fontSize: '1rem',
-                    boxShadow: '0 4px 20px #e0c97f40',
                   }}
                 >
                   📺 광고 시청하고 번호 보기
@@ -426,7 +412,7 @@ export default function LottoPage() {
           )}
         </div>
 
-        <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>
+        <p className="text-center text-xs mt-8" style={{ color: '#505075' }}>
           ※ 본 번호는 재미·위안 목적의 콘텐츠로, 실제 당첨을 보장하지 않습니다.
         </p>
       </div>

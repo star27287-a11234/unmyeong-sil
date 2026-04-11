@@ -200,27 +200,27 @@ export default function LottoPageEn() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999,
           }}>
             <div style={{
-              background: '#1a2040', borderRadius: '20px', padding: '2.5rem',
+              background: '#111120', borderRadius: '20px', padding: '2.5rem',
               maxWidth: '380px', width: '90%', textAlign: 'center',
-              border: '1px solid #e0c97f40', boxShadow: '0 0 40px #e0c97f20',
+              border: '1px solid #2a2a48',
             }}>
               <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📺</div>
-              <p style={{ color: '#e0c97f', fontWeight: 900, fontSize: '1.125rem', marginBottom: '0.5rem' }}>
+              <p style={{ color: '#f0eef8', fontWeight: 900, fontSize: '1.125rem', marginBottom: '0.5rem' }}>
                 Watching Ad...
               </p>
-              <p style={{ color: '#9090a8', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+              <p style={{ color: '#9090b8', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
                 Numbers reveal in <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '1.5rem' }}>{countdown}</span> seconds
               </p>
-              <div style={{ background: '#0f1f3d', borderRadius: '9999px', height: '8px', overflow: 'hidden', marginBottom: '1rem' }}>
+              <div style={{ background: '#1e1e38', borderRadius: '9999px', height: '8px', overflow: 'hidden', marginBottom: '1rem' }}>
                 <div style={{
-                  background: 'linear-gradient(90deg, #e0c97f, #c8a850)',
+                  background: '#c94444',
                   height: '100%',
                   width: `${((AD_SECONDS - countdown) / AD_SECONDS) * 100}%`,
                   transition: 'width 1s linear',
                   borderRadius: '9999px',
                 }} />
               </div>
-              <p style={{ color: '#505070', fontSize: '0.75rem' }}>Please watch until the end</p>
+              <p style={{ color: '#505075', fontSize: '0.75rem' }}>Please watch until the end</p>
             </div>
           </div>
         )}
@@ -228,14 +228,14 @@ export default function LottoPageEn() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🍀</div>
-          <h1 className="text-4xl font-black mb-2" style={{ color: '#e0c97f' }}>This Week&apos;s Lucky Numbers</h1>
-          <p className="text-sm mt-1" style={{ color: '#6b7280' }}>Updated every Monday · Lucky numbers for fun</p>
+          <h1 className="text-4xl font-black mb-2" style={{ color: '#f0eef8' }}>This Week&apos;s Lucky Numbers</h1>
+          <p className="text-sm mt-1" style={{ color: '#505075' }}>Updated every Monday · Lucky numbers for fun</p>
         </div>
 
         {/* Notice */}
-        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
-          <p style={{ color: '#9090a8' }}>
-            🎯 Watch a short ad to reveal <span style={{ color: '#e0c97f' }}>this week&apos;s lucky numbers</span>.
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#0b0b16', border: '1px solid #1e1e38' }}>
+          <p style={{ color: '#9090b8' }}>
+            🎯 Watch a short ad to reveal <span style={{ color: '#d4951e' }}>this week&apos;s lucky numbers</span>.
             For entertainment purposes only.
           </p>
         </div>
@@ -251,23 +251,23 @@ export default function LottoPageEn() {
             <div className="flex flex-col gap-6">
 
               {/* Korean Lotto 6/45 */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #e0c97f30' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #2a2a48' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🇰🇷</span>
                     <div>
-                      <h2 className="text-xl font-black" style={{ color: '#e0c97f' }}>Korean Lotto 6/45</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>6 from 1–45 + 1 Bonus</p>
+                      <h2 className="text-xl font-black" style={{ color: '#f0eef8' }}>Korean Lotto 6/45</h2>
+                      <p className="text-xs" style={{ color: '#505075' }}>6 from 1–45 + 1 Bonus</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black" style={{ color: '#e0c97f' }}>Draw #{krRound}</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>{satDate}</div>
+                    <div className="text-sm font-black" style={{ color: '#d4951e' }}>Draw #{krRound}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>{satDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap mb-3">
                   {lottos.kr.map(n => <LottoBall key={n} n={n} />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   <LottoBall n={lottos.krBonus} bonus />
                 </div>
                 <div className="flex gap-3 text-xs flex-wrap mt-2">
@@ -280,89 +280,89 @@ export default function LottoPageEn() {
                   ].map(c => (
                     <span key={c.label} className="flex items-center gap-1">
                       <span style={{ width: 10, height: 10, borderRadius: '50%', background: c.color, display: 'inline-block' }} />
-                      <span style={{ color: '#808090' }}>{c.label}</span>
+                      <span style={{ color: '#505075' }}>{c.label}</span>
                     </span>
                   ))}
                   <span className="flex items-center gap-1">
                     <span style={{ width: 10, height: 10, borderRadius: '50%', border: '2px solid #ffd700', display: 'inline-block' }} />
-                    <span style={{ color: '#808090' }}>Bonus</span>
+                    <span style={{ color: '#505075' }}>Bonus</span>
                   </span>
                 </div>
               </div>
 
               {/* Powerball */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #ff6b6b40' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #ff6b6b40' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🇺🇸</span>
                     <div>
                       <h2 className="text-xl font-black" style={{ color: '#ff6b6b' }}>Powerball</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>5 from 1–69 + Powerball 1–26</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>5 from 1–69 + Powerball 1–26</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-black" style={{ color: '#ff6b6b' }}>Draw #{pbRound}</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>{wedDate}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>{wedDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {lottos.pb.map(n => <ForeignBall key={n} n={n} color="#54a0ff" />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   <ForeignBall n={lottos.pbPower} color="#ff4757" />
                 </div>
-                <p className="text-xs mt-3" style={{ color: '#606080' }}>
+                <p className="text-xs mt-3" style={{ color: '#505075' }}>
                   <span style={{ color: '#54a0ff' }}>●</span> White balls (1–69) &nbsp;
                   <span style={{ color: '#ff4757' }}>●</span> Powerball (1–26)
                 </p>
               </div>
 
               {/* EuroMillions */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #54a0ff40' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #54a0ff40' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🇪🇺</span>
                     <div>
                       <h2 className="text-xl font-black" style={{ color: '#54a0ff' }}>EuroMillions</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>5 from 1–50 + 2 Lucky Stars 1–12</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>5 from 1–50 + 2 Lucky Stars 1–12</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-black" style={{ color: '#54a0ff' }}>Draw #{emRound}</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>{tueDate}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>{tueDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {lottos.em.map(n => <ForeignBall key={n} n={n} color="#54a0ff" />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   {lottos.emStars.map(n => <ForeignBall key={n} n={n} color="#ffd700" small />)}
                 </div>
-                <p className="text-xs mt-3" style={{ color: '#606080' }}>
+                <p className="text-xs mt-3" style={{ color: '#505075' }}>
                   <span style={{ color: '#54a0ff' }}>●</span> Main balls (1–50) &nbsp;
                   <span style={{ color: '#ffd700' }}>★</span> Lucky Stars (1–12)
                 </p>
               </div>
 
               {/* Mega Millions */}
-              <div className="rounded-2xl p-6" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: '1px solid #5f27cd40' }}>
+              <div className="rounded-xl p-6" style={{ background: '#111120', border: '1px solid #5f27cd40' }}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">💎</span>
                     <div>
                       <h2 className="text-xl font-black" style={{ color: '#a29bfe' }}>Mega Millions</h2>
-                      <p className="text-xs" style={{ color: '#606080' }}>5 from 1–70 + Mega Ball 1–25</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>5 from 1–70 + Mega Ball 1–25</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-black" style={{ color: '#a29bfe' }}>Draw #{mmRound}</div>
-                    <div className="text-xs" style={{ color: '#505068' }}>{tueDate}</div>
+                    <div className="text-xs" style={{ color: '#505075' }}>{tueDate}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
                   {lottos.mm.map(n => <ForeignBall key={n} n={n} color="#5f27cd" />)}
-                  <span style={{ color: '#808090', fontSize: 20, margin: '0 4px' }}>+</span>
+                  <span style={{ color: '#505075', fontSize: 20, margin: '0 4px' }}>+</span>
                   <ForeignBall n={lottos.mmMega} color="#ffd700" />
                 </div>
-                <p className="text-xs mt-3" style={{ color: '#606080' }}>
+                <p className="text-xs mt-3" style={{ color: '#505075' }}>
                   <span style={{ color: '#5f27cd' }}>●</span> Main balls (1–70) &nbsp;
                   <span style={{ color: '#ffd700' }}>●</span> Mega Ball (1–25)
                 </p>
@@ -377,29 +377,28 @@ export default function LottoPageEn() {
               position: 'absolute', inset: 0,
               display: 'flex', flexDirection: 'column',
               alignItems: 'center', justifyContent: 'center',
-              background: 'rgba(10, 15, 35, 0.55)',
-              borderRadius: '16px',
+              background: 'rgba(10, 10, 22, 0.55)',
+              borderRadius: '12px',
             }}>
               <div style={{ textAlign: 'center', padding: '2rem' }}>
                 <div style={{ fontSize: '3.5rem', marginBottom: '0.75rem' }}>🔒</div>
-                <h3 style={{ color: '#e0c97f', fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.5rem' }}>
+                <h3 style={{ color: '#f0eef8', fontSize: '1.25rem', fontWeight: 900, marginBottom: '0.5rem' }}>
                   Watch an Ad to Unlock
                 </h3>
-                <p style={{ color: '#9090a8', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                <p style={{ color: '#9090b8', fontSize: '0.875rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
                   Watch a short ad ({AD_SECONDS} sec) to reveal<br />this week&apos;s lucky numbers
                 </p>
                 <button
                   onClick={handleWatchAd}
                   style={{
-                    background: 'linear-gradient(135deg, #e0c97f, #c8a850)',
-                    color: '#16213e',
+                    background: '#c94444',
+                    color: '#fff',
                     fontWeight: 900,
                     padding: '0.875rem 2rem',
                     borderRadius: '9999px',
                     border: 'none',
                     cursor: 'pointer',
                     fontSize: '1rem',
-                    boxShadow: '0 4px 20px #e0c97f40',
                   }}
                 >
                   📺 Watch Ad & Reveal Numbers
@@ -409,7 +408,7 @@ export default function LottoPageEn() {
           )}
         </div>
 
-        <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>
+        <p className="text-center text-xs mt-8" style={{ color: '#505075' }}>
           ※ These numbers are for entertainment only and do not guarantee any lottery winnings.
         </p>
       </div>

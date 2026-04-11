@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
@@ -39,7 +39,6 @@ export default function LoveTestPage() {
     if (currentQ < loveQuestions.length - 1) {
       setCurrentQ(currentQ + 1)
     } else {
-      // 마지막 질문 완료
       const type = calcLoveType(newAnswers.map(a => ({ score: a.score })))
       setResultType(type)
       setStep('loading')
@@ -69,10 +68,10 @@ export default function LoveTestPage() {
       <div className="min-h-screen py-12">
         <div className="text-center mb-8 px-4">
           <div className="text-4xl mb-3">💘</div>
-          <h1 className="text-3xl font-black mb-1" style={{ color: '#e0c97f' }}>
+          <h1 className="text-3xl font-black mb-1" style={{ color: '#f0eef8' }}>
             연애유형 테스트
           </h1>
-          <p className="text-sm" style={{ color: '#8080a0' }}>
+          <p className="text-sm" style={{ color: '#505075' }}>
             나의 연애 스타일을 알아보세요
           </p>
         </div>
@@ -102,29 +101,29 @@ export default function LoveTestPage() {
     const Paragraphs = ({ text }: { text: string }) => (
       <div className="space-y-3">
         {text.split('\n\n').map((p, i) => (
-          <p key={i} className="text-sm leading-7" style={{ color: '#b0b8c8' }}>{p}</p>
+          <p key={i} className="text-sm leading-7" style={{ color: '#9090b8' }}>{p}</p>
         ))}
       </div>
     )
 
     const DetailContent = () => (
       <div className="space-y-4 mt-4">
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#e0c97f' }}>💕 상세 분석</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#e05c7f' }}>💕 상세 분석</h4>
           <Paragraphs text={result.detail} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #00ff8820' }}>
-            <h4 className="font-bold mb-3" style={{ color: '#00ff88' }}>💪 연애 강점</h4>
+          <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #2db8a020' }}>
+            <h4 className="font-bold mb-3" style={{ color: '#2db8a0' }}>💪 연애 강점</h4>
             <Paragraphs text={result.strength} />
           </div>
-          <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #ff707020' }}>
-            <h4 className="font-bold mb-3" style={{ color: '#ff7070' }}>⚠️ 주의할 점</h4>
+          <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #e0525220' }}>
+            <h4 className="font-bold mb-3" style={{ color: '#e05252' }}>⚠️ 주의할 점</h4>
             <Paragraphs text={result.weakness} />
           </div>
         </div>
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #9c59d120' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#9c59d1' }}>💞 나와 잘 맞는 유형</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #2db8a020' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#2db8a0' }}>💞 나와 잘 맞는 유형</h4>
           <Paragraphs text={result.compatibility} />
         </div>
       </div>
@@ -138,25 +137,25 @@ export default function LoveTestPage() {
             <div className="text-6xl mb-4">{result.icon}</div>
             <div
               className="inline-block px-4 py-1 rounded-full text-sm font-bold mb-3"
-              style={{ background: '#e05c7f20', color: '#e05c7f', border: '1px solid #e05c7f40' }}
+              style={{ background: '#c9444420', color: '#c94444', border: '1px solid #c9444440' }}
             >
               {result.type}
             </div>
-            <h1 className="text-3xl font-black mb-2" style={{ color: '#e0c97f' }}>
+            <h1 className="text-3xl font-black mb-2" style={{ color: '#f0eef8' }}>
               {result.title}
             </h1>
-            <p className="text-sm" style={{ color: '#8080a0' }}>연애유형 분석 결과</p>
+            <p className="text-sm" style={{ color: '#505075' }}>연애유형 분석 결과</p>
           </div>
 
           {/* 요약 카드 */}
           <div
-            className="rounded-2xl p-6 mb-6"
+            className="rounded-xl p-6 mb-6"
             style={{
-              background: 'linear-gradient(135deg, #16213e, #0f3460)',
-              border: '1px solid #e05c7f40',
+              background: '#111120',
+              border: '1px solid #2a2a48',
             }}
           >
-            <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#9090b8' }}>
               {result.summary}
             </p>
           </div>
@@ -166,7 +165,7 @@ export default function LoveTestPage() {
 
           {/* 상세 분석 */}
           <div>
-            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#f0eef8' }}>상세 분석</h2>
             <DetailContent />
           </div>
 
@@ -177,15 +176,15 @@ export default function LoveTestPage() {
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleReset}
-              className="px-6 py-3 rounded-xl text-sm font-medium transition-all"
-              style={{ background: 'transparent', border: '1px solid #e0c97f30', color: '#8090a8' }}
+              className="px-6 py-3 rounded-full text-sm font-medium transition-all"
+              style={{ background: 'transparent', border: '1px solid #2a2a48', color: '#9090b8' }}
             >
               다시 테스트하기
             </button>
             <a
               href="/test"
-              className="px-6 py-3 rounded-xl text-sm font-medium text-center transition-all"
-              style={{ background: '#16213e', border: '1px solid #e0c97f30', color: '#e0c97f' }}
+              className="px-6 py-3 rounded-full text-sm font-medium text-center transition-all"
+              style={{ background: '#c94444', color: '#fff' }}
             >
               다른 테스트 보기
             </a>

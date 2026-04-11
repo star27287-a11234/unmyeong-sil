@@ -85,7 +85,7 @@ function Stars({ n, color }: { n: number; color: string }) {
   return (
     <span>
       {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: i <= n ? color : '#333355', fontSize: '14px' }}>★</span>
+        <span key={i} style={{ color: i <= n ? color : '#1e1e38', fontSize: '14px' }}>★</span>
       ))}
     </span>
   )
@@ -137,16 +137,16 @@ export default function FortunePageEn() {
 
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🔮</div>
-          <h1 className="text-4xl font-black mb-2" style={{ color: '#e0c97f' }}>Today&apos;s Fortune</h1>
-          <p className="text-lg font-medium" style={{ color: '#c0c0d0' }}>
+          <h1 className="text-4xl font-black mb-2" style={{ color: '#f0eef8' }}>Today&apos;s Fortune</h1>
+          <p className="text-lg font-medium" style={{ color: '#9090b8' }}>
             {dateStr} ({dayName})
           </p>
-          <p className="text-sm mt-1" style={{ color: '#6b7280' }}>Updated daily at midnight · 12 Chinese Zodiac signs</p>
+          <p className="text-sm mt-1" style={{ color: '#505075' }}>Updated daily at midnight · 12 Chinese Zodiac signs</p>
         </div>
 
-        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
-          <p style={{ color: '#9090a8' }}>
-            🐾 Select your <span style={{ color: '#e0c97f' }}>zodiac sign (birth year)</span> to check today&apos;s fortune.
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#0b0b16', border: '1px solid #1e1e38' }}>
+          <p style={{ color: '#9090b8' }}>
+            🐾 Select your <span style={{ color: '#c94444' }}>zodiac sign (birth year)</span> to check today&apos;s fortune.
             This is for fun and comfort only.
           </p>
         </div>
@@ -157,25 +157,25 @@ export default function FortunePageEn() {
             return (
               <div
                 key={f.name}
-                className="rounded-2xl overflow-hidden"
-                style={{ border: `1px solid ${isOpen ? f.color + '60' : f.color + '25'}`, transition: 'border-color 0.2s' }}
+                className="rounded-xl overflow-hidden"
+                style={{ border: `1px solid ${isOpen ? f.color + '60' : '#1e1e38'}`, transition: 'border-color 0.2s' }}
               >
                 <button
                   onClick={() => toggleIndex(i)}
                   className="w-full flex items-center justify-between px-5 py-4"
-                  style={{ background: isOpen ? `${f.color}12` : 'linear-gradient(135deg, #16213e, #0f1f3d)' }}
+                  style={{ background: isOpen ? `${f.color}12` : '#111120' }}
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{f.emoji}</span>
                     <div className="text-left">
                       <span className="text-lg font-black" style={{ color: f.color }}>{f.name}</span>
-                      <p className="text-xs" style={{ color: '#606080' }}>{f.years}</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>{f.years}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
                       <Stars n={f.overall} color={f.color} />
-                      <p className="text-xs mt-0.5" style={{ color: '#808090' }}>Overall {avgScore(f)}</p>
+                      <p className="text-xs mt-0.5" style={{ color: '#505075' }}>Overall {avgScore(f)}</p>
                     </div>
                     <span
                       className="text-xl font-bold transition-transform duration-300"
@@ -187,8 +187,8 @@ export default function FortunePageEn() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-3" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)' }}>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b8c8' }}>{f.msg}</p>
+                  <div className="px-5 pb-5 pt-3" style={{ background: '#111120' }}>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#9090b8' }}>{f.msg}</p>
 
                     <div className="grid grid-cols-2 gap-2 mb-4">
                       {[
@@ -197,12 +197,12 @@ export default function FortunePageEn() {
                         { label: '💼 Career', s: f.work, msg: f.workMsg },
                         { label: '💪 Health', s: f.health, msg: f.healthMsg },
                       ].map(item => (
-                        <div key={item.label} className="rounded-xl p-3" style={{ background: '#ffffff06' }}>
+                        <div key={item.label} className="rounded-xl p-3" style={{ background: '#0b0b16' }}>
                           <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs font-bold" style={{ color: '#9090b0' }}>{item.label}</span>
+                            <span className="text-xs font-bold" style={{ color: '#505075' }}>{item.label}</span>
                             <Stars n={item.s} color={f.color} />
                           </div>
-                          <p className="text-xs" style={{ color: '#8090a8' }}>{item.msg}</p>
+                          <p className="text-xs" style={{ color: '#505075' }}>{item.msg}</p>
                         </div>
                       ))}
                     </div>
@@ -229,7 +229,7 @@ export default function FortunePageEn() {
           })}
         </div>
 
-        <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>
+        <p className="text-center text-xs mt-8" style={{ color: '#505075' }}>
           ※ This fortune is for entertainment purposes only and does not predict actual future events.
         </p>
       </div>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
@@ -60,8 +60,8 @@ export default function EnglishCareerTestPage() {
       <div className="min-h-screen py-12">
         <div className="text-center mb-8 px-4">
           <div className="text-4xl mb-3">💼</div>
-          <h1 className="text-3xl font-black mb-1" style={{ color: '#e0c97f' }}>Career Aptitude Test</h1>
-          <p className="text-sm" style={{ color: '#8080a0' }}>Discover your ideal career type</p>
+          <h1 className="text-3xl font-black mb-1" style={{ color: '#f0eef8' }}>Career Aptitude Test</h1>
+          <p className="text-sm" style={{ color: '#505075' }}>Discover your ideal career type</p>
         </div>
         <QuestionCard
           question={careerQuestions[currentQ].question}
@@ -85,28 +85,28 @@ export default function EnglishCareerTestPage() {
     const Paragraphs = ({ text }: { text: string }) => (
       <div className="space-y-3">
         {text.split('\n\n').map((p, i) => (
-          <p key={i} className="text-sm leading-7" style={{ color: '#b0b8c8' }}>{p}</p>
+          <p key={i} className="text-sm leading-7" style={{ color: '#9090b8' }}>{p}</p>
         ))}
       </div>
     )
 
     const DetailContent = () => (
       <div className="space-y-4 mt-4">
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
-          <h4 className="font-bold mb-3" style={{ color: '#e0c97f' }}>🔍 Detailed Analysis</h4>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
+          <h4 className="font-bold mb-3" style={{ color: '#f0eef8' }}>🔍 Detailed Analysis</h4>
           <Paragraphs text={result.detail} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #00ff8820' }}>
-            <h4 className="font-bold mb-3" style={{ color: '#00ff88' }}>💪 Strengths</h4>
+          <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #2db8a020' }}>
+            <h4 className="font-bold mb-3" style={{ color: '#2db8a0' }}>💪 Strengths</h4>
             <Paragraphs text={result.strength} />
           </div>
-          <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #ff707020' }}>
-            <h4 className="font-bold mb-3" style={{ color: '#ff7070' }}>⚠️ Areas to Develop</h4>
+          <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #e0525220' }}>
+            <h4 className="font-bold mb-3" style={{ color: '#e05252' }}>⚠️ Areas to Develop</h4>
             <Paragraphs text={result.weakness} />
           </div>
         </div>
-        <div className="rounded-xl p-5" style={{ background: '#16213e', border: '1px solid #e0c97f15' }}>
+        <div className="rounded-xl p-5" style={{ background: '#111120', border: '1px solid #1e1e38' }}>
           <h4 className="font-bold mb-3" style={{ color: '#4a9eff' }}>💼 Recommended Careers</h4>
           <div className="flex flex-wrap gap-2">
             {result.bestJobs.map((job) => (
@@ -129,31 +129,31 @@ export default function EnglishCareerTestPage() {
               style={{ background: '#4a9eff20', color: '#4a9eff', border: '1px solid #4a9eff40' }}>
               {result.type}
             </div>
-            <h1 className="text-3xl font-black mb-2" style={{ color: '#e0c97f' }}>{result.title}</h1>
-            <p className="text-sm" style={{ color: '#8080a0' }}>Career Aptitude Result</p>
+            <h1 className="text-3xl font-black mb-2" style={{ color: '#f0eef8' }}>{result.title}</h1>
+            <p className="text-sm" style={{ color: '#505075' }}>Career Aptitude Result</p>
           </div>
 
           <div className="rounded-2xl p-6 mb-6"
-            style={{ background: 'linear-gradient(135deg, #16213e, #0f3460)', border: '1px solid #4a9eff40' }}>
-            <p className="text-sm leading-relaxed" style={{ color: '#c0c8d8' }}>{result.summary}</p>
+            style={{ background: '#111120', border: '1px solid #4a9eff40' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#9090b8' }}>{result.summary}</p>
           </div>
 
           <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
           <div>
-            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>Full Analysis</h2>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#f0eef8' }}>Full Analysis</h2>
             <DetailContent />
           </div>
 
           <NextTestSuggestion currentPath="/en/test/career" lang="en" />
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <button onClick={handleReset} className="px-6 py-3 rounded-xl text-sm font-medium"
-              style={{ background: 'transparent', border: '1px solid #e0c97f30', color: '#8090a8' }}>
+            <button onClick={handleReset} className="px-6 py-3 text-sm font-medium"
+              style={{ background: 'transparent', border: '1px solid #2a2a48', color: '#505075', borderRadius: '9999px' }}>
               Retake Test
             </button>
-            <a href="/en/test" className="px-6 py-3 rounded-xl text-sm font-medium text-center"
-              style={{ background: '#16213e', border: '1px solid #e0c97f30', color: '#e0c97f' }}>
+            <a href="/en/test" className="px-6 py-3 text-sm font-medium text-center"
+              style={{ background: '#111120', border: '1px solid #2a2a48', color: '#9090b8', borderRadius: '9999px' }}>
               Other Tests
             </a>
           </div>

@@ -86,7 +86,7 @@ function Stars({ n, color }: { n: number; color: string }) {
   return (
     <span>
       {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: i <= n ? color : '#333355', fontSize: '14px' }}>★</span>
+        <span key={i} style={{ color: i <= n ? color : '#1e1e38', fontSize: '14px' }}>★</span>
       ))}
     </span>
   )
@@ -141,17 +141,17 @@ export default function FortunePage() {
         {/* 헤더 */}
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🔮</div>
-          <h1 className="text-4xl font-black mb-2" style={{ color: '#e0c97f' }}>오늘의 운세</h1>
-          <p className="text-lg font-medium" style={{ color: '#c0c0d0' }}>
+          <h1 className="text-4xl font-black mb-2" style={{ color: '#f0eef8' }}>오늘의 운세</h1>
+          <p className="text-lg font-medium" style={{ color: '#9090b8' }}>
             {dateStr} ({dayName}요일)
           </p>
-          <p className="text-sm mt-1" style={{ color: '#6b7280' }}>매일 자정 업데이트 · 12띠별 운세</p>
+          <p className="text-sm mt-1" style={{ color: '#505075' }}>매일 자정 업데이트 · 12띠별 운세</p>
         </div>
 
         {/* 안내 */}
-        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
-          <p style={{ color: '#9090a8' }}>
-            🐾 본인의 <span style={{ color: '#e0c97f' }}>띠(출생연도)</span>를 선택하여 오늘의 운세를 확인하세요.
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#0b0b16', border: '1px solid #1e1e38' }}>
+          <p style={{ color: '#9090b8' }}>
+            🐾 본인의 <span style={{ color: '#c94444' }}>띠(출생연도)</span>를 선택하여 오늘의 운세를 확인하세요.
             재미와 위안을 위한 콘텐츠입니다.
           </p>
         </div>
@@ -163,26 +163,26 @@ export default function FortunePage() {
             return (
               <div
                 key={f.name}
-                className="rounded-2xl overflow-hidden"
-                style={{ border: `1px solid ${isOpen ? f.color + '60' : f.color + '25'}`, transition: 'border-color 0.2s' }}
+                className="rounded-xl overflow-hidden"
+                style={{ border: `1px solid ${isOpen ? f.color + '60' : '#1e1e38'}`, transition: 'border-color 0.2s' }}
               >
                 {/* 아코디언 헤더 (클릭) */}
                 <button
                   onClick={() => toggleIndex(i)}
                   className="w-full flex items-center justify-between px-5 py-4"
-                  style={{ background: isOpen ? `${f.color}12` : 'linear-gradient(135deg, #16213e, #0f1f3d)' }}
+                  style={{ background: isOpen ? `${f.color}12` : '#111120' }}
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{f.emoji}</span>
                     <div className="text-left">
                       <span className="text-lg font-black" style={{ color: f.color }}>{f.name}띠</span>
-                      <p className="text-xs" style={{ color: '#606080' }}>{f.years}</p>
+                      <p className="text-xs" style={{ color: '#505075' }}>{f.years}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
                       <Stars n={f.overall} color={f.color} />
-                      <p className="text-xs mt-0.5" style={{ color: '#808090' }}>종합 {avgScore(f)}점</p>
+                      <p className="text-xs mt-0.5" style={{ color: '#505075' }}>종합 {avgScore(f)}점</p>
                     </div>
                     <span
                       className="text-xl font-bold transition-transform duration-300"
@@ -197,10 +197,10 @@ export default function FortunePage() {
                 {isOpen && (
                   <div
                     className="px-5 pb-5 pt-3"
-                    style={{ background: `linear-gradient(135deg, #16213e, #0f1f3d)` }}
+                    style={{ background: '#111120' }}
                   >
                     {/* 운세 메시지 */}
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b8c8' }}>{f.msg}</p>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#9090b8' }}>{f.msg}</p>
 
                     {/* 세부 운세 */}
                     <div className="grid grid-cols-2 gap-2 mb-4">
@@ -210,12 +210,12 @@ export default function FortunePage() {
                         { label: '💼 직업운', s: f.work, msg: f.workMsg },
                         { label: '💪 건강운', s: f.health, msg: f.healthMsg },
                       ].map(item => (
-                        <div key={item.label} className="rounded-xl p-3" style={{ background: '#ffffff06' }}>
+                        <div key={item.label} className="rounded-xl p-3" style={{ background: '#0b0b16' }}>
                           <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs font-bold" style={{ color: '#9090b0' }}>{item.label}</span>
+                            <span className="text-xs font-bold" style={{ color: '#505075' }}>{item.label}</span>
                             <Stars n={item.s} color={f.color} />
                           </div>
-                          <p className="text-xs" style={{ color: '#8090a8' }}>{item.msg}</p>
+                          <p className="text-xs" style={{ color: '#505075' }}>{item.msg}</p>
                         </div>
                       ))}
                     </div>
@@ -243,7 +243,7 @@ export default function FortunePage() {
           })}
         </div>
 
-        <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>
+        <p className="text-center text-xs mt-8" style={{ color: '#505075' }}>
           ※ 본 운세는 재미·위안 목적의 콘텐츠로, 실제 미래를 예측하지 않습니다.
         </p>
       </div>

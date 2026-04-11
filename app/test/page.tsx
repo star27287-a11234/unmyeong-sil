@@ -29,7 +29,7 @@ const tests = [
     description: 'E/I, S/N, T/F, J/P 4가지 차원 12개 질문으로 정확한 MBTI 유형을 분석합니다.',
     questions: 12,
     time: '4분',
-    color: '#00cc77',
+    color: '#2db8a0',
   },
   {
     href: '/test/money',
@@ -39,7 +39,7 @@ const tests = [
     description: '재물운과 금전 관리 성향을 분석합니다. 황금손, 꾸준형, 투자형 등 6가지 재물 유형 중 나는?',
     questions: 10,
     time: '3분',
-    color: '#e0c97f',
+    color: '#d4951e',
   },
 ]
 
@@ -48,11 +48,11 @@ export default function TestPage() {
     <div className="min-h-screen py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* 헤더 */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-black mb-3" style={{ color: '#e0c97f' }}>
+        <div className="mb-10">
+          <h1 className="text-3xl font-black mb-2" style={{ color: '#f0eef8' }}>
             심리테스트
           </h1>
-          <p style={{ color: '#8080a0' }}>
+          <p style={{ color: '#505075' }}>
             나를 더 깊이 이해하는 4가지 심리 분석
           </p>
         </div>
@@ -63,32 +63,38 @@ export default function TestPage() {
             <Link
               key={test.href}
               href={test.href}
-              className="group relative rounded-2xl p-6 block transition-all duration-300 hover:scale-[1.02]"
+              className="group relative rounded-xl p-6 block transition-all duration-200 active:scale-[0.99]"
               style={{
-                background: 'linear-gradient(135deg, #16213e, #0f3460)',
-                border: '1px solid #e0c97f20',
+                background: '#111120',
+                border: '1px solid #1e1e38',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = '#2a2a48'
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.borderColor = '#1e1e38'
               }}
             >
               {/* 아이콘 */}
               <div className="text-5xl mb-4">{test.icon}</div>
 
               {/* 타이틀 */}
-              <h2 className="text-xl font-bold mb-1" style={{ color: '#e8e8f0' }}>
+              <h2 className="text-xl font-bold mb-1" style={{ color: '#f0eef8' }}>
                 {test.title}
               </h2>
               <p className="text-sm font-medium mb-3" style={{ color: test.color }}>
                 {test.subtitle}
               </p>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: '#8090a8' }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: '#9090b8' }}>
                 {test.description}
               </p>
 
               {/* 메타 정보 */}
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-xs px-2 py-1 rounded-full" style={{ background: '#1a1a2e', color: '#9090b0' }}>
+                <span className="text-xs px-2 py-1 rounded-full" style={{ background: '#0b0b16', color: '#505075' }}>
                   📝 {test.questions}문항
                 </span>
-                <span className="text-xs px-2 py-1 rounded-full" style={{ background: '#1a1a2e', color: '#9090b0' }}>
+                <span className="text-xs px-2 py-1 rounded-full" style={{ background: '#0b0b16', color: '#505075' }}>
                   ⏱ 약 {test.time}
                 </span>
               </div>

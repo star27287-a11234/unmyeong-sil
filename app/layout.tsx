@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/Navbar"
 import FooterWrapper from "@/components/FooterWrapper"
+import { Analytics } from "@vercel/analytics/next"
 
 const notoSansKR = Noto_Sans_KR({
   weight: ['300', '400', '500', '700', '900'],
@@ -52,6 +53,7 @@ export default function RootLayout({
           {children}
         </main>
         <FooterWrapper />
+        <Analytics />
       </body>
     </html>
   )

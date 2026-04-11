@@ -66,9 +66,9 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-1 text-xs font-medium whitespace-nowrap flex-shrink-0 transition-colors duration-150"
+                className="px-3 py-1 text-sm font-medium whitespace-nowrap flex-shrink-0 transition-colors duration-150"
                 style={{
-                  color: isActive ? '#ede9fe' : '#4a4570',
+                  color: isActive ? '#ede9fe' : '#9d8ec7',
                   borderBottom: isActive ? '2px solid #7c3aed' : '2px solid transparent',
                   paddingBottom: isActive ? '2px' : '4px',
                 }}
@@ -83,8 +83,8 @@ export default function Navbar() {
             onClick={() => {
               document.cookie = `preferred-lang=${isEnglish ? 'ko' : 'en'}; path=/; max-age=31536000`
             }}
-            className="ml-3 px-3 py-1 text-xs font-bold whitespace-nowrap flex-shrink-0 transition-colors duration-150 cursor-pointer"
-            style={{ color: '#9090b8', borderLeft: '1px solid rgba(100,80,200,0.2)' }}
+            className="ml-3 px-3 py-1 text-sm font-bold whitespace-nowrap flex-shrink-0 transition-colors duration-150 cursor-pointer"
+            style={{ color: '#9d8ec7', borderLeft: '1px solid rgba(100,80,200,0.2)' }}
           >
             {isEnglish ? '한국어' : 'EN'}
           </a>

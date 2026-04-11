@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/Navbar"
 import FooterWrapper from "@/components/FooterWrapper"
+import CosmicBackground from "@/components/CosmicBackground"
 import { Analytics } from "@vercel/analytics/next"
 
 const notoSansKR = Noto_Sans_KR({
@@ -41,14 +42,8 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body
-        className="min-h-screen flex flex-col antialiased"
-        style={{
-          background: '#1a1a2e',
-          color: '#e8e8f0',
-          fontFamily: "'Noto Sans KR', sans-serif",
-        }}
-      >
+      <body className="min-h-screen flex flex-col antialiased">
+        <CosmicBackground />
         <Navbar />
         <main className="flex-1">
           {children}

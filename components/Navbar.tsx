@@ -34,8 +34,10 @@ export default function Navbar() {
   return (
     <nav
       style={{
-        background: '#080810',
-        borderBottom: '1px solid #1e1e38',
+        background: 'rgba(4,4,15,0.85)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(120,80,220,0.15)',
       }}
       className="sticky top-0 z-50 w-full"
     >
@@ -44,11 +46,11 @@ export default function Navbar() {
         <Link
           href={isEnglish ? '/en' : '/'}
           className="flex items-center gap-2 text-base font-bold flex-shrink-0"
-          style={{ color: '#f0eef8' }}
+          style={{ color: '#ede9fe' }}
         >
           <span
-            className="w-2 h-2 rounded-full flex-shrink-0"
-            style={{ background: '#c94444' }}
+            className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse-glow"
+            style={{ background: '#7c3aed' }}
           />
           {isEnglish ? 'Thread of Fate' : '운명의 실'}
         </Link>
@@ -66,8 +68,8 @@ export default function Navbar() {
                 href={link.href}
                 className="px-3 py-1 text-xs font-medium whitespace-nowrap flex-shrink-0 transition-colors duration-150"
                 style={{
-                  color: isActive ? '#f0eef8' : '#505075',
-                  borderBottom: isActive ? '2px solid #c94444' : '2px solid transparent',
+                  color: isActive ? '#ede9fe' : '#4a4570',
+                  borderBottom: isActive ? '2px solid #7c3aed' : '2px solid transparent',
                   paddingBottom: isActive ? '2px' : '4px',
                 }}
               >
@@ -76,16 +78,16 @@ export default function Navbar() {
             )
           })}
 
-          <Link
+          <a
             href={langSwitchHref}
-            className="ml-3 px-3 py-1 text-xs font-bold whitespace-nowrap flex-shrink-0 transition-colors duration-150"
-            style={{
-              color: '#9090b8',
-              borderLeft: '1px solid #1e1e38',
+            onClick={() => {
+              document.cookie = `preferred-lang=${isEnglish ? 'ko' : 'en'}; path=/; max-age=31536000`
             }}
+            className="ml-3 px-3 py-1 text-xs font-bold whitespace-nowrap flex-shrink-0 transition-colors duration-150 cursor-pointer"
+            style={{ color: '#9090b8', borderLeft: '1px solid rgba(100,80,200,0.2)' }}
           >
             {isEnglish ? '한국어' : 'EN'}
-          </Link>
+          </a>
         </div>
       </div>
     </nav>

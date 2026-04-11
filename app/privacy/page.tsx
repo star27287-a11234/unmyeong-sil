@@ -93,11 +93,11 @@ export default function PrivacyPage() {
           <p className="mt-2">
             이메일:{' '}
             <a
-              href="mailto:star27287@gmail.com"
+              href="mailto:starroad0717@gmail.com"
               className="underline"
               style={{ color: '#e0c97f' }}
             >
-              star27287@gmail.com
+              starroad0717@gmail.com
             </a>
           </p>
         </section>

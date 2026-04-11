@@ -106,14 +106,14 @@ export default function AboutPage() {
             서비스 이용 중 문의사항이나 개선 제안이 있으시면 이메일로 연락해 주세요.
           </p>
           <a
-            href="mailto:star27287@gmail.com"
+            href="mailto:starroad0717@gmail.com"
             className="inline-block px-6 py-3 rounded-xl font-medium text-sm transition-all hover:scale-105"
             style={{
               background: 'linear-gradient(135deg, #e0c97f, #c4a84f)',
               color: '#1a1a2e',
             }}
           >
-            star27287@gmail.com
+            starroad0717@gmail.com
           </a>
         </div>
 

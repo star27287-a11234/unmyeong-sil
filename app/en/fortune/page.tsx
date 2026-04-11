@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 function seeded(seed: number) {
   let s = seed >>> 0
@@ -128,9 +128,12 @@ export default function FortunePageEn() {
 
   const avgScore = (f: typeof fortunes[0]) => ((f.love + f.money + f.work + f.health) / 4).toFixed(1)
 
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const toggleIndex = (i: number) => setOpenIndex(prev => prev === i ? null : i)
+
   return (
     <div className="min-h-screen py-10 px-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-2xl mx-auto">
 
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">🔮</div>
@@ -141,70 +144,89 @@ export default function FortunePageEn() {
           <p className="text-sm mt-1" style={{ color: '#6b7280' }}>Updated daily at midnight · 12 Chinese Zodiac signs</p>
         </div>
 
-        <div className="rounded-xl px-4 py-3 mb-8 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
           <p style={{ color: '#9090a8' }}>
-            🐾 Find your <span style={{ color: '#e0c97f' }}>zodiac sign (birth year)</span> and check today&apos;s fortune.
+            🐾 Select your <span style={{ color: '#e0c97f' }}>zodiac sign (birth year)</span> to check today&apos;s fortune.
             This is for fun and comfort only.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {fortunes.map(f => (
-            <div
-              key={f.name}
-              className="rounded-2xl p-5"
-              style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: `1px solid ${f.color}25` }}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl">{f.emoji}</span>
-                  <div>
-                    <span className="text-lg font-black" style={{ color: f.color }}>{f.name}</span>
-                    <p className="text-xs" style={{ color: '#606080' }}>{f.years}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <Stars n={f.overall} color={f.color} />
-                  <p className="text-xs mt-0.5" style={{ color: '#808090' }}>Overall {avgScore(f)}</p>
-                </div>
-              </div>
-
-              <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b8c8' }}>{f.msg}</p>
-
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {[
-                  { label: '💕 Love', s: f.love, msg: f.loveMsg },
-                  { label: '💰 Money', s: f.money, msg: f.moneyMsg },
-                  { label: '💼 Career', s: f.work, msg: f.workMsg },
-                  { label: '💪 Health', s: f.health, msg: f.healthMsg },
-                ].map(item => (
-                  <div key={item.label} className="rounded-xl p-3" style={{ background: '#ffffff06' }}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold" style={{ color: '#9090b0' }}>{item.label}</span>
-                      <Stars n={item.s} color={f.color} />
+        <div className="flex flex-col gap-2">
+          {fortunes.map((f, i) => {
+            const isOpen = openIndex === i
+            return (
+              <div
+                key={f.name}
+                className="rounded-2xl overflow-hidden"
+                style={{ border: `1px solid ${isOpen ? f.color + '60' : f.color + '25'}`, transition: 'border-color 0.2s' }}
+              >
+                <button
+                  onClick={() => toggleIndex(i)}
+                  className="w-full flex items-center justify-between px-5 py-4"
+                  style={{ background: isOpen ? `${f.color}12` : 'linear-gradient(135deg, #16213e, #0f1f3d)' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">{f.emoji}</span>
+                    <div className="text-left">
+                      <span className="text-lg font-black" style={{ color: f.color }}>{f.name}</span>
+                      <p className="text-xs" style={{ color: '#606080' }}>{f.years}</p>
                     </div>
-                    <p className="text-xs" style={{ color: '#8090a8' }}>{item.msg}</p>
                   </div>
-                ))}
-              </div>
+                  <div className="flex items-center gap-3">
+                    <div className="text-right">
+                      <Stars n={f.overall} color={f.color} />
+                      <p className="text-xs mt-0.5" style={{ color: '#808090' }}>Overall {avgScore(f)}</p>
+                    </div>
+                    <span
+                      className="text-xl font-bold transition-transform duration-300"
+                      style={{ color: f.color, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}
+                    >
+                      ∨
+                    </span>
+                  </div>
+                </button>
 
-              <div className="flex gap-2 flex-wrap">
-                {[
-                  { label: '🎨 Color', val: f.luckyColor },
-                  { label: '🔢 Number', val: String(f.luckyNum) },
-                  { label: '🧭 Direction', val: f.luckyDir },
-                ].map(item => (
-                  <span
-                    key={item.label}
-                    className="text-xs px-2 py-1 rounded-full"
-                    style={{ background: `${f.color}15`, color: f.color }}
-                  >
-                    {item.label} <strong>{item.val}</strong>
-                  </span>
-                ))}
+                {isOpen && (
+                  <div className="px-5 pb-5 pt-3" style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)' }}>
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b8c8' }}>{f.msg}</p>
+
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      {[
+                        { label: '💕 Love', s: f.love, msg: f.loveMsg },
+                        { label: '💰 Money', s: f.money, msg: f.moneyMsg },
+                        { label: '💼 Career', s: f.work, msg: f.workMsg },
+                        { label: '💪 Health', s: f.health, msg: f.healthMsg },
+                      ].map(item => (
+                        <div key={item.label} className="rounded-xl p-3" style={{ background: '#ffffff06' }}>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-bold" style={{ color: '#9090b0' }}>{item.label}</span>
+                            <Stars n={item.s} color={f.color} />
+                          </div>
+                          <p className="text-xs" style={{ color: '#8090a8' }}>{item.msg}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-2 flex-wrap">
+                      {[
+                        { label: '🎨 Color', val: f.luckyColor },
+                        { label: '🔢 Number', val: String(f.luckyNum) },
+                        { label: '🧭 Direction', val: f.luckyDir },
+                      ].map(item => (
+                        <span
+                          key={item.label}
+                          className="text-xs px-2 py-1 rounded-full"
+                          style={{ background: `${f.color}15`, color: f.color }}
+                        >
+                          {item.label} <strong>{item.val}</strong>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>

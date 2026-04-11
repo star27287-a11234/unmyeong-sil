@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 // 시드 기반 난수 생성기
 function seeded(seed: number) {
@@ -98,6 +98,8 @@ export default function FortunePage() {
   const dayNames = ['일', '월', '화', '수', '목', '금', '토']
   const dayName = dayNames[today.getDay()]
 
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
   const fortunes = useMemo(() => {
     const base = getDaySeed()
     return ZODIACS.map((z, i) => {
@@ -128,9 +130,13 @@ export default function FortunePage() {
 
   const avgScore = (f: typeof fortunes[0]) => ((f.love + f.money + f.work + f.health) / 4).toFixed(1)
 
+  const toggleIndex = (i: number) => {
+    setOpenIndex(prev => prev === i ? null : i)
+  }
+
   return (
     <div className="min-h-screen py-10 px-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-2xl mx-auto">
 
         {/* 헤더 */}
         <div className="text-center mb-8">
@@ -143,75 +149,98 @@ export default function FortunePage() {
         </div>
 
         {/* 안내 */}
-        <div className="rounded-xl px-4 py-3 mb-8 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
+        <div className="rounded-xl px-4 py-3 mb-6 text-sm" style={{ background: '#e0c97f0a', border: '1px solid #e0c97f25' }}>
           <p style={{ color: '#9090a8' }}>
-            🐾 본인의 <span style={{ color: '#e0c97f' }}>띠(출생연도)</span>를 확인하여 오늘의 운세를 보세요.
+            🐾 본인의 <span style={{ color: '#e0c97f' }}>띠(출생연도)</span>를 선택하여 오늘의 운세를 확인하세요.
             재미와 위안을 위한 콘텐츠입니다.
           </p>
         </div>
 
-        {/* 12띠 그리드 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {fortunes.map(f => (
-            <div
-              key={f.name}
-              className="rounded-2xl p-5"
-              style={{ background: 'linear-gradient(135deg, #16213e, #0f1f3d)', border: `1px solid ${f.color}25` }}
-            >
-              {/* 띠 이름 + 점수 */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-3xl">{f.emoji}</span>
-                  <div>
-                    <span className="text-lg font-black" style={{ color: f.color }}>{f.name}띠</span>
-                    <p className="text-xs" style={{ color: '#606080' }}>{f.years}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <Stars n={f.overall} color={f.color} />
-                  <p className="text-xs mt-0.5" style={{ color: '#808090' }}>종합 {avgScore(f)}점</p>
-                </div>
-              </div>
-
-              {/* 운세 메시지 */}
-              <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b8c8' }}>{f.msg}</p>
-
-              {/* 세부 운세 */}
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {[
-                  { label: '💕 애정운', s: f.love, msg: f.loveMsg },
-                  { label: '💰 재물운', s: f.money, msg: f.moneyMsg },
-                  { label: '💼 직업운', s: f.work, msg: f.workMsg },
-                  { label: '💪 건강운', s: f.health, msg: f.healthMsg },
-                ].map(item => (
-                  <div key={item.label} className="rounded-xl p-3" style={{ background: '#ffffff06' }}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold" style={{ color: '#9090b0' }}>{item.label}</span>
-                      <Stars n={item.s} color={f.color} />
+        {/* 12띠 아코디언 목록 */}
+        <div className="flex flex-col gap-2">
+          {fortunes.map((f, i) => {
+            const isOpen = openIndex === i
+            return (
+              <div
+                key={f.name}
+                className="rounded-2xl overflow-hidden"
+                style={{ border: `1px solid ${isOpen ? f.color + '60' : f.color + '25'}`, transition: 'border-color 0.2s' }}
+              >
+                {/* 아코디언 헤더 (클릭) */}
+                <button
+                  onClick={() => toggleIndex(i)}
+                  className="w-full flex items-center justify-between px-5 py-4"
+                  style={{ background: isOpen ? `${f.color}12` : 'linear-gradient(135deg, #16213e, #0f1f3d)' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">{f.emoji}</span>
+                    <div className="text-left">
+                      <span className="text-lg font-black" style={{ color: f.color }}>{f.name}띠</span>
+                      <p className="text-xs" style={{ color: '#606080' }}>{f.years}</p>
                     </div>
-                    <p className="text-xs" style={{ color: '#8090a8' }}>{item.msg}</p>
                   </div>
-                ))}
-              </div>
+                  <div className="flex items-center gap-3">
+                    <div className="text-right">
+                      <Stars n={f.overall} color={f.color} />
+                      <p className="text-xs mt-0.5" style={{ color: '#808090' }}>종합 {avgScore(f)}점</p>
+                    </div>
+                    <span
+                      className="text-xl font-bold transition-transform duration-300"
+                      style={{ color: f.color, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}
+                    >
+                      ∨
+                    </span>
+                  </div>
+                </button>
 
-              {/* 행운의 정보 */}
-              <div className="flex gap-2 flex-wrap">
-                {[
-                  { label: '🎨 행운의 색', val: f.luckyColor },
-                  { label: '🔢 행운의 숫자', val: String(f.luckyNum) },
-                  { label: '🧭 행운의 방향', val: f.luckyDir },
-                ].map(item => (
-                  <span
-                    key={item.label}
-                    className="text-xs px-2 py-1 rounded-full"
-                    style={{ background: `${f.color}15`, color: f.color }}
+                {/* 아코디언 내용 */}
+                {isOpen && (
+                  <div
+                    className="px-5 pb-5 pt-3"
+                    style={{ background: `linear-gradient(135deg, #16213e, #0f1f3d)` }}
                   >
-                    {item.label} <strong>{item.val}</strong>
-                  </span>
-                ))}
+                    {/* 운세 메시지 */}
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#b0b8c8' }}>{f.msg}</p>
+
+                    {/* 세부 운세 */}
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      {[
+                        { label: '💕 애정운', s: f.love, msg: f.loveMsg },
+                        { label: '💰 재물운', s: f.money, msg: f.moneyMsg },
+                        { label: '💼 직업운', s: f.work, msg: f.workMsg },
+                        { label: '💪 건강운', s: f.health, msg: f.healthMsg },
+                      ].map(item => (
+                        <div key={item.label} className="rounded-xl p-3" style={{ background: '#ffffff06' }}>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-bold" style={{ color: '#9090b0' }}>{item.label}</span>
+                            <Stars n={item.s} color={f.color} />
+                          </div>
+                          <p className="text-xs" style={{ color: '#8090a8' }}>{item.msg}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* 행운의 정보 */}
+                    <div className="flex gap-2 flex-wrap">
+                      {[
+                        { label: '🎨 행운의 색', val: f.luckyColor },
+                        { label: '🔢 행운의 숫자', val: String(f.luckyNum) },
+                        { label: '🧭 행운의 방향', val: f.luckyDir },
+                      ].map(item => (
+                        <span
+                          key={item.label}
+                          className="text-xs px-2 py-1 rounded-full"
+                          style={{ background: `${f.color}15`, color: f.color }}
+                        >
+                          {item.label} <strong>{item.val}</strong>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <p className="text-center text-xs mt-8" style={{ color: '#404060' }}>

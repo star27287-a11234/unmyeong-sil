@@ -3,14 +3,13 @@
 import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import LoadingAnimation from '@/components/LoadingAnimation'
-import ResultGate from '@/components/ResultGate'
 import AdBanner from '@/components/AdBanner'
 import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { careerQuestions } from '@/data/en/career-questions'
 import { careerResults } from '@/data/en/career-results'
 import { calcCareerType } from '@/lib/test-calc'
 
-type Step = 'quiz' | 'loading' | 'summary' | 'detail'
+type Step = 'quiz' | 'loading' | 'result'
 
 interface Answer {
   questionId: number
@@ -23,7 +22,6 @@ export default function EnglishCareerTestPage() {
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [resultType, setResultType] = useState<string>('')
-  const [unlocked, setUnlocked] = useState(false)
 
   const handleAnswer = useCallback((optionIndex: number) => {
     const question = careerQuestions[currentQ]
@@ -37,7 +35,7 @@ export default function EnglishCareerTestPage() {
       const type = calcCareerType(newAnswers.map(a => ({ score: a.score })))
       setResultType(type)
       setStep('loading')
-      setTimeout(() => setStep('summary'), 2000)
+      setTimeout(() => setStep('result'), 2000)
     }
   }, [currentQ, answers])
 
@@ -48,12 +46,6 @@ export default function EnglishCareerTestPage() {
     }
   }, [currentQ])
 
-  const handleAdWatch = useCallback(() => {
-    alert('Thank you for watching! Your full results are now unlocked. 🎉')
-    setUnlocked(true)
-    setStep('detail')
-  }, [])
-
   const result = careerResults.find(r => r.id === resultType)
 
   const handleReset = () => {
@@ -61,7 +53,6 @@ export default function EnglishCareerTestPage() {
     setCurrentQ(0)
     setAnswers([])
     setResultType('')
-    setUnlocked(false)
   }
 
   if (step === 'quiz') {
@@ -90,7 +81,7 @@ export default function EnglishCareerTestPage() {
     return <div className="min-h-screen flex items-center justify-center"><LoadingAnimation /></div>
   }
 
-  if ((step === 'summary' || step === 'detail') && result) {
+  if (step === 'result' && result) {
     const Paragraphs = ({ text }: { text: string }) => (
       <div className="space-y-3">
         {text.split('\n\n').map((p, i) => (
@@ -149,21 +140,10 @@ export default function EnglishCareerTestPage() {
 
           <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
-          {step === 'detail' || unlocked ? (
-            <div>
-              <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>Full Analysis</h2>
-              <DetailContent />
-            </div>
-          ) : (
-            <ResultGate
-              onAdWatch={handleAdWatch}
-              blurContent={<DetailContent />}
-              title="View Full Analysis"
-              subtitle="Watch a short ad to unlock your complete results"
-              watchAdLabel="📺 Watch Ad & Unlock for Free"
-              note="Watch one ad to access your full detailed analysis"
-            />
-          )}
+          <div>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>Full Analysis</h2>
+            <DetailContent />
+          </div>
 
           <NextTestSuggestion currentPath="/en/test/career" lang="en" />
 

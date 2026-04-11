@@ -3,14 +3,13 @@
 import { useState, useCallback } from 'react'
 import QuestionCard from '@/components/QuestionCard'
 import LoadingAnimation from '@/components/LoadingAnimation'
-import ResultGate from '@/components/ResultGate'
 import AdBanner from '@/components/AdBanner'
 import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { careerQuestions } from '@/data/career-questions'
 import { careerResults } from '@/data/career-results'
 import { calcCareerType } from '@/lib/test-calc'
 
-type Step = 'quiz' | 'loading' | 'summary' | 'detail'
+type Step = 'quiz' | 'loading' | 'result'
 
 interface Answer {
   questionId: number
@@ -23,7 +22,6 @@ export default function CareerTestPage() {
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [resultType, setResultType] = useState<string>('')
-  const [unlocked, setUnlocked] = useState(false)
 
   const handleAnswer = useCallback((optionIndex: number) => {
     const question = careerQuestions[currentQ]
@@ -44,7 +42,7 @@ export default function CareerTestPage() {
       const type = calcCareerType(newAnswers.map(a => ({ score: a.score })))
       setResultType(type)
       setStep('loading')
-      setTimeout(() => setStep('summary'), 2000)
+      setTimeout(() => setStep('result'), 2000)
     }
   }, [currentQ, answers])
 
@@ -55,12 +53,6 @@ export default function CareerTestPage() {
     }
   }, [currentQ])
 
-  const handleAdWatch = useCallback(() => {
-    alert('광고를 시청했습니다! 전체 결과를 볼 수 있습니다. 🎉')
-    setUnlocked(true)
-    setStep('detail')
-  }, [])
-
   const result = careerResults.find(r => r.id === resultType)
 
   const handleReset = () => {
@@ -68,7 +60,6 @@ export default function CareerTestPage() {
     setCurrentQ(0)
     setAnswers([])
     setResultType('')
-    setUnlocked(false)
   }
 
   if (step === 'quiz') {
@@ -99,7 +90,7 @@ export default function CareerTestPage() {
     )
   }
 
-  if ((step === 'summary' || step === 'detail') && result) {
+  if (step === 'result' && result) {
     const Paragraphs = ({ text }: { text: string }) => (
       <div className="space-y-3">
         {text.split('\n\n').map((p, i) => (
@@ -166,14 +157,10 @@ export default function CareerTestPage() {
           {/* 요약 아래 광고 */}
           <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
-          {step === 'detail' || unlocked ? (
-            <div>
-              <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
-              <DetailContent />
-            </div>
-          ) : (
-            <ResultGate onAdWatch={handleAdWatch} blurContent={<DetailContent />} />
-          )}
+          <div>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
+            <DetailContent />
+          </div>
 
           {/* 다음 테스트 추천 */}
           <NextTestSuggestion currentPath="/test/career" />

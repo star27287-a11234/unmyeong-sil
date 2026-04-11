@@ -2,14 +2,13 @@
 
 import { useState, useCallback } from 'react'
 import LoadingAnimation from '@/components/LoadingAnimation'
-import ResultGate from '@/components/ResultGate'
 import AdBanner from '@/components/AdBanner'
 import NextTestSuggestion from '@/components/NextTestSuggestion'
 import { mbtiQuestions } from '@/data/mbti-questions'
 import { mbtiResults } from '@/data/mbti-results'
 import { calcMbtiType } from '@/lib/test-calc'
 
-type Step = 'quiz' | 'loading' | 'summary' | 'detail'
+type Step = 'quiz' | 'loading' | 'result'
 
 interface Answer {
   questionId: number
@@ -22,7 +21,6 @@ export default function MbtiTestPage() {
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [resultType, setResultType] = useState<string>('')
-  const [unlocked, setUnlocked] = useState(false)
 
   const progress = ((currentQ + 1) / mbtiQuestions.length) * 100
 
@@ -45,7 +43,7 @@ export default function MbtiTestPage() {
       const type = calcMbtiType(newAnswers.map(a => ({ dimension: a.dimension, value: a.value })))
       setResultType(type)
       setStep('loading')
-      setTimeout(() => setStep('summary'), 2200)
+      setTimeout(() => setStep('result'), 2200)
     }
   }, [currentQ, answers])
 
@@ -56,12 +54,6 @@ export default function MbtiTestPage() {
     }
   }, [currentQ])
 
-  const handleAdWatch = useCallback(() => {
-    alert('광고를 시청했습니다! 전체 결과를 볼 수 있습니다. 🎉')
-    setUnlocked(true)
-    setStep('detail')
-  }, [])
-
   const result = mbtiResults[resultType]
 
   const handleReset = () => {
@@ -69,7 +61,6 @@ export default function MbtiTestPage() {
     setCurrentQ(0)
     setAnswers([])
     setResultType('')
-    setUnlocked(false)
   }
 
   const dimensionColors: Record<string, string> = {
@@ -204,7 +195,7 @@ export default function MbtiTestPage() {
     )
   }
 
-  if ((step === 'summary' || step === 'detail') && result) {
+  if (step === 'result' && result) {
     const typeColors: Record<string, string> = {
       'E': '#9c59d1', 'I': '#4a9eff',
       'S': '#e0c97f', 'N': '#00cc77',
@@ -280,14 +271,10 @@ export default function MbtiTestPage() {
           {/* 요약 아래 광고 */}
           <AdBanner adSlot="7187602366" adFormat="auto" className="mb-2" />
 
-          {step === 'detail' || unlocked ? (
-            <div>
-              <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
-              <DetailContent />
-            </div>
-          ) : (
-            <ResultGate onAdWatch={handleAdWatch} blurContent={<DetailContent />} />
-          )}
+          <div>
+            <h2 className="text-xl font-bold mb-2" style={{ color: '#e8e8f0' }}>상세 분석</h2>
+            <DetailContent />
+          </div>
 
           {/* 다음 테스트 추천 */}
           <NextTestSuggestion currentPath="/test/mbti" />
